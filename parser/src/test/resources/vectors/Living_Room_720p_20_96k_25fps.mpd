@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!-- Generated Tue Jun 09 10:48:14 2015 by Dolby Media Generator, Version 2015Jun08.144347 -->
+<MPD
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:dolby="http://www.dolby.com/ns/online/DASH"
+ xmlns="urn:mpeg:dash:schema:mpd:2011"
+ xsi:schemaLocation="urn:mpeg:dash:schema:mpd:2011"
+ type="static"
+ mediaPresentationDuration="PT0H1M11.920S"
+ minBufferTime="PT1.2S"
+ profiles="urn:mpeg:dash:profile:isoff-on-demand:2011,http://dashif.org/guidelines/dash264">
+
+ <BaseURL>./</BaseURL>
+
+ <Period>
+    <!-- Video -->
+    <AdaptationSet mimeType="video/mp4" codecs="avc1.4d4028" subsegmentAlignment="true" subsegmentStartsWithSAP="1">
+      <Representation id="1" bandwidth="3520480" width="1280" height="720" frameRate="25">
+        <BaseURL>Living_Room_720p_20_96k_25fps_V.mp4</BaseURL>
+        <SegmentBase indexRange="760-1223">
+         <Initialization range="0-759"/>
+        </SegmentBase>
+      </Representation>
+    </AdaptationSet>
+    <!-- Audio -->
+    <AdaptationSet mimeType="audio/mp4" codecs="ac-4" lang="en" subsegmentAlignment="true" subsegmentStartsWithSAP="1">
+      <Representation id="2" bandwidth="110800" audioSamplingRate="48000">
+        <AudioChannelConfiguration schemeIdUri="tag:dolby.com,2014:dash:audio_channel_configuration:2011" value="A000"/>
+        <BaseURL>Living_Room_720p_20_96k_25fps_A.mp4</BaseURL>
+        <SegmentBase indexRange="623-1098">
+         <Initialization range="0-622"/>
+        </SegmentBase>
+      </Representation>
+    </AdaptationSet>
+ </Period>
+</MPD>

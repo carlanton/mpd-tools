@@ -1,0 +1,84 @@
+group 'io.lindstrom'
+version '0.1'
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.8.9'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile 'org.xmlunit:xmlunit-matchers:2.4.0'
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+archivesBaseName = "mpd-parser"
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'mpd-parser'
+                packaging 'jar'
+                artifactId 'mpd-parser'
+                description 'DASH MPD parser'
+                url 'https://github.com/carlanton/mpd-tools'
+
+                scm {
+                    connection 'scm:git:https://github.com/carlanton/mpd-tools.git'
+                    developerConnection 'scm:git:git@github.com:carlanton/mpd-tools.git'
+                    url 'https://github.com/carlanton/mpd-tools.git'
+                }
+
+                licenses {
+                    license {
+                        name 'MIT License'
+                        url 'https://github.com/carlanton/mpd-tools/blob/master/LICENSE'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'antonlindstrom'
+                        name 'Anton Lindström'
+                        email 'carlantonlindstrom@gmail.com'
+                    }
+                }
+            }
+        }
+    }
+}

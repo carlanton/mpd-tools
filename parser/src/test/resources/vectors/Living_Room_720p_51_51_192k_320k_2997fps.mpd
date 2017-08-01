@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!-- Generated Tue Jun 09 10:49:17 2015 by Dolby Media Generator, Version 2015Jun08.144347 -->
+<MPD
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:dolby="http://www.dolby.com/ns/online/DASH"
+ xmlns="urn:mpeg:dash:schema:mpd:2011"
+ xsi:schemaLocation="urn:mpeg:dash:schema:mpd:2011"
+ type="static"
+ mediaPresentationDuration="PT0H1M11.938S"
+ minBufferTime="PT4S"
+ profiles="urn:mpeg:dash:profile:isoff-live:2011,http://dashif.org/guidelines/dash264">
+
+ <BaseURL>./</BaseURL>
+
+ <Period start="PT0S">
+    <!-- Video -->
+    <AdaptationSet mimeType="video/mp4" codecs="avc1.4d4028" segmentAlignment="true" startWithSAP="1">
+      <SegmentTemplate timescale="30000"
+        media="Living_Room_720p_51_51_192k_320k_2997fps_V_$Number$.m4s"
+        initialization="Living_Room_720p_51_51_192k_320k_2997fps_V.mp4">
+        <SegmentTimeline>
+          <S t="0" d="58058" r="37"/>
+        </SegmentTimeline>
+      </SegmentTemplate>
+      <Representation id="1" bandwidth="3512557" width="1280" height="720" frameRate="30000/1001"/>
+    </AdaptationSet>
+    <!-- Audio -->
+    <AdaptationSet mimeType="audio/mp4" codecs="ac-4" lang="en" segmentAlignment="true" startWithSAP="1">
+      <SegmentTemplate timescale="240000"
+        media="Living_Room_720p_51_51_192k_320k_2997fps_A_$RepresentationID$_$Number$.m4s"
+        initialization="Living_Room_720p_51_51_192k_320k_2997fps_A_$RepresentationID$.mp4">
+        <SegmentTimeline>
+          <S t="0" d="464464" r="37"/>
+        </SegmentTimeline>
+      </SegmentTemplate>
+      <Representation id="2" bandwidth="210840" audioSamplingRate="48000">
+        <AudioChannelConfiguration schemeIdUri="tag:dolby.com,2014:dash:audio_channel_configuration:2011" value="F801"/>
+      </Representation>
+      <Representation id="3" bandwidth="340273" audioSamplingRate="48000">
+        <AudioChannelConfiguration schemeIdUri="tag:dolby.com,2014:dash:audio_channel_configuration:2011" value="F801"/>
+      </Representation>
+    </AdaptationSet>
+ </Period>
+</MPD>
