@@ -32,13 +32,13 @@ artifacts {
     archives javadocJar, sourcesJar
 }
 
-signing {
-    sign configurations.archives
-}
-
 archivesBaseName = "mpd-parser"
 
 if (project.hasProperty('ossrhUsername')) {
+    signing {
+        sign configurations.archives
+    }
+
     uploadArchives {
         repositories {
             mavenDeployer {
