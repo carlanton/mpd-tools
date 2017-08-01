@@ -38,44 +38,46 @@ signing {
 
 archivesBaseName = "mpd-parser"
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+if (project.hasProperty('ossrhUsername')) {
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-
-            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-
-            pom.project {
-                name 'mpd-parser'
-                packaging 'jar'
-                artifactId 'mpd-parser'
-                description 'DASH MPD parser'
-                url 'https://github.com/carlanton/mpd-tools'
-
-                scm {
-                    connection 'scm:git:https://github.com/carlanton/mpd-tools.git'
-                    developerConnection 'scm:git:git@github.com:carlanton/mpd-tools.git'
-                    url 'https://github.com/carlanton/mpd-tools.git'
+                repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                    authentication(userName: ossrhUsername, password: ossrhPassword)
                 }
 
-                licenses {
-                    license {
-                        name 'MIT License'
-                        url 'https://github.com/carlanton/mpd-tools/blob/master/LICENSE'
+                snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                    authentication(userName: ossrhUsername, password: ossrhPassword)
+                }
+
+                pom.project {
+                    name 'mpd-parser'
+                    packaging 'jar'
+                    artifactId 'mpd-parser'
+                    description 'DASH MPD parser'
+                    url 'https://github.com/carlanton/mpd-tools'
+
+                    scm {
+                        connection 'scm:git:https://github.com/carlanton/mpd-tools.git'
+                        developerConnection 'scm:git:git@github.com:carlanton/mpd-tools.git'
+                        url 'https://github.com/carlanton/mpd-tools.git'
                     }
-                }
 
-                developers {
-                    developer {
-                        id 'antonlindstrom'
-                        name 'Anton Lindström'
-                        email 'carlantonlindstrom@gmail.com'
+                    licenses {
+                        license {
+                            name 'MIT License'
+                            url 'https://github.com/carlanton/mpd-tools/blob/master/LICENSE'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id 'antonlindstrom'
+                            name 'Anton Lindström'
+                            email 'carlantonlindstrom@gmail.com'
+                        }
                     }
                 }
             }
