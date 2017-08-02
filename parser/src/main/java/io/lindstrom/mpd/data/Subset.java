@@ -1,21 +1,16 @@
 package io.lindstrom.mpd.data;
 
-import io.lindstrom.mpd.support.VectorAdapter;
-
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.util.List;
 import java.util.Objects;
 
 public class Subset {
     @XmlAttribute(name = "contains", required = true)
-    @XmlJavaTypeAdapter(VectorAdapter.LongAdapter.class)
-    private final List<Long> contains;
+    private final String contains;
 
     @XmlAttribute(name = "id")
     private final String id;
 
-    private Subset(List<Long> contains, String id) {
+    private Subset(String contains, String id) {
         this.contains = contains;
         this.id = id;
     }
@@ -26,7 +21,7 @@ public class Subset {
         this.id = null;
     }
 
-    public List<Long> getContains() {
+    public String getContains() {
         return contains;
     }
 
@@ -63,10 +58,10 @@ public class Subset {
     }
 
     public static class Builder {
-        private List<Long> contains;
+        private String contains;
         private String id;
 
-        public Builder withContains(List<Long> contains) {
+        public Builder withContains(String contains) {
             this.contains = contains;
             return this;
         }

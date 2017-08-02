@@ -54,10 +54,9 @@ public class Representation extends RepresentationBase {
     private final List<String> dependencyIds;
 
     @XmlAttribute(name = "mediaStreamStructureId")
-    @XmlJavaTypeAdapter(VectorAdapter.StringAdapter.class)
-    private final List<String> mediaStreamStructureIds;
+    private final String mediaStreamStructureIds;
 
-    private Representation(List<Descriptor> framePackings, List<Descriptor> audioChannelConfigurations, List<Descriptor> contentProtections, List<Descriptor> essentialProperties, List<Descriptor> supplementalProperties, List<EventStream> inbandEventStreams, String profiles, Long width, Long height, Ratio sar, FrameRate frameRate, String audioSamplingRate, String mimeType, String segmentProfiles, String codecs, Double maximumSAPPeriod, Long startWithSAP, Double maxPlayoutRate, Boolean codingDependency, VideoScanType scanType, List<BaseURL> baseURLs, List<SubRepresentation> subRepresentations, SegmentBase segmentBase, SegmentList segmentList, SegmentTemplate segmentTemplate, String id, long bandwidth, Long qualityRanking, List<String> dependencyIds, List<String> mediaStreamStructureIds) {
+    private Representation(List<Descriptor> framePackings, List<Descriptor> audioChannelConfigurations, List<Descriptor> contentProtections, List<Descriptor> essentialProperties, List<Descriptor> supplementalProperties, List<EventStream> inbandEventStreams, String profiles, Long width, Long height, Ratio sar, FrameRate frameRate, String audioSamplingRate, String mimeType, String segmentProfiles, String codecs, Double maximumSAPPeriod, Long startWithSAP, Double maxPlayoutRate, Boolean codingDependency, VideoScanType scanType, List<BaseURL> baseURLs, List<SubRepresentation> subRepresentations, SegmentBase segmentBase, SegmentList segmentList, SegmentTemplate segmentTemplate, String id, long bandwidth, Long qualityRanking, List<String> dependencyIds, String mediaStreamStructureIds) {
         super(framePackings, audioChannelConfigurations, contentProtections, essentialProperties, supplementalProperties, inbandEventStreams, profiles, width, height, sar, frameRate, audioSamplingRate, mimeType, segmentProfiles, codecs, maximumSAPPeriod, startWithSAP, maxPlayoutRate, codingDependency, scanType);
         this.baseURLs = baseURLs;
         this.subRepresentations = subRepresentations;
@@ -121,7 +120,7 @@ public class Representation extends RepresentationBase {
         return dependencyIds;
     }
 
-    public List<String> getMediaStreamStructureIds() {
+    public String getMediaStreamStructureIds() {
         return mediaStreamStructureIds;
     }
 
@@ -191,7 +190,7 @@ public class Representation extends RepresentationBase {
         private long bandwidth;
         private Long qualityRanking;
         private List<String> dependencyIds;
-        private List<String> mediaStreamStructureIds;
+        private String mediaStreamStructureIds;
 
         @Override
         Builder getThis() {
@@ -243,7 +242,7 @@ public class Representation extends RepresentationBase {
             return this;
         }
 
-        public Builder withMediaStreamStructureIds(List<String> mediaStreamStructureIds) {
+        public Builder withMediaStreamStructureIds(String mediaStreamStructureIds) {
             this.mediaStreamStructureIds = mediaStreamStructureIds;
             return this;
         }

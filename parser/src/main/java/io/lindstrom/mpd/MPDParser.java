@@ -41,6 +41,10 @@ public class MPDParser {
         return objectMapper.readValue(inputStream, MPD.class);
     }
 
+    public MPD parse(String content) throws IOException {
+        return objectMapper.readValue(content, MPD.class);
+    }
+
     public String writeAsString(MPD mpd) throws JsonProcessingException {
         return objectMapper.writeValueAsString(mpd);
     }
