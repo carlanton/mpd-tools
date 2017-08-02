@@ -37,4 +37,29 @@ public class Ratio {
     public int hashCode() {
         return Objects.hash(a, b);
     }
+
+    public Builder buildUpon() {
+        return new Builder()
+                .withA(a)
+                .withB(b);
+    }
+
+    public static class Builder {
+        private Long a;
+        private Long b;
+
+        public Builder withA(Long a) {
+            this.a = a;
+            return this;
+        }
+
+        public Builder withB(Long b) {
+            this.b = b;
+            return this;
+        }
+
+        public Ratio build() {
+            return new Ratio(a, b);
+        }
+    }
 }

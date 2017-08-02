@@ -37,4 +37,29 @@ public class FrameRate {
     public int hashCode() {
         return Objects.hash(numerator, denominator);
     }
+
+    public Builder buildUpon() {
+        return new Builder()
+                .withNumerator(numerator)
+                .withDenominator(denominator);
+    }
+
+    public static class Builder {
+        private long numerator;
+        private Long denominator;
+
+        public Builder withNumerator(long numerator) {
+            this.numerator = numerator;
+            return this;
+        }
+
+        public Builder withDenominator(Long denominator) {
+            this.denominator = denominator;
+            return this;
+        }
+
+        public FrameRate build() {
+            return new FrameRate(numerator, denominator);
+        }
+    }
 }

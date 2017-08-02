@@ -1,11 +1,8 @@
 package io.lindstrom.mpd.data;
 
-import io.lindstrom.mpd.support.VectorAdapter;
-
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.List;
 import java.util.Objects;
 
@@ -50,13 +47,12 @@ public class Representation extends RepresentationBase {
     private final Long qualityRanking;
 
     @XmlAttribute(name = "dependencyId")
-    @XmlJavaTypeAdapter(VectorAdapter.StringAdapter.class)
-    private final List<String> dependencyIds;
+    private final String dependencyId;
 
     @XmlAttribute(name = "mediaStreamStructureId")
-    private final String mediaStreamStructureIds;
+    private final String mediaStreamStructureId;
 
-    private Representation(List<Descriptor> framePackings, List<Descriptor> audioChannelConfigurations, List<Descriptor> contentProtections, List<Descriptor> essentialProperties, List<Descriptor> supplementalProperties, List<EventStream> inbandEventStreams, String profiles, Long width, Long height, Ratio sar, FrameRate frameRate, String audioSamplingRate, String mimeType, String segmentProfiles, String codecs, Double maximumSAPPeriod, Long startWithSAP, Double maxPlayoutRate, Boolean codingDependency, VideoScanType scanType, List<BaseURL> baseURLs, List<SubRepresentation> subRepresentations, SegmentBase segmentBase, SegmentList segmentList, SegmentTemplate segmentTemplate, String id, long bandwidth, Long qualityRanking, List<String> dependencyIds, String mediaStreamStructureIds) {
+    private Representation(List<Descriptor> framePackings, List<Descriptor> audioChannelConfigurations, List<Descriptor> contentProtections, List<Descriptor> essentialProperties, List<Descriptor> supplementalProperties, List<EventStream> inbandEventStreams, String profiles, Long width, Long height, Ratio sar, FrameRate frameRate, String audioSamplingRate, String mimeType, String segmentProfiles, String codecs, Double maximumSAPPeriod, Long startWithSAP, Double maxPlayoutRate, Boolean codingDependency, VideoScanType scanType, List<BaseURL> baseURLs, List<SubRepresentation> subRepresentations, SegmentBase segmentBase, SegmentList segmentList, SegmentTemplate segmentTemplate, String id, long bandwidth, Long qualityRanking, String dependencyId, String mediaStreamStructureId) {
         super(framePackings, audioChannelConfigurations, contentProtections, essentialProperties, supplementalProperties, inbandEventStreams, profiles, width, height, sar, frameRate, audioSamplingRate, mimeType, segmentProfiles, codecs, maximumSAPPeriod, startWithSAP, maxPlayoutRate, codingDependency, scanType);
         this.baseURLs = baseURLs;
         this.subRepresentations = subRepresentations;
@@ -66,8 +62,8 @@ public class Representation extends RepresentationBase {
         this.id = id;
         this.bandwidth = bandwidth;
         this.qualityRanking = qualityRanking;
-        this.dependencyIds = dependencyIds;
-        this.mediaStreamStructureIds = mediaStreamStructureIds;
+        this.dependencyId = dependencyId;
+        this.mediaStreamStructureId = mediaStreamStructureId;
     }
 
     @SuppressWarnings("unused")
@@ -80,8 +76,8 @@ public class Representation extends RepresentationBase {
         this.id = null;
         this.bandwidth = 0;
         this.qualityRanking = null;
-        this.dependencyIds = null;
-        this.mediaStreamStructureIds = null;
+        this.dependencyId = null;
+        this.mediaStreamStructureId = null;
     }
 
     public List<BaseURL> getBaseURLs() {
@@ -116,12 +112,12 @@ public class Representation extends RepresentationBase {
         return qualityRanking;
     }
 
-    public List<String> getDependencyIds() {
-        return dependencyIds;
+    public String getDependencyId() {
+        return dependencyId;
     }
 
-    public String getMediaStreamStructureIds() {
-        return mediaStreamStructureIds;
+    public String getMediaStreamStructureId() {
+        return mediaStreamStructureId;
     }
 
     @Override
@@ -138,13 +134,13 @@ public class Representation extends RepresentationBase {
                 Objects.equals(segmentTemplate, that.segmentTemplate) &&
                 Objects.equals(id, that.id) &&
                 Objects.equals(qualityRanking, that.qualityRanking) &&
-                Objects.equals(dependencyIds, that.dependencyIds) &&
-                Objects.equals(mediaStreamStructureIds, that.mediaStreamStructureIds);
+                Objects.equals(dependencyId, that.dependencyId) &&
+                Objects.equals(mediaStreamStructureId, that.mediaStreamStructureId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), baseURLs, subRepresentations, segmentBase, segmentList, segmentTemplate, id, bandwidth, qualityRanking, dependencyIds, mediaStreamStructureIds);
+        return Objects.hash(super.hashCode(), baseURLs, subRepresentations, segmentBase, segmentList, segmentTemplate, id, bandwidth, qualityRanking, dependencyId, mediaStreamStructureId);
     }
 
     @Override
@@ -159,8 +155,8 @@ public class Representation extends RepresentationBase {
                 ", id='" + id + '\'' +
                 ", bandwidth=" + bandwidth +
                 ", qualityRanking=" + qualityRanking +
-                ", dependencyIds=" + dependencyIds +
-                ", mediaStreamStructureIds=" + mediaStreamStructureIds +
+                ", dependencyId=" + dependencyId +
+                ", mediaStreamStructureId=" + mediaStreamStructureId +
                 '}';
     }
 
@@ -174,8 +170,8 @@ public class Representation extends RepresentationBase {
             .withId(id)
             .withBandwidth(bandwidth)
             .withQualityRanking(qualityRanking)
-            .withDependencyIds(dependencyIds)
-            .withMediaStreamStructureIds(mediaStreamStructureIds));
+            .withDependencyId(dependencyId)
+            .withMediaStreamStructureId(mediaStreamStructureId));
     }
 
 
@@ -189,8 +185,8 @@ public class Representation extends RepresentationBase {
         private String id;
         private long bandwidth;
         private Long qualityRanking;
-        private List<String> dependencyIds;
-        private String mediaStreamStructureIds;
+        private String dependencyId;
+        private String mediaStreamStructureId;
 
         @Override
         Builder getThis() {
@@ -237,18 +233,18 @@ public class Representation extends RepresentationBase {
             return this;
         }
 
-        public Builder withDependencyIds(List<String> dependencyIds) {
-            this.dependencyIds = dependencyIds;
+        public Builder withDependencyId(String dependencyIds) {
+            this.dependencyId = dependencyIds;
             return this;
         }
 
-        public Builder withMediaStreamStructureIds(String mediaStreamStructureIds) {
-            this.mediaStreamStructureIds = mediaStreamStructureIds;
+        public Builder withMediaStreamStructureId(String mediaStreamStructureId) {
+            this.mediaStreamStructureId = mediaStreamStructureId;
             return this;
         }
 
         public Representation build() {
-            return new Representation(framePackings, audioChannelConfigurations, contentProtections, essentialProperties, supplementalProperties, inbandEventStreams, profiles, width, height, sar, frameRate, audioSamplingRate, mimeType, segmentProfiles, codecs, maximumSAPPeriod, startWithSAP, maxPlayoutRate, codingDependency, scanType, baseURLs, subRepresentations, segmentBase, segmentList, segmentTemplate, id, bandwidth, qualityRanking, dependencyIds, mediaStreamStructureIds);
+            return new Representation(framePackings, audioChannelConfigurations, contentProtections, essentialProperties, supplementalProperties, inbandEventStreams, profiles, width, height, sar, frameRate, audioSamplingRate, mimeType, segmentProfiles, codecs, maximumSAPPeriod, startWithSAP, maxPlayoutRate, codingDependency, scanType, baseURLs, subRepresentations, segmentBase, segmentList, segmentTemplate, id, bandwidth, qualityRanking, dependencyId, mediaStreamStructureId);
         }
     }
 }

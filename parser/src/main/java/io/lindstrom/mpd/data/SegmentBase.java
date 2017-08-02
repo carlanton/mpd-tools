@@ -2,6 +2,7 @@ package io.lindstrom.mpd.data;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import java.util.Objects;
 
 public class SegmentBase {
     @XmlElement(name = "Initialization", namespace = MPD.NAMESPACE)
@@ -49,6 +50,72 @@ public class SegmentBase {
         this.indexRangeExact = null;
         this.availabilityTimeOffset = null;
         this.availabilityTimeComplete = null;
+    }
+
+    public URLType getInitialization() {
+        return initialization;
+    }
+
+    public URLType getRepresentationIndex() {
+        return representationIndex;
+    }
+
+    public Long getTimescale() {
+        return timescale;
+    }
+
+    public Long getPresentationTimeOffset() {
+        return presentationTimeOffset;
+    }
+
+    public String getIndexRange() {
+        return indexRange;
+    }
+
+    public Boolean getIndexRangeExact() {
+        return indexRangeExact;
+    }
+
+    public Double getAvailabilityTimeOffset() {
+        return availabilityTimeOffset;
+    }
+
+    public Boolean getAvailabilityTimeComplete() {
+        return availabilityTimeComplete;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SegmentBase that = (SegmentBase) o;
+        return Objects.equals(initialization, that.initialization) &&
+                Objects.equals(representationIndex, that.representationIndex) &&
+                Objects.equals(timescale, that.timescale) &&
+                Objects.equals(presentationTimeOffset, that.presentationTimeOffset) &&
+                Objects.equals(indexRange, that.indexRange) &&
+                Objects.equals(indexRangeExact, that.indexRangeExact) &&
+                Objects.equals(availabilityTimeOffset, that.availabilityTimeOffset) &&
+                Objects.equals(availabilityTimeComplete, that.availabilityTimeComplete);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(initialization, representationIndex, timescale, presentationTimeOffset, indexRange, indexRangeExact, availabilityTimeOffset, availabilityTimeComplete);
+    }
+
+    @Override
+    public String toString() {
+        return "SegmentBase{" +
+                "initialization=" + initialization +
+                ", representationIndex=" + representationIndex +
+                ", timescale=" + timescale +
+                ", presentationTimeOffset=" + presentationTimeOffset +
+                ", indexRange='" + indexRange + '\'' +
+                ", indexRangeExact=" + indexRangeExact +
+                ", availabilityTimeOffset=" + availabilityTimeOffset +
+                ", availabilityTimeComplete=" + availabilityTimeComplete +
+                '}';
     }
 
     public Builder buildUpon() {

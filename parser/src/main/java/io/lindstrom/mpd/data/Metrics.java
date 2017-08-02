@@ -55,6 +55,15 @@ public class Metrics {
         return Objects.hash(reportings, ranges, metrics);
     }
 
+    @Override
+    public String toString() {
+        return "Metrics{" +
+                "reportings=" + reportings +
+                ", ranges=" + ranges +
+                ", metrics='" + metrics + '\'' +
+                '}';
+    }
+
     public Builder buildUpon() {
         return new Builder()
                 .withReportings(reportings)

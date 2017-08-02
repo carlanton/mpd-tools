@@ -1,9 +1,6 @@
 package io.lindstrom.mpd.data;
 
-import io.lindstrom.mpd.support.VectorAdapter;
-
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,46 +9,44 @@ public class SubRepresentation extends RepresentationBase {
     private final Long level;
 
     @XmlAttribute(name = "dependencyLevel")
-    @XmlJavaTypeAdapter(VectorAdapter.LongAdapter.class)
-    private final List<Long> dependencyLevels;
+    private final String dependencyLevel;
 
     @XmlAttribute(name = "bandwidth")
     private final Long bandwidth;
 
     @XmlAttribute(name = "contentComponent")
-    @XmlJavaTypeAdapter(VectorAdapter.StringAdapter.class)
-    private final List<String> contentComponents;
+    private final String contentComponent;
 
-    private SubRepresentation(List<Descriptor> framePackings, List<Descriptor> audioChannelConfigurations, List<Descriptor> contentProtections, List<Descriptor> essentialProperties, List<Descriptor> supplementalProperties, List<EventStream> inbandEventStreams, String profiles, Long width, Long height, Ratio sar, FrameRate frameRate, String audioSamplingRate, String mimeType, String segmentProfiles, String codecs, Double maximumSAPPeriod, Long startWithSAP, Double maxPlayoutRate, Boolean codingDependency, VideoScanType scanType, Long level, List<Long> dependencyLevels, Long bandwidth, List<String> contentComponents) {
+    private SubRepresentation(List<Descriptor> framePackings, List<Descriptor> audioChannelConfigurations, List<Descriptor> contentProtections, List<Descriptor> essentialProperties, List<Descriptor> supplementalProperties, List<EventStream> inbandEventStreams, String profiles, Long width, Long height, Ratio sar, FrameRate frameRate, String audioSamplingRate, String mimeType, String segmentProfiles, String codecs, Double maximumSAPPeriod, Long startWithSAP, Double maxPlayoutRate, Boolean codingDependency, VideoScanType scanType, Long level, String dependencyLevel, Long bandwidth, String contentComponent) {
         super(framePackings, audioChannelConfigurations, contentProtections, essentialProperties, supplementalProperties, inbandEventStreams, profiles, width, height, sar, frameRate, audioSamplingRate, mimeType, segmentProfiles, codecs, maximumSAPPeriod, startWithSAP, maxPlayoutRate, codingDependency, scanType);
         this.level = level;
-        this.dependencyLevels = dependencyLevels;
+        this.dependencyLevel = dependencyLevel;
         this.bandwidth = bandwidth;
-        this.contentComponents = contentComponents;
+        this.contentComponent = contentComponent;
     }
 
     @SuppressWarnings("unused")
     private SubRepresentation() {
         this.level = null;
-        this.dependencyLevels = null;
+        this.dependencyLevel = null;
         this.bandwidth = null;
-        this.contentComponents = null;
+        this.contentComponent = null;
     }
 
     public Long getLevel() {
         return level;
     }
 
-    public List<Long> getDependencyLevels() {
-        return dependencyLevels;
+    public String getDependencyLevel() {
+        return dependencyLevel;
     }
 
     public Long getBandwidth() {
         return bandwidth;
     }
 
-    public List<String> getContentComponents() {
-        return contentComponents;
+    public String getContentComponent() {
+        return contentComponent;
     }
 
     @Override
@@ -61,14 +56,14 @@ public class SubRepresentation extends RepresentationBase {
         if (!super.equals(o)) return false;
         SubRepresentation that = (SubRepresentation) o;
         return Objects.equals(level, that.level) &&
-                Objects.equals(dependencyLevels, that.dependencyLevels) &&
+                Objects.equals(dependencyLevel, that.dependencyLevel) &&
                 Objects.equals(bandwidth, that.bandwidth) &&
-                Objects.equals(contentComponents, that.contentComponents);
+                Objects.equals(contentComponent, that.contentComponent);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), level, dependencyLevels, bandwidth, contentComponents);
+        return Objects.hash(super.hashCode(), level, dependencyLevel, bandwidth, contentComponent);
     }
 
     @Override
@@ -76,33 +71,33 @@ public class SubRepresentation extends RepresentationBase {
         return "SubRepresentation{" +
                 "super=" + super.toString() +
                 ", level=" + level +
-                ", dependencyLevels=" + dependencyLevels +
+                ", dependencyLevel=" + dependencyLevel +
                 ", bandwidth=" + bandwidth +
-                ", contentComponents=" + contentComponents +
+                ", contentComponent=" + contentComponent +
                 '}';
     }
 
     public Builder buildUpon() {
         return super.buildUpon(new Builder()
                 .withLevel(level)
-                .withDependencyLevels(dependencyLevels)
+                .withDependencyLevel(dependencyLevel)
                 .withBandwidth(bandwidth)
-                .withContentComponents(contentComponents));
+                .withContentComponent(contentComponent));
     }
 
     public static class Builder extends RepresentationBase.AbstractBuilder<Builder> {
         private Long level;
-        private List<Long> dependencyLevels;
+        private String dependencyLevel;
         private Long bandwidth;
-        private List<String> contentComponents;
+        private String contentComponent;
 
         public Builder withLevel(Long level) {
             this.level = level;
             return this;
         }
 
-        public Builder withDependencyLevels(List<Long> dependencyLevels) {
-            this.dependencyLevels = dependencyLevels;
+        public Builder withDependencyLevel(String dependencyLevel) {
+            this.dependencyLevel = dependencyLevel;
             return this;
         }
 
@@ -111,13 +106,13 @@ public class SubRepresentation extends RepresentationBase {
             return this;
         }
 
-        public Builder withContentComponents(List<String> contentComponents) {
-            this.contentComponents = contentComponents;
+        public Builder withContentComponent(String contentComponent) {
+            this.contentComponent = contentComponent;
             return this;
         }
 
         public SubRepresentation build() {
-            return new SubRepresentation(framePackings, audioChannelConfigurations, contentProtections, essentialProperties, supplementalProperties, inbandEventStreams, profiles, width, height, sar, frameRate, audioSamplingRate, mimeType, segmentProfiles, codecs, maximumSAPPeriod, startWithSAP, maxPlayoutRate, codingDependency, scanType, level, dependencyLevels, bandwidth, contentComponents);
+            return new SubRepresentation(framePackings, audioChannelConfigurations, contentProtections, essentialProperties, supplementalProperties, inbandEventStreams, profiles, width, height, sar, frameRate, audioSamplingRate, mimeType, segmentProfiles, codecs, maximumSAPPeriod, startWithSAP, maxPlayoutRate, codingDependency, scanType, level, dependencyLevel, bandwidth, contentComponent);
         }
 
         @Override

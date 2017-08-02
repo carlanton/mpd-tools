@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 import java.util.Date;
 
-public class MyDifferenceEvalutar implements DifferenceEvaluator {
+public class MyDifferenceEvaluator implements DifferenceEvaluator {
     private final DateTimeFormatter formatter =
             new DateTimeFormatterBuilder().appendPattern("yyyy-MM-dd'T'HH:mm:ss[XXXXX]")
                     .parseDefaulting(ChronoField.OFFSET_SECONDS, 0)

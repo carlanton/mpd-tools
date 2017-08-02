@@ -17,15 +17,18 @@ public class RandomBeanTest {
                 .constantStringField("segmentAlignment", "true")
                 .constantStringField("subsegmentAlignment", "true")
                 .constantStringField("lang", "sv")
+                .constantStringField("contains", "1")
+                .constantStringField("dependencyLevel", "1")
                 .randomize(Long.class, (Supplier<Long>) () -> 5L)
-                .collectionSizeRange(1, 3)
+                .collectionSizeRange(1, 2)
                 .build();
 
-       MPDValidator validator = new MPDValidator();
+        MPDValidator validator = new MPDValidator();
+        MPDParser parser = new MPDParser();
 
         for (int i = 0; i < 5; i++) {
             MPD mpd = random.nextObject(MPD.class);
-            String generated = new MPDParser().writeAsString(mpd);
+            String generated = parser.writeAsString(parser.parse(parser.writeAsString(mpd)));
 
             try {
                 validator.validate(generated);

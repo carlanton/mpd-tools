@@ -18,7 +18,7 @@ public class MpdParserTest {
 
     private CompareMatcher isSimilarTo(Path path) {
         return CompareMatcher.isSimilarTo(Input.fromFile(path.toFile()))
-                .withDifferenceEvaluator(new MyDifferenceEvalutar())
+                .withDifferenceEvaluator(new MyDifferenceEvaluator())
                 .ignoreComments()
                 .ignoreWhitespace();
     }
@@ -53,7 +53,7 @@ public class MpdParserTest {
 
             Assert.assertThat("zing", actual,
                     CompareMatcher.isSimilarTo(Input.fromFile(path.toFile()))
-                            .withDifferenceEvaluator(new MyDifferenceEvalutar())
+                            .withDifferenceEvaluator(new MyDifferenceEvaluator())
                             .ignoreComments()
                             .ignoreWhitespace());
         }
