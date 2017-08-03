@@ -1,5 +1,7 @@
 package io.lindstrom.mpd.data;
 
+import io.lindstrom.mpd.support.Utils;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
@@ -123,27 +125,27 @@ public abstract class RepresentationBase {
     }
 
     public List<Descriptor> getFramePackings() {
-        return framePackings;
+        return Utils.unmodifiableList(framePackings);
     }
 
     public List<Descriptor> getAudioChannelConfigurations() {
-        return audioChannelConfigurations;
+        return Utils.unmodifiableList(audioChannelConfigurations);
     }
 
     public List<Descriptor> getContentProtections() {
-        return contentProtections;
+        return Utils.unmodifiableList(contentProtections);
     }
 
     public List<Descriptor> getEssentialProperties() {
-        return essentialProperties;
+        return Utils.unmodifiableList(essentialProperties);
     }
 
     public List<Descriptor> getSupplementalProperties() {
-        return supplementalProperties;
+        return Utils.unmodifiableList(supplementalProperties);
     }
 
     public List<EventStream> getInbandEventStreams() {
-        return inbandEventStreams;
+        return Utils.unmodifiableList(inbandEventStreams);
     }
 
     public String getProfiles() {
@@ -308,102 +310,102 @@ public abstract class RepresentationBase {
 
         abstract T getThis();
 
-        T withFramePackings(List<Descriptor> framePackings) {
+        public T withFramePackings(List<Descriptor> framePackings) {
             this.framePackings = framePackings;
             return getThis();
         }
 
-        T withAudioChannelConfigurations(List<Descriptor> audioChannelConfigurations) {
+        public T withAudioChannelConfigurations(List<Descriptor> audioChannelConfigurations) {
             this.audioChannelConfigurations = audioChannelConfigurations;
             return getThis();
         }
 
-        T withContentProtections(List<Descriptor> contentProtections) {
+        public T withContentProtections(List<Descriptor> contentProtections) {
             this.contentProtections = contentProtections;
             return getThis();
         }
 
-        T withEssentialProperties(List<Descriptor> essentialProperties) {
+        public T withEssentialProperties(List<Descriptor> essentialProperties) {
             this.essentialProperties = essentialProperties;
             return getThis();
         }
 
-        T withSupplementalProperties(List<Descriptor> supplementalProperties) {
+        public T withSupplementalProperties(List<Descriptor> supplementalProperties) {
             this.supplementalProperties = supplementalProperties;
             return getThis();
         }
 
-        T withInbandEventStreams(List<EventStream> inbandEventStreams) {
+        public T withInbandEventStreams(List<EventStream> inbandEventStreams) {
             this.inbandEventStreams = inbandEventStreams;
             return getThis();
         }
 
-        T withProfiles(String profiles) {
+        public T withProfiles(String profiles) {
             this.profiles = profiles;
             return getThis();
         }
 
-        T withWidth(Long width) {
+        public T withWidth(Long width) {
             this.width = width;
             return getThis();
         }
 
-        T withHeight(Long height) {
+        public T withHeight(Long height) {
             this.height = height;
             return getThis();
         }
 
-        T withSar(Ratio sar) {
+        public T withSar(Ratio sar) {
             this.sar = sar;
             return getThis();
         }
 
-        T withFrameRate(FrameRate frameRate) {
+        public T withFrameRate(FrameRate frameRate) {
             this.frameRate = frameRate;
             return getThis();
         }
 
-        T withAudioSamplingRate(String audioSamplingRate) {
+        public T withAudioSamplingRate(String audioSamplingRate) {
             this.audioSamplingRate = audioSamplingRate;
             return getThis();
         }
 
-        T withMimeType(String mimeType) {
+        public T withMimeType(String mimeType) {
             this.mimeType = mimeType;
             return getThis();
         }
 
-        T withSegmentProfiles(String segmentProfiles) {
+        public T withSegmentProfiles(String segmentProfiles) {
             this.segmentProfiles = segmentProfiles;
             return getThis();
         }
 
-        T withCodecs(String codecs) {
+        public T withCodecs(String codecs) {
             this.codecs = codecs;
             return getThis();
         }
 
-        T withMaximumSAPPeriod(Double maximumSAPPeriod) {
+        public T withMaximumSAPPeriod(Double maximumSAPPeriod) {
             this.maximumSAPPeriod = maximumSAPPeriod;
             return getThis();
         }
 
-        T withStartWithSAP(Long startWithSAP) {
+        public T withStartWithSAP(Long startWithSAP) {
             this.startWithSAP = startWithSAP;
             return getThis();
         }
 
-        T withMaxPlayoutRate(Double maxPlayoutRate) {
+        public T withMaxPlayoutRate(Double maxPlayoutRate) {
             this.maxPlayoutRate = maxPlayoutRate;
             return getThis();
         }
 
-        T withCodingDependency(Boolean codingDependency) {
+        public T withCodingDependency(Boolean codingDependency) {
             this.codingDependency = codingDependency;
             return getThis();
         }
 
-        T withScanType(VideoScanType scanType) {
+        public T withScanType(VideoScanType scanType) {
             this.scanType = scanType;
             return getThis();
         }

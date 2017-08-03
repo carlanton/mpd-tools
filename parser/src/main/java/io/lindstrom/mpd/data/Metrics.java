@@ -1,5 +1,7 @@
 package io.lindstrom.mpd.data;
 
+import io.lindstrom.mpd.support.Utils;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
@@ -29,11 +31,11 @@ public class Metrics {
     }
 
     public List<Descriptor> getReportings() {
-        return reportings;
+        return Utils.unmodifiableList(reportings);
     }
 
     public List<Range> getRanges() {
-        return ranges;
+        return Utils.unmodifiableList(ranges);
     }
 
     public String getMetrics() {

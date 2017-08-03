@@ -20,18 +20,18 @@
    <Representation bandwidth="2796000" codecs="avc1.4d401f" height="720" id="6" width="1280"/>
   </AdaptationSet>
   <AdaptationSet id="1" mimeType="audio/mp4" segmentAlignment="true">
+   <Role schemeIdUri="urn:mpeg:dash:role:2011" value="main"/>
    <SegmentTemplate duration="153600" initialization="dash-a0/a0-init.mp4" media="dash-a0/a0-$Number$.mp4" startNumber="1" timescale="48000"/>
    <Representation audioSamplingRate="48000" bandwidth="96000" codecs="mp4a.40.2" id="7">
     <AudioChannelConfiguration schemeIdUri="urn:mpeg:dash:23003:3:audio_channel_configuration:2011" value="2"/>
    </Representation>
-   <Role schemeIdUri="urn:mpeg:dash:role:2011" value="main"/>
   </AdaptationSet>
   <AdaptationSet id="2" mimeType="audio/mp4" segmentAlignment="true">
+   <Role schemeIdUri="urn:mpeg:dash:role:2011" value="dub"/>
    <SegmentTemplate duration="153600" initialization="dash-a1/a1-init.mp4" media="dash-a1/a1-$Number$.mp4" startNumber="1" timescale="48000"/>
    <Representation audioSamplingRate="48000" bandwidth="96000" codecs="mp4a.40.2" id="8">
     <AudioChannelConfiguration schemeIdUri="urn:mpeg:dash:23003:3:audio_channel_configuration:2011" value="2"/>
    </Representation>
-   <Role schemeIdUri="urn:mpeg:dash:role:2011" value="dub"/>
   </AdaptationSet>
   </Period>
 </MPD>

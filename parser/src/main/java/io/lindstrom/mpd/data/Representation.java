@@ -1,5 +1,7 @@
 package io.lindstrom.mpd.data;
 
+import io.lindstrom.mpd.support.Utils;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
@@ -81,11 +83,11 @@ public class Representation extends RepresentationBase {
     }
 
     public List<BaseURL> getBaseURLs() {
-        return baseURLs;
+        return Utils.unmodifiableList(baseURLs);
     }
 
     public List<SubRepresentation> getSubRepresentations() {
-        return subRepresentations;
+        return Utils.unmodifiableList(subRepresentations);
     }
 
     public SegmentBase getSegmentBase() {

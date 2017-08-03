@@ -1,5 +1,7 @@
 package io.lindstrom.mpd.data;
 
+import io.lindstrom.mpd.support.Utils;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
@@ -19,7 +21,7 @@ public class SegmentTimeline {
     }
 
     public List<S> getSs() {
-        return ss;
+        return Utils.unmodifiableList(ss);
     }
 
     @Override

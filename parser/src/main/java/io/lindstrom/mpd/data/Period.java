@@ -1,5 +1,7 @@
 package io.lindstrom.mpd.data;
 
+import io.lindstrom.mpd.support.Utils;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
@@ -102,7 +104,7 @@ public class Period {
     }
 
     public List<BaseURL> getBaseURLs() {
-        return baseURLs;
+        return Utils.unmodifiableList(baseURLs);
     }
 
     public SegmentBase getSegmentBase() {
@@ -122,19 +124,19 @@ public class Period {
     }
 
     public List<EventStream> getEventStreams() {
-        return eventStreams;
+        return Utils.unmodifiableList(eventStreams);
     }
 
     public List<AdaptationSet> getAdaptationSets() {
-        return adaptationSets;
+        return Utils.unmodifiableList(adaptationSets);
     }
 
     public List<Subset> getSubsets() {
-        return subsets;
+        return Utils.unmodifiableList(subsets);
     }
 
     public List<Descriptor> getSupplementalProperties() {
-        return supplementalProperties;
+        return Utils.unmodifiableList(supplementalProperties);
     }
 
     public String getHref() {

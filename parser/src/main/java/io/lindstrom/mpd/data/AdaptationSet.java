@@ -1,5 +1,7 @@
 package io.lindstrom.mpd.data;
 
+import io.lindstrom.mpd.support.Utils;
+
 import javax.xml.bind.annotation.*;
 import java.util.List;
 import java.util.Objects;
@@ -11,16 +13,16 @@ import java.util.Objects;
         "essentialProperties",
         "supplementalProperties",
         "inbandEventStreams",
-    "accessibilities",
-    "roles",
-    "ratings",
-    "viewpoints",
-    "contentComponents",
-    "baseURLs",
-    "segmentBase",
-    "segmentList",
-    "segmentTemplate",
-    "representations"
+        "accessibilities",
+        "roles",
+        "ratings",
+        "viewpoints",
+        "contentComponents",
+        "baseURLs",
+        "segmentBase",
+        "segmentList",
+        "segmentTemplate",
+        "representations"
 })
 public class AdaptationSet extends RepresentationBase {
     @XmlElement(name = "Accessibility", namespace = MPD.NAMESPACE)
@@ -177,27 +179,27 @@ public class AdaptationSet extends RepresentationBase {
     }
 
     public List<Descriptor> getAccessibilities() {
-        return accessibilities;
+        return Utils.unmodifiableList(accessibilities);
     }
 
     public List<Descriptor> getRoles() {
-        return roles;
+        return Utils.unmodifiableList(roles);
     }
 
     public List<Descriptor> getRatings() {
-        return ratings;
+        return Utils.unmodifiableList(ratings);
     }
 
     public List<Descriptor> getViewpoints() {
-        return viewpoints;
+        return Utils.unmodifiableList(viewpoints);
     }
 
     public List<ContentComponent> getContentComponents() {
-        return contentComponents;
+        return Utils.unmodifiableList(contentComponents);
     }
 
     public List<BaseURL> getBaseURLs() {
-        return baseURLs;
+        return Utils.unmodifiableList(baseURLs);
     }
 
     public SegmentBase getSegmentBase() {
@@ -213,7 +215,7 @@ public class AdaptationSet extends RepresentationBase {
     }
 
     public List<Representation> getRepresentations() {
-        return representations;
+        return Utils.unmodifiableList(representations);
     }
 
     public String getHref() {

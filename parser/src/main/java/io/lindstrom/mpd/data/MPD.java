@@ -1,5 +1,7 @@
 package io.lindstrom.mpd.data;
 
+import io.lindstrom.mpd.support.Utils;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -141,35 +143,35 @@ public class MPD {
     }
 
     public List<ProgramInformation> getProgramInformations() {
-        return programInformations;
+        return Utils.unmodifiableList(programInformations);
     }
 
     public List<BaseURL> getBaseURLs() {
-        return baseURLs;
+        return Utils.unmodifiableList(baseURLs);
     }
 
     public List<String> getLocations() {
-        return locations;
+        return Utils.unmodifiableList(locations);
     }
 
     public List<Period> getPeriods() {
-        return periods;
+        return Utils.unmodifiableList(periods);
     }
 
     public List<Metrics> getMetrics() {
-        return metrics;
+        return Utils.unmodifiableList(metrics);
     }
 
     public List<Descriptor> getEssentialProperties() {
-        return essentialProperties;
+        return Utils.unmodifiableList(essentialProperties);
     }
 
     public List<Descriptor> getSupplementalProperties() {
-        return supplementalProperties;
+        return Utils.unmodifiableList(supplementalProperties);
     }
 
     public List<Descriptor> getUtcTimings() {
-        return utcTimings;
+        return Utils.unmodifiableList(utcTimings);
     }
 
     public String getId() {
