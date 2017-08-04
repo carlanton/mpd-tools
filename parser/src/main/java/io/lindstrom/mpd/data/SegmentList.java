@@ -1,9 +1,11 @@
 package io.lindstrom.mpd.data;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.lindstrom.mpd.support.Utils;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,8 +16,10 @@ public class SegmentList {
     @XmlElement(name = "RepresentationIndex", namespace = MPD.NAMESPACE)
     private final URLType representationIndex;
 
-    @XmlElement(name = "SegmentTimeline", namespace = MPD.NAMESPACE)
-    private final SegmentTimeline segmentTimeline;
+    @XmlElement(name = "S", namespace = MPD.NAMESPACE)
+    @XmlElementWrapper(name = "SegmentTimeline", namespace = MPD.NAMESPACE)
+    @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
+    private final List<Segment> segmentTimeline;
 
     @XmlElement(name = "BitstreamSwitching", namespace = MPD.NAMESPACE)
     private final URLType bitstreamswitchingElement;
@@ -53,7 +57,7 @@ public class SegmentList {
     @XmlAttribute(name = "availabilityTimeComplete")
     private final Boolean availabilityTimeComplete;
 
-    private SegmentList(URLType initialization, URLType representationIndex, SegmentTimeline segmentTimeline, URLType bitstreamswitchingElement, List<SegmentURL> segmentURLs, Long duration, Long startNumber, String href, ActuateType actuate, Long timescale, Long presentationTimeOffset, String indexRange, Boolean indexRangeExact, Double availabilityTimeOffset, Boolean availabilityTimeComplete) {
+    private SegmentList(URLType initialization, URLType representationIndex, List<Segment> segmentTimeline, URLType bitstreamswitchingElement, List<SegmentURL> segmentURLs, Long duration, Long startNumber, String href, ActuateType actuate, Long timescale, Long presentationTimeOffset, String indexRange, Boolean indexRangeExact, Double availabilityTimeOffset, Boolean availabilityTimeComplete) {
         this.initialization = initialization;
         this.representationIndex = representationIndex;
         this.segmentTimeline = segmentTimeline;
@@ -98,8 +102,8 @@ public class SegmentList {
         return representationIndex;
     }
 
-    public SegmentTimeline getSegmentTimeline() {
-        return segmentTimeline;
+    public List<Segment> getSegmentTimeline() {
+        return Utils.unmodifiableList(segmentTimeline);
     }
 
     public URLType getBitstreamswitchingElement() {
@@ -220,7 +224,7 @@ public class SegmentList {
     public static class Builder {
         private URLType initialization;
         private URLType representationIndex;
-        private SegmentTimeline segmentTimeline;
+        private List<Segment> segmentTimeline;
         private URLType bitstreamswitchingElement;
         private List<SegmentURL> segmentURLs;
         private Long duration;
@@ -244,7 +248,7 @@ public class SegmentList {
             return this;
         }
 
-        public Builder withSegmentTimeline(SegmentTimeline segmentTimeline) {
+        public Builder withSegmentTimeline(List<Segment> segmentTimeline) {
             this.segmentTimeline = segmentTimeline;
             return this;
         }

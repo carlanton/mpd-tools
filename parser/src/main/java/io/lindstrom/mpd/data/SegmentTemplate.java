@@ -1,19 +1,26 @@
 package io.lindstrom.mpd.data;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import io.lindstrom.mpd.support.Utils;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
+import java.util.List;
 import java.util.Objects;
 
 @XmlType(propOrder = {
         "Initialization",
         "RepresentationIndex",
-        "SegmentTimeline",
+        "segmentTimeline",
         "BitstreamSwitching"
 })
 public class SegmentTemplate {
-    @XmlElement(name = "SegmentTimeline", namespace = MPD.NAMESPACE)
-    private final SegmentTimeline segmentTimeline;
+    @XmlElement(name = "S", namespace = MPD.NAMESPACE)
+    @XmlElementWrapper(name = "SegmentTimeline", namespace = MPD.NAMESPACE)
+    @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
+    private final List<Segment> segmentTimeline;
 
     @XmlElement(name = "BitstreamSwitching", namespace = MPD.NAMESPACE)
     private final URLType bitstreamswitchingElement;
@@ -60,7 +67,7 @@ public class SegmentTemplate {
     @XmlAttribute(name = "availabilityTimeComplete")
     private final Boolean availabilityTimeComplete;
 
-    private SegmentTemplate(SegmentTimeline segmentTimeline, URLType bitstreamswitchingElement, URLType initialization, URLType representationIndex, String media, String index, String initializationAttribute, String bitstreamSwitching, Long duration, Long startNumber, Long timescale, Long presentationTimeOffset, String indexRange, Boolean indexRangeExact, Double availabilityTimeOffset, Boolean availabilityTimeComplete) {
+    private SegmentTemplate(List<Segment> segmentTimeline, URLType bitstreamswitchingElement, URLType initialization, URLType representationIndex, String media, String index, String initializationAttribute, String bitstreamSwitching, Long duration, Long startNumber, Long timescale, Long presentationTimeOffset, String indexRange, Boolean indexRangeExact, Double availabilityTimeOffset, Boolean availabilityTimeComplete) {
         this.segmentTimeline = segmentTimeline;
         this.bitstreamswitchingElement = bitstreamswitchingElement;
         this.initialization = initialization;
@@ -99,8 +106,8 @@ public class SegmentTemplate {
         this.availabilityTimeComplete = null;
     }
 
-    public SegmentTimeline getSegmentTimeline() {
-        return segmentTimeline;
+    public List<Segment> getSegmentTimeline() {
+        return Utils.unmodifiableList(segmentTimeline);
     }
 
     public URLType getBitstreamswitchingElement() {
@@ -235,7 +242,7 @@ public class SegmentTemplate {
     }
 
     public static class Builder {
-        private SegmentTimeline segmentTimeline;
+        private List<Segment> segmentTimeline;
         private URLType bitstreamswitchingElement;
         private URLType initialization;
         private URLType representationIndex;
@@ -252,7 +259,7 @@ public class SegmentTemplate {
         private Double availabilityTimeOffset;
         private Boolean availabilityTimeComplete;
 
-        public Builder withSegmentTimeline(SegmentTimeline segmentTimeline) {
+        public Builder withSegmentTimeline(List<Segment> segmentTimeline) {
             this.segmentTimeline = segmentTimeline;
             return this;
         }
