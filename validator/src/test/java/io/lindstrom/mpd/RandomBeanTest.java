@@ -4,18 +4,20 @@ import io.github.benas.randombeans.EnhancedRandomBuilder;
 import io.github.benas.randombeans.FieldDefinitionBuilder;
 import io.github.benas.randombeans.api.EnhancedRandom;
 import io.lindstrom.mpd.data.MPD;
+import io.lindstrom.mpd.data.PresentationType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
-import org.xml.sax.SAXException;
 
-import java.io.IOException;
+import java.util.Random;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 @RunWith(Parameterized.class)
 public class RandomBeanTest {
+    private static final Random RANDOM = new Random();
+
     @Parameters
     public static Iterable<MPD> randomBeans() {
         EnhancedRandom random = new MPDRandomBuilder()
@@ -25,6 +27,8 @@ public class RandomBeanTest {
                 .constantStringField("contains", "1")
                 .constantStringField("dependencyLevel", "1")
                 .randomize(Long.class, (Supplier<Long>) () -> 5L)
+                .randomize(PresentationType.class,(Supplier<PresentationType>) () ->
+                        RANDOM.nextBoolean() ? PresentationType.STATIC : PresentationType.DYNAMIC)
                 .collectionSizeRange(1, 2)
                 .seed(10005)
                 .build();
@@ -40,18 +44,9 @@ public class RandomBeanTest {
     }
 
     @Test
-    public void randomMPD() throws IOException, SAXException {
+    public void randomMPD() throws Exception {
         MPDValidator validator = new MPDValidator();
-        MPDParser parser = new MPDParser();
-
-        String generated = parser.writeAsString(parser.parse(parser.writeAsString(mpd)));
-
-        try {
-            validator.validate(generated);
-        } catch (Exception e) {
-            System.out.println(generated);
-            throw e;
-        }
+        validator.xsdValidation(mpd);
     }
 
     static class MPDRandomBuilder extends EnhancedRandomBuilder {

@@ -573,7 +573,7 @@
   <EssentialProperty schemeIdUri="YrOvNExGBoUkQBRuOggqlmOQPHkwi" value="dNXnRsrJmImULWbDQsVOFhyU" id="RFQsVUnvqLGwyyAIAALViJHqPC"/>
   <SupplementalProperty schemeIdUri="zG" value="OJvoaGmulcNdahEfx" id="Vr"/>
   <SupplementalProperty schemeIdUri="zG" value="OJvoaGmulcNdahEfx" id="Vr"/>
-  <UTCTiming schemeIdUri="IuRuScjdhQofJFMlqt" value="rQCHRDDnSUWXjxKVQTkdne" id="cmBxiFVWS"/>
-  <UTCTiming schemeIdUri="BUieOdxithDaoKPGRS" value="oFJSetgekRvRgJCRrqMoZxaa" id="dAm"/>
+  <UTCTiming schemeIdUri="urn:mpeg:dash:utc:http-head:2014" value="rQCHRDDnSUWXjxKVQTkdne" id="cmBxiFVWS"/>
+  <UTCTiming schemeIdUri="urn:mpeg:dash:utc:ntp:2014" value="oFJSetgekRvRgJCRrqMoZxaa" id="dAm"/>
 </MPD>
 

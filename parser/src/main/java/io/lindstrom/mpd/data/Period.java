@@ -282,6 +282,11 @@ public class Period {
             return this;
         }
 
+        public Builder withAdaptationSet(AdaptationSet adaptationSet, AdaptationSet ...moreAdaptationSets) {
+            this.adaptationSets = Utils.varargsToList(adaptationSet, moreAdaptationSets);
+            return this;
+        }
+
         public Builder withSubsets(List<Subset> subsets) {
             this.subsets = subsets;
             return this;

@@ -2,7 +2,9 @@ package io.lindstrom.mpd.data;
 
 import io.lindstrom.mpd.support.Utils;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 import java.util.Objects;
 
@@ -488,6 +490,11 @@ public class AdaptationSet extends RepresentationBase {
 
         public Builder withRepresentations(List<Representation> representations) {
             this.representations = representations;
+            return this;
+        }
+
+        public Builder withRepresentation(Representation representation, Representation ...moreRepresentations) {
+            this.representations = Utils.varargsToList(representation, moreRepresentations);
             return this;
         }
 

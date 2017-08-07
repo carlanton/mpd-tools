@@ -1,5 +1,7 @@
 package io.lindstrom.mpd.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Objects;
 
 public class FrameRate {
@@ -17,6 +19,15 @@ public class FrameRate {
 
     public Long getDenominator() {
         return denominator;
+    }
+
+    @JsonIgnore
+    public double toDouble() {
+        if (denominator == null) {
+            return numerator;
+        } else {
+            return numerator / (double) denominator;
+        }
     }
 
     @Override

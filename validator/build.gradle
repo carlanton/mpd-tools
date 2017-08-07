@@ -11,6 +11,7 @@ repositories {
 
 dependencies {
     compile project(':parser')
+
     testCompile 'junit:junit:4.12'
     testCompile 'io.github.benas:random-beans:3.7.0'
 }

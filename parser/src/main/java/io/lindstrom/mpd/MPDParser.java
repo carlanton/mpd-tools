@@ -49,11 +49,16 @@ public class MPDParser {
         return objectMapper.writeValueAsString(mpd);
     }
 
+    public byte[] writeAsBytes(MPD mpd) throws JsonProcessingException {
+        return objectMapper.writeValueAsBytes(mpd);
+    }
+
     public static ObjectMapper defaultObjectMapper() {
         return new XmlMapper(new XmlFactory(new WstxInputFactory(), new WstxPrefixedOutputFactory()))
                 .enable(SerializationFeature.INDENT_OUTPUT)
                 .setSerializationInclusion(JsonInclude.Include.NON_NULL)
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true)
+                .configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE, true)
                 .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
                 .registerModule(new ParserModule())
                 .setAnnotationIntrospector(AnnotationIntrospector.pair(

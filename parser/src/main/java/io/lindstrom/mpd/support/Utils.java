@@ -1,5 +1,7 @@
 package io.lindstrom.mpd.support;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,6 +16,18 @@ public class Utils {
             return list;
         } else {
             return Collections.unmodifiableList(list);
+        }
+    }
+
+    @SafeVarargs
+    public static <T> List<T> varargsToList(T head, T ...tail) {
+        if (tail.length == 0) {
+            return Collections.singletonList(head);
+        } else {
+            List<T> list = new ArrayList<>();
+            list.add(head);
+            list.addAll(Arrays.asList(tail));
+            return list;
         }
     }
 }

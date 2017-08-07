@@ -1,5 +1,6 @@
 package io.lindstrom.mpd.data;
 
+import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum PresentationType {
@@ -7,5 +8,8 @@ public enum PresentationType {
     STATIC,
 
     @JsonProperty("dynamic")
-    DYNAMIC;
+    DYNAMIC,
+
+    @JsonEnumDefaultValue
+    INVALID
 }

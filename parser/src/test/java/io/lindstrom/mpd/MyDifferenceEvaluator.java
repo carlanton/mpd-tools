@@ -12,7 +12,9 @@ import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 public class MyDifferenceEvaluator implements DifferenceEvaluator {
     private final DateTimeFormatter formatter =
@@ -29,46 +31,67 @@ public class MyDifferenceEvaluator implements DifferenceEvaluator {
         Node controlNode = comparison.getControlDetails().getTarget();
         Node testNode = comparison.getTestDetails().getTarget();
 
-
-        if (controlNode instanceof Attr && testNode instanceof Attr) {
-            Attr controlAttribute = (Attr) controlNode;
-            Attr testAttribute = (Attr) testNode;
-
-            try {
-                long test = parseDuration(testAttribute.getValue());
-                long control = parseDuration(controlAttribute.getValue());
-                if (test == control) {
-                    return ComparisonResult.SIMILAR;
-                }
-            } catch (Exception e) {
-                // ignore
-            }
-
-            try {
-                double test = Double.parseDouble(testAttribute.getValue());
-                double control = Double.parseDouble(controlAttribute.getValue());
-                if (test == control) {
-                    return ComparisonResult.SIMILAR;
-                }
-            } catch (Exception e) {
-                // ignore
-            }
-
-            try {
-                OffsetDateTime test = OffsetDateTime.parse(testAttribute.getValue(), formatter);
-                OffsetDateTime control = OffsetDateTime.parse(controlAttribute.getValue(), formatter);
-                if (test.equals(control)) {
-                    return ComparisonResult.SIMILAR;
-                }
-            } catch (Exception e) {
-                // ignore
+        if ((controlNode instanceof Attr && testNode instanceof Attr)) {
+            if (similarAttributes((Attr) controlNode, (Attr) testNode)) {
+                return ComparisonResult.SIMILAR;
+            } else {
+                return outcome;
             }
         }
 
         return outcome;
     }
 
+
+    private boolean similarAttributes(Attr control, Attr test) {
+        // Sanity check
+        if (!control.getName().equals(test.getName())) {
+            return false;
+        }
+
+        final String controlValue = control.getValue();
+        final String testValue = test.getValue();
+
+        if (control.getName().equals("profiles")) {
+            return sortAndTrimProfiles(controlValue).equals(sortAndTrimProfiles(testValue));
+        }
+
+        try {
+            if (parseDuration(controlValue) == parseDuration(testValue)) {
+                return true;
+            }
+        } catch (Exception e) {
+            // ignore
+        }
+
+        try {
+            if (Double.parseDouble(controlValue) == Double.parseDouble(testValue)) {
+                return true;
+            }
+        } catch (Exception e) {
+            // ignore
+        }
+
+        try {
+            if (OffsetDateTime.parse(controlValue, formatter).equals(OffsetDateTime.parse(testValue, formatter))) {
+                return true;
+            }
+        } catch (Exception e) {
+            // ignore
+        }
+
+        return false;
+    }
+
+
     private long parseDuration(String value) throws DatatypeConfigurationException {
         return DatatypeFactory.newInstance().newDuration(value).getTimeInMillis(new Date(0));
+    }
+
+    private String sortAndTrimProfiles(String profiles) {
+        return Arrays.stream(profiles.split(","))
+                .map(String::trim)
+                .sorted()
+                .collect(Collectors.joining(","));
     }
 }

@@ -56,10 +56,22 @@ public class DataTypeTest {
 
         for (Method method : builderType.getMethods()) {
             if (method.getName().startsWith("with")) {
-                String getter = method.getName().replaceFirst("with", "get");
+                String getterName = method.getName().replaceFirst("with", "get");
 
-                Object value = clazz.getMethod(getter).invoke(object);
+                Method getter;
+                try {
+                    getter = clazz.getMethod(getterName);
+                } catch (NoSuchMethodException e) {
+                    continue;
+                }
+
+                if (!getter.getReturnType().equals(method.getParameterTypes()[0])) {
+                    continue;
+                }
+
+                Object value = getter.invoke(object);
                 Object newValue = rebuildAndValidate(value);
+
 
                 method.invoke(builder, newValue);
             }

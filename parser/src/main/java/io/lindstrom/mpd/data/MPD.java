@@ -1,5 +1,6 @@
 package io.lindstrom.mpd.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.lindstrom.mpd.support.Utils;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -8,6 +9,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.time.Duration;
 import java.time.OffsetDateTime;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -47,13 +50,13 @@ public class MPD {
     private final List<Descriptor> supplementalProperties;
 
     @XmlElement(name = "UTCTiming", namespace = NAMESPACE)
-    private final List<Descriptor> utcTimings;
+    private final List<UTCTiming> utcTimings;
 
     @XmlAttribute(name = "id")
     private final String id;
 
     @XmlAttribute(name = "profiles", required = true)
-    private final String profiles;
+    private final Profiles profiles;
 
     @XmlAttribute(name = "type")
     private final PresentationType type;
@@ -91,7 +94,7 @@ public class MPD {
     @XmlAttribute(namespace = "http://www.w3.org/2001/XMLSchema-instance")
     private final String schemaLocation;
 
-    private MPD(List<ProgramInformation> programInformations, List<BaseURL> baseURLs, List<String> locations, List<Period> periods, List<Metrics> metrics, List<Descriptor> essentialProperties, List<Descriptor> supplementalProperties, List<Descriptor> utcTimings, String id, String profiles, PresentationType type, OffsetDateTime availabilityStartTime, OffsetDateTime availabilityEndTime, OffsetDateTime publishTime, Duration mediaPresentationDuration, Duration minimumUpdatePeriod, Duration minBufferTime, Duration timeShiftBufferDepth, Duration suggestedPresentationDelay, Duration maxSegmentDuration, Duration maxSubsegmentDuration, String schemaLocation) {
+    private MPD(List<ProgramInformation> programInformations, List<BaseURL> baseURLs, List<String> locations, List<Period> periods, List<Metrics> metrics, List<Descriptor> essentialProperties, List<Descriptor> supplementalProperties, List<UTCTiming> utcTimings, String id, Profiles profiles, PresentationType type, OffsetDateTime availabilityStartTime, OffsetDateTime availabilityEndTime, OffsetDateTime publishTime, Duration mediaPresentationDuration, Duration minimumUpdatePeriod, Duration minBufferTime, Duration timeShiftBufferDepth, Duration suggestedPresentationDelay, Duration maxSegmentDuration, Duration maxSubsegmentDuration, String schemaLocation) {
         this.programInformations = programInformations;
         this.baseURLs = baseURLs;
         this.locations = locations;
@@ -170,7 +173,7 @@ public class MPD {
         return Utils.unmodifiableList(supplementalProperties);
     }
 
-    public List<Descriptor> getUtcTimings() {
+    public List<UTCTiming> getUtcTimings() {
         return Utils.unmodifiableList(utcTimings);
     }
 
@@ -178,8 +181,22 @@ public class MPD {
         return id;
     }
 
-    public String getProfiles() {
-        return profiles;
+    @JsonIgnore
+    public List<Profile> getProfiles() {
+        if (profiles == null) {
+            return Collections.emptyList();
+        } else {
+            return profiles.getProfiles();
+        }
+    }
+
+    @JsonIgnore
+    public List<String> getInteroperabilityPointsAndExtensions() {
+        if (profiles == null) {
+            return Collections.emptyList();
+        } else {
+            return profiles.getInteroperabilityPointsAndExtensions();
+        }
     }
 
     public PresentationType getType() {
@@ -319,6 +336,8 @@ public class MPD {
     }
 
     public static class Builder {
+        private static final String DEFAULT_SCHEMA_LOCATION = "urn:mpeg:dash:schema:mpd:2011 http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-DASH_schema_files/DASH-MPD.xsd";
+
         private List<ProgramInformation> programInformations;
         private List<BaseURL> baseURLs;
         private List<String> locations;
@@ -326,9 +345,9 @@ public class MPD {
         private List<Metrics> metrics;
         private List<Descriptor> essentialProperties;
         private List<Descriptor> supplementalProperties;
-        private List<Descriptor> utcTimings;
+        private List<UTCTiming> utcTimings;
         private String id;
-        private String profiles;
+        private Profiles profiles;
         private PresentationType type;
         private OffsetDateTime availabilityStartTime;
         private OffsetDateTime availabilityEndTime;
@@ -341,6 +360,12 @@ public class MPD {
         private Duration maxSegmentDuration;
         private Duration maxSubsegmentDuration;
         private String schemaLocation;
+
+        public Builder() {
+            this.schemaLocation = DEFAULT_SCHEMA_LOCATION;
+            this.type = PresentationType.STATIC;
+            this.minBufferTime = Duration.ZERO;
+        }
 
         public Builder withProgramInformations(List<ProgramInformation> programInformations) {
             this.programInformations = programInformations;
@@ -362,6 +387,11 @@ public class MPD {
             return this;
         }
 
+        public Builder withPeriod(Period period, Period ...morePeriods) {
+            this.periods = Utils.varargsToList(period, morePeriods);
+            return this;
+        }
+
         public Builder withMetrics(List<Metrics> metrics) {
             this.metrics = metrics;
             return this;
@@ -377,7 +407,7 @@ public class MPD {
             return this;
         }
 
-        public Builder withUtcTimings(List<Descriptor> utcTimings) {
+        public Builder withUtcTimings(List<UTCTiming> utcTimings) {
             this.utcTimings = utcTimings;
             return this;
         }
@@ -387,8 +417,25 @@ public class MPD {
             return this;
         }
 
-        public Builder withProfiles(String profiles) {
+        public Builder withProfiles(Profiles profiles) {
             this.profiles = profiles;
+            return this;
+        }
+
+        public Builder withProfiles(Profile ...profile) {
+            if (this.profiles == null) {
+                this.profiles = new Profiles();
+            }
+            this.profiles = this.profiles.buildUpon().withProfiles(Arrays.asList(profile)).build();
+            return this;
+        }
+
+        public Builder withInteroperabilityPointsAndExtensions(String ...value) {
+            if (this.profiles == null) {
+                this.profiles = new Profiles();
+            }
+            this.profiles = this.profiles.buildUpon()
+                    .withInteroperabilityPointsAndExtensions(Arrays.asList(value)).build();
             return this;
         }
 
