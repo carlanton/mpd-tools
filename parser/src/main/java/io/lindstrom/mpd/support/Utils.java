@@ -25,8 +25,8 @@ public class Utils {
         } else {
             List<T> list = new ArrayList<>();
             list.add(head);
-            for (int i = 0; i < tail.length; i++) {
-                list.add(tail[i]);
+            for (T element : tail) {
+                list.add(element);
             }
             return list;
         }

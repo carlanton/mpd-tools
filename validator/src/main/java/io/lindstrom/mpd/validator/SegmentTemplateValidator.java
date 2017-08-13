@@ -85,7 +85,7 @@ public class SegmentTemplateValidator {
 
     @ValidationRule("if (matches(@media, '\\$RepresentationID%.[^\\$]*\\$')) then false() else true()")
     private static Violation ruleR76(SegmentTemplate segmentTemplate) {
-        if (segmentTemplate.getMedia() != null && segmentTemplate.getMedia().matches(".*\\$RepresentationID%.[^\\$]*\\$.*")) {
+        if (segmentTemplate.getMedia() != null && segmentTemplate.getMedia().matches(".*\\$RepresentationID%.[^$]*\\$.*")) {
             return new Violation("R7.6", "$RepresentationID$ shall not have a format tag.");
         }
         return Violation.empty();
