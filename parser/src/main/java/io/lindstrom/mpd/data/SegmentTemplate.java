@@ -11,6 +11,12 @@ import java.util.List;
 import java.util.Objects;
 
 @XmlType(propOrder = {
+        "initialization",
+        "media",
+        "startNumber",
+        "timescale",
+        "duration",
+
         "Initialization",
         "RepresentationIndex",
         "segmentTimeline",

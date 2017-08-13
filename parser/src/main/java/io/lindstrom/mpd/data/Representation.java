@@ -10,19 +10,25 @@ import java.util.List;
 import java.util.Objects;
 
 
-
 @XmlType(propOrder = {
+        "id",
+        "bandwidth",
+
+        "width",
+        "height",
+        "codecs",
+
         "framePackings",
         "audioChannelConfigurations",
         "contentProtections",
         "essentialProperties",
         "supplementalProperties",
         "inbandEventStreams",
-    "baseURLs",
-    "SubRepresentation",
-    "segmentBase",
-    "segmentList",
-    "segmentTemplate"
+        "baseURLs",
+        "SubRepresentation",
+        "segmentBase",
+        "segmentList",
+        "segmentTemplate"
 })
 public class Representation extends RepresentationBase {
     @XmlElement(name = "BaseURL", namespace = MPD.NAMESPACE)

@@ -11,15 +11,17 @@ import java.util.List;
 import java.util.Objects;
 
 @XmlType(propOrder = {
-    "baseURLs",
-    "segmentBase",
-    "segmentList",
-    "segmentTemplate",
-    "assetIdentifier",
-    "eventStreams",
-    "adaptationSets",
-    "subsets",
-    "supplementalProperties"
+        "id",
+
+        "baseURLs",
+        "segmentBase",
+        "segmentList",
+        "segmentTemplate",
+        "assetIdentifier",
+        "eventStreams",
+        "adaptationSets",
+        "subsets",
+        "supplementalProperties"
 })
 public class Period {
     @XmlElement(name = "BaseURL", namespace = MPD.NAMESPACE)

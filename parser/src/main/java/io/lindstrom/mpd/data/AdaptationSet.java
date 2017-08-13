@@ -10,6 +10,12 @@ import java.util.List;
 import java.util.Objects;
 
 @XmlType(propOrder = {
+        "id",
+        "contentType",
+        "mimeType",
+        "segmentAlignment",
+
+
         "framePackings",
         "audioChannelConfigurations",
         "contentProtections",
