@@ -38,6 +38,10 @@ public class Role extends Descriptor {
         }
     }
 
+    public Type getType() {
+        return type;
+    }
+
     public enum Type {
         @JsonProperty("caption") CAPTION,
         @JsonProperty("subtitle") SUBTITLE,

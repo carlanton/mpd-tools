@@ -366,7 +366,7 @@ public abstract class RepresentationBase {
             return getThis();
         }
 
-        public T withHeigth(int height) {
+        public T withHeight(int height) {
             this.height = (long) height;
             return getThis();
         }

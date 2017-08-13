@@ -32,7 +32,7 @@ public class SegmentTemplate {
     private final URLType bitstreamswitchingElement;
 
     @XmlElement(name = "Initialization", namespace = MPD.NAMESPACE)
-    private final URLType initialization;
+    private final URLType initializationElement;
 
     @XmlElement(name = "RepresentationIndex", namespace = MPD.NAMESPACE)
     private final URLType representationIndex;
@@ -44,7 +44,7 @@ public class SegmentTemplate {
     private final String index;
 
     @XmlAttribute(name = "initialization")
-    private final String initializationAttribute;
+    private final String initialization;
 
     @XmlAttribute(name = "bitstreamSwitching")
     private final String bitstreamSwitching;
@@ -73,14 +73,14 @@ public class SegmentTemplate {
     @XmlAttribute(name = "availabilityTimeComplete")
     private final Boolean availabilityTimeComplete;
 
-    private SegmentTemplate(List<Segment> segmentTimeline, URLType bitstreamswitchingElement, URLType initialization, URLType representationIndex, String media, String index, String initializationAttribute, String bitstreamSwitching, Long duration, Long startNumber, Long timescale, Long presentationTimeOffset, String indexRange, Boolean indexRangeExact, Double availabilityTimeOffset, Boolean availabilityTimeComplete) {
+    private SegmentTemplate(List<Segment> segmentTimeline, URLType bitstreamswitchingElement, URLType initializationElement, URLType representationIndex, String media, String index, String initialization, String bitstreamSwitching, Long duration, Long startNumber, Long timescale, Long presentationTimeOffset, String indexRange, Boolean indexRangeExact, Double availabilityTimeOffset, Boolean availabilityTimeComplete) {
         this.segmentTimeline = segmentTimeline;
         this.bitstreamswitchingElement = bitstreamswitchingElement;
-        this.initialization = initialization;
+        this.initializationElement = initializationElement;
         this.representationIndex = representationIndex;
         this.media = media;
         this.index = index;
-        this.initializationAttribute = initializationAttribute;
+        this.initialization = initialization;
         this.bitstreamSwitching = bitstreamSwitching;
         this.duration = duration;
         this.startNumber = startNumber;
@@ -96,11 +96,11 @@ public class SegmentTemplate {
     private SegmentTemplate() {
         this.segmentTimeline = null;
         this.bitstreamswitchingElement = null;
-        this.initialization = null;
+        this.initializationElement = null;
         this.representationIndex = null;
         this.media = null;
         this.index = null;
-        this.initializationAttribute = null;
+        this.initialization = null;
         this.bitstreamSwitching = null;
         this.duration = null;
         this.startNumber = null;
@@ -120,8 +120,8 @@ public class SegmentTemplate {
         return bitstreamswitchingElement;
     }
 
-    public URLType getInitialization() {
-        return initialization;
+    public URLType getInitializationElement() {
+        return initializationElement;
     }
 
     public URLType getRepresentationIndex() {
@@ -136,8 +136,8 @@ public class SegmentTemplate {
         return index;
     }
 
-    public String getInitializationAttribute() {
-        return initializationAttribute;
+    public String getInitialization() {
+        return initialization;
     }
 
     public String getBitstreamSwitching() {
@@ -183,11 +183,11 @@ public class SegmentTemplate {
         SegmentTemplate that = (SegmentTemplate) o;
         return Objects.equals(segmentTimeline, that.segmentTimeline) &&
                 Objects.equals(bitstreamswitchingElement, that.bitstreamswitchingElement) &&
-                Objects.equals(initialization, that.initialization) &&
+                Objects.equals(initializationElement, that.initializationElement) &&
                 Objects.equals(representationIndex, that.representationIndex) &&
                 Objects.equals(media, that.media) &&
                 Objects.equals(index, that.index) &&
-                Objects.equals(initializationAttribute, that.initializationAttribute) &&
+                Objects.equals(initialization, that.initialization) &&
                 Objects.equals(bitstreamSwitching, that.bitstreamSwitching) &&
                 Objects.equals(duration, that.duration) &&
                 Objects.equals(startNumber, that.startNumber) &&
@@ -201,7 +201,7 @@ public class SegmentTemplate {
 
     @Override
     public int hashCode() {
-        return Objects.hash(segmentTimeline, bitstreamswitchingElement, initialization, representationIndex, media, index, initializationAttribute, bitstreamSwitching, duration, startNumber, timescale, presentationTimeOffset, indexRange, indexRangeExact, availabilityTimeOffset, availabilityTimeComplete);
+        return Objects.hash(segmentTimeline, bitstreamswitchingElement, initializationElement, representationIndex, media, index, initialization, bitstreamSwitching, duration, startNumber, timescale, presentationTimeOffset, indexRange, indexRangeExact, availabilityTimeOffset, availabilityTimeComplete);
     }
 
     @Override
@@ -209,11 +209,11 @@ public class SegmentTemplate {
         return "SegmentTemplate{" +
                 "segmentTimeline=" + segmentTimeline +
                 ", bitstreamswitchingElement=" + bitstreamswitchingElement +
-                ", initialization=" + initialization +
+                ", initializationElement=" + initializationElement +
                 ", representationIndex=" + representationIndex +
                 ", media='" + media + '\'' +
                 ", index='" + index + '\'' +
-                ", initializationAttribute='" + initializationAttribute + '\'' +
+                ", initialization='" + initialization + '\'' +
                 ", bitstreamSwitching='" + bitstreamSwitching + '\'' +
                 ", duration=" + duration +
                 ", startNumber=" + startNumber +
@@ -230,11 +230,11 @@ public class SegmentTemplate {
         return new Builder()
             .withSegmentTimeline(segmentTimeline)
             .withBitstreamswitchingElement(bitstreamswitchingElement)
-            .withInitialization(initialization)
+            .withInitializationElement(initializationElement)
             .withRepresentationIndex(representationIndex)
             .withMedia(media)
             .withIndex(index)
-            .withInitializationAttribute(initializationAttribute)
+            .withinitialization(initialization)
             .withBitstreamSwitching(bitstreamSwitching)
             .withDuration(duration)
             .withStartNumber(startNumber)
@@ -250,11 +250,11 @@ public class SegmentTemplate {
     public static class Builder {
         private List<Segment> segmentTimeline;
         private URLType bitstreamswitchingElement;
-        private URLType initialization;
+        private URLType initializationElement;
         private URLType representationIndex;
         private String media;
         private String index;
-        private String initializationAttribute;
+        private String initialization;
         private String bitstreamSwitching;
         private Long duration;
         private Long startNumber;
@@ -275,8 +275,8 @@ public class SegmentTemplate {
             return this;
         }
 
-        public Builder withInitialization(URLType initialization) {
-            this.initialization = initialization;
+        public Builder withInitializationElement(URLType initializationElement) {
+            this.initializationElement = initializationElement;
             return this;
         }
 
@@ -295,8 +295,8 @@ public class SegmentTemplate {
             return this;
         }
 
-        public Builder withInitializationAttribute(String initializationAttribute) {
-            this.initializationAttribute = initializationAttribute;
+        public Builder withinitialization(String initialization) {
+            this.initialization = initialization;
             return this;
         }
 
@@ -346,7 +346,7 @@ public class SegmentTemplate {
         }
 
         public SegmentTemplate build() {
-            return new SegmentTemplate(segmentTimeline, bitstreamswitchingElement, initialization, representationIndex, media, index, initializationAttribute, bitstreamSwitching, duration, startNumber, timescale, presentationTimeOffset, indexRange, indexRangeExact, availabilityTimeOffset, availabilityTimeComplete);
+            return new SegmentTemplate(segmentTimeline, bitstreamswitchingElement, initializationElement, representationIndex, media, index, initialization, bitstreamSwitching, duration, startNumber, timescale, presentationTimeOffset, indexRange, indexRangeExact, availabilityTimeOffset, availabilityTimeComplete);
         }
     }
 }

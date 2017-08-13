@@ -44,7 +44,7 @@ public class SegmentTemplateValidator {
 
     @ValidationRule("if (@initialization and (matches(@initialization, '\\$Number(%.[^\\$]*)?\\$') or matches(@initialization, '\\$Time(%.[^\\$]*)?\\$'))) then false() else true()")
     private static Violation ruleR73(SegmentTemplate segmentTemplate) {
-        String initialization = segmentTemplate.getInitializationAttribute();
+        String initialization = segmentTemplate.getInitialization();
         if (initialization != null && (initialization.contains("$Number") || initialization.contains("$Time"))) {
             return new Violation("R7.3", "Neither $Number$ nor the $Time$ identifier shall be included in the initialization attribute.");
         }
