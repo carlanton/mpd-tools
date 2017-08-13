@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.time.Duration;
 import java.time.OffsetDateTime;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -388,7 +387,7 @@ public class MPD {
             return this;
         }
 
-        public Builder withPeriod(Period period, Period ...morePeriods) {
+        public Builder withPeriods(Period period, Period ...morePeriods) {
             this.periods = Utils.varargsToList(period, morePeriods);
             return this;
         }
@@ -413,6 +412,11 @@ public class MPD {
             return this;
         }
 
+        public Builder withUtcTimings(UTCTiming utcTiming, UTCTiming ...moreUtcTiming) {
+            this.utcTimings = Utils.varargsToList(utcTiming, moreUtcTiming);
+            return this;
+        }
+
         public Builder withId(String id) {
             this.id = id;
             return this;
@@ -423,20 +427,23 @@ public class MPD {
             return this;
         }
 
-        public Builder withProfiles(Profile ...profile) {
-            if (this.profiles == null) {
-                this.profiles = new Profiles();
-            }
-            this.profiles = this.profiles.buildUpon().withProfiles(Arrays.asList(profile)).build();
-            return this;
-        }
-
-        public Builder withInteroperabilityPointsAndExtensions(String ...value) {
+        public Builder withProfiles(Profile profile, Profile ...moreProfiles) {
             if (this.profiles == null) {
                 this.profiles = new Profiles();
             }
             this.profiles = this.profiles.buildUpon()
-                    .withInteroperabilityPointsAndExtensions(Arrays.asList(value)).build();
+                    .withProfiles(Utils.varargsToList(profile, moreProfiles))
+                    .build();
+            return this;
+        }
+
+        public Builder withInteroperabilityPointsAndExtensions(String value, String ...moreValues) {
+            if (this.profiles == null) {
+                this.profiles = new Profiles();
+            }
+            this.profiles = this.profiles.buildUpon()
+                    .withInteroperabilityPointsAndExtensions(Utils.varargsToList(value, moreValues))
+                    .build();
             return this;
         }
 

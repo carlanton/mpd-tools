@@ -1,6 +1,7 @@
 package io.lindstrom.mpd.data;
 
 import io.lindstrom.mpd.data.descriptor.Descriptor;
+import io.lindstrom.mpd.data.descriptor.Role;
 import io.lindstrom.mpd.support.Utils;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -8,13 +9,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @XmlType(propOrder = {
         "id",
         "contentType",
         "mimeType",
         "segmentAlignment",
-
 
         "framePackings",
         "audioChannelConfigurations",
@@ -460,6 +461,18 @@ public class AdaptationSet extends RepresentationBase {
             return this;
         }
 
+        public Builder withRoles(Descriptor role, Descriptor ...moreRoles) {
+            this.roles = Utils.varargsToList(role, moreRoles);
+            return this;
+        }
+
+        public Builder withRoles(Role.Type role, Role.Type ...moreRoles) {
+            this.roles = Utils.varargsToList(role, moreRoles).stream()
+                    .map(Role::new)
+                    .collect(Collectors.toList());
+            return this;
+        }
+
         public Builder withRatings(List<Descriptor> ratings) {
             this.ratings = ratings;
             return this;
@@ -500,7 +513,7 @@ public class AdaptationSet extends RepresentationBase {
             return this;
         }
 
-        public Builder withRepresentation(Representation representation, Representation ...moreRepresentations) {
+        public Builder withRepresentations(Representation representation, Representation ...moreRepresentations) {
             this.representations = Utils.varargsToList(representation, moreRepresentations);
             return this;
         }
@@ -517,6 +530,11 @@ public class AdaptationSet extends RepresentationBase {
 
         public Builder withId(Long id) {
             this.id = id;
+            return this;
+        }
+
+        public Builder withId(int id) {
+            this.id = (long) id;
             return this;
         }
 

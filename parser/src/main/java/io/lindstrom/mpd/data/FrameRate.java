@@ -13,6 +13,10 @@ public class FrameRate {
         this.denominator = denominator;
     }
 
+    public FrameRate(long frameRate) {
+        this(frameRate, null);
+    }
+
     public long getNumerator() {
         return numerator;
     }

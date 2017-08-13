@@ -321,6 +321,11 @@ public abstract class RepresentationBase {
             return getThis();
         }
 
+        public T withAudioChannelConfigurations(Descriptor audioChannelConfiguration, Descriptor ...moreAudioChannelConfigurations) {
+            this.audioChannelConfigurations = Utils.varargsToList(audioChannelConfiguration, moreAudioChannelConfigurations);
+            return getThis();
+        }
+
         public T withContentProtections(List<Descriptor> contentProtections) {
             this.contentProtections = contentProtections;
             return getThis();
@@ -351,8 +356,18 @@ public abstract class RepresentationBase {
             return getThis();
         }
 
+        public T withWidth(int width) {
+            this.width = (long) width;
+            return getThis();
+        }
+
         public T withHeight(Long height) {
             this.height = height;
+            return getThis();
+        }
+
+        public T withHeigth(int height) {
+            this.height = (long) height;
             return getThis();
         }
 
