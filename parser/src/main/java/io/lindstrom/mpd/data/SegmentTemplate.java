@@ -234,7 +234,7 @@ public class SegmentTemplate {
             .withRepresentationIndex(representationIndex)
             .withMedia(media)
             .withIndex(index)
-            .withinitialization(initialization)
+            .withInitialization(initialization)
             .withBitstreamSwitching(bitstreamSwitching)
             .withDuration(duration)
             .withStartNumber(startNumber)
@@ -295,7 +295,7 @@ public class SegmentTemplate {
             return this;
         }
 
-        public Builder withinitialization(String initialization) {
+        public Builder withInitialization(String initialization) {
             this.initialization = initialization;
             return this;
         }
