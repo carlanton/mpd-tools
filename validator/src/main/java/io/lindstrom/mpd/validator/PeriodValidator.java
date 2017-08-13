@@ -1,6 +1,7 @@
 package io.lindstrom.mpd.validator;
 
 import io.lindstrom.mpd.data.*;
+import io.lindstrom.mpd.data.descriptor.Descriptor;
 
 import java.time.Duration;
 import java.util.ArrayList;

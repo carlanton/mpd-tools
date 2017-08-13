@@ -33,6 +33,7 @@ public class OffsetDateTimeDeserializer extends JsonDeserializer<OffsetDateTime>
             // ignore
         }
 
-        throw ctxt.mappingException("Invalid date time");
+        ctxt.reportWrongTokenException(this, p.currentToken(), "Invalid date time");
+        return null;
     }
 }

@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.8.9'
+    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.9.0'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.xmlunit:xmlunit-matchers:2.4.0'

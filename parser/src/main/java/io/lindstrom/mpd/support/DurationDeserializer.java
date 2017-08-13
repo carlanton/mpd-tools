@@ -28,7 +28,9 @@ public class DurationDeserializer extends JsonDeserializer<Duration> {
         } catch (DatatypeConfigurationException e) {
             throw new IOException(e);
         } catch (Exception e) {
-            throw ctxt.mappingException("Invalid duration");
+            ctxt.reportWrongTokenException(this, p.currentToken(), "Invalid duration");
         }
+
+        return null;
     }
 }

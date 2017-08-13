@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class UTCTiming {
     @XmlAttribute(name = "schemeIdUri", required = true)
-    private final Scheme schemeIdUri;
+    private final Type schemeIdUri;
 
     @XmlAttribute(name = "value")
     private final String value;
@@ -15,7 +15,7 @@ public class UTCTiming {
     @XmlAttribute(name = "id")
     private final String id;
 
-    private UTCTiming(Scheme schemeIdUri, String value, String id) {
+    private UTCTiming(Type schemeIdUri, String value, String id) {
         this.schemeIdUri = schemeIdUri;
         this.value = value;
         this.id = id;
@@ -27,7 +27,7 @@ public class UTCTiming {
         this.id = null;
     }
 
-    public Scheme getSchemeIdUri() {
+    public Type getSchemeIdUri() {
         return schemeIdUri;
     }
 
@@ -71,11 +71,11 @@ public class UTCTiming {
     }
 
     public static class Builder {
-        private Scheme schemeIdUri;
+        private Type schemeIdUri;
         private String value;
         private String id;
 
-        public Builder withSchemeIdUri(Scheme schemeIdUri) {
+        public Builder withSchemeIdUri(Type schemeIdUri) {
             this.schemeIdUri = schemeIdUri;
             return this;
         }
@@ -95,7 +95,7 @@ public class UTCTiming {
         }
     }
 
-    public enum Scheme {
+    public enum Type {
         @JsonProperty("urn:mpeg:dash:utc:ntp:2014") NTP,
         @JsonProperty("urn:mpeg:dash:utc:sntp:2014") SNTP,
         @JsonProperty("urn:mpeg:dash:utc:http-head:2014") HTTP_HEAD,

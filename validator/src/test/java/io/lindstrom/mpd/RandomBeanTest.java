@@ -5,6 +5,8 @@ import io.github.benas.randombeans.FieldDefinitionBuilder;
 import io.github.benas.randombeans.api.EnhancedRandom;
 import io.lindstrom.mpd.data.MPD;
 import io.lindstrom.mpd.data.PresentationType;
+import io.lindstrom.mpd.data.descriptor.Descriptor;
+import io.lindstrom.mpd.data.descriptor.GenericDescriptor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -29,6 +31,13 @@ public class RandomBeanTest {
                 .randomize(Long.class, (Supplier<Long>) () -> 5L)
                 .randomize(PresentationType.class,(Supplier<PresentationType>) () ->
                         RANDOM.nextBoolean() ? PresentationType.STATIC : PresentationType.DYNAMIC)
+                .randomize(Descriptor.class, new Supplier<Descriptor>() {
+                    private final EnhancedRandom random = new EnhancedRandomBuilder().build();
+                    @Override
+                    public Descriptor get() {
+                        return random.nextObject(GenericDescriptor.class);
+                    }
+                })
                 .collectionSizeRange(1, 2)
                 .seed(10005)
                 .build();

@@ -5,3 +5,10 @@ task wrapper(type: Wrapper) {
     gradleVersion = '4.0.1'
     distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
 }
+
+allprojects {
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+        options.compilerArgs << "-Werror" << "-Xlint:all" << "-Xlint:-processing" << "-Xlint:-serial"
+    }
+}

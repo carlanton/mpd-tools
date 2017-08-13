@@ -22,7 +22,8 @@ public class FrameRateDeserializer extends JsonDeserializer<FrameRate> {
             return new FrameRate(Long.parseLong(a),
                     b == null ? null : Long.parseLong(b.substring(1)));
         } else {
-            throw ctxt.mappingException("Invalid ratio");
+            ctxt.reportWrongTokenException(this, p.currentToken(), "Invalid ratio");
+            return null;
         }
     }
 }

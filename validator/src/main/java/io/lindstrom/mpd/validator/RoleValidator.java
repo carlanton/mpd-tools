@@ -1,6 +1,6 @@
 package io.lindstrom.mpd.validator;
 
-import io.lindstrom.mpd.data.Descriptor;
+import io.lindstrom.mpd.data.descriptor.Descriptor;
 
 import java.util.Arrays;
 import java.util.List;

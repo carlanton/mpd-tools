@@ -1,12 +1,11 @@
 package io.lindstrom.mpd.support;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class Utils {
-    private static final Class<? extends List> UNMODIFIABLE_LIST_CLASS =
+    private static final Class<?> UNMODIFIABLE_LIST_CLASS =
             Collections.unmodifiableList(Collections.emptyList()).getClass();
 
     public static <T> List<T> unmodifiableList(List<T> list) {
@@ -26,7 +25,9 @@ public class Utils {
         } else {
             List<T> list = new ArrayList<>();
             list.add(head);
-            list.addAll(Arrays.asList(tail));
+            for (int i = 0; i < tail.length; i++) {
+                list.add(tail[i]);
+            }
             return list;
         }
     }

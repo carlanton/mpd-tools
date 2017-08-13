@@ -1,5 +1,6 @@
 package io.lindstrom.mpd.data;
 
+import io.lindstrom.mpd.data.descriptor.Descriptor;
 import io.lindstrom.mpd.support.Utils;
 
 import javax.xml.bind.annotation.XmlAttribute;

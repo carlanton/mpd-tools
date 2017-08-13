@@ -1,7 +1,7 @@
 package io.lindstrom.mpd.validator;
 
 import io.lindstrom.mpd.data.AdaptationSet;
-import io.lindstrom.mpd.data.Descriptor;
+import io.lindstrom.mpd.data.descriptor.Descriptor;
 import io.lindstrom.mpd.data.Representation;
 
 import java.util.Arrays;

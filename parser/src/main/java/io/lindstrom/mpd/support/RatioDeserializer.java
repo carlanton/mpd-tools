@@ -22,7 +22,8 @@ public class RatioDeserializer extends JsonDeserializer<Ratio> {
             return new Ratio(a.isEmpty() ? null : Long.parseLong(a),
                     b.isEmpty() ? null : Long.parseLong(b));
         } else {
-            throw ctxt.mappingException("Invalid ratio");
+            ctxt.reportWrongTokenException(this, p.currentToken(), "Invalid ratio");
+            return null;
         }
     }
 }
