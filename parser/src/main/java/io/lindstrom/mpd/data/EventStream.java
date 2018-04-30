@@ -26,13 +26,17 @@ public class EventStream {
     @XmlAttribute(name = "timescale")
     private final Long timescale;
 
-    private EventStream(List<Event> events, String href, ActuateType actuate, String schemeIdUri, String value, Long timescale) {
+    @XmlAttribute(name = "messageData")
+    private final String messageData;
+
+    private EventStream(List<Event> events, String href, ActuateType actuate, String schemeIdUri, String value, Long timescale, String messageData) {
         this.events = events;
         this.href = href;
         this.actuate = actuate;
         this.schemeIdUri = schemeIdUri;
         this.value = value;
         this.timescale = timescale;
+        this.messageData = messageData;
     }
 
     @SuppressWarnings("unused")
@@ -43,6 +47,7 @@ public class EventStream {
         this.schemeIdUri = null;
         this.value = null;
         this.timescale = null;
+        this.messageData = null;
     }
 
     public List<Event> getEvents() {
@@ -70,6 +75,19 @@ public class EventStream {
     }
 
     @Override
+    public String toString() {
+        return "EventStream{" +
+                "events=" + events +
+                ", href='" + href + '\'' +
+                ", actuate=" + actuate +
+                ", schemeIdUri='" + schemeIdUri + '\'' +
+                ", value='" + value + '\'' +
+                ", timescale=" + timescale +
+                ", messageData='" + messageData + '\'' +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -79,24 +97,14 @@ public class EventStream {
                 actuate == that.actuate &&
                 Objects.equals(schemeIdUri, that.schemeIdUri) &&
                 Objects.equals(value, that.value) &&
-                Objects.equals(timescale, that.timescale);
+                Objects.equals(timescale, that.timescale) &&
+                Objects.equals(messageData, that.messageData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(events, href, actuate, schemeIdUri, value, timescale);
-    }
 
-    @Override
-    public String toString() {
-        return "EventStream{" +
-                "events=" + events +
-                ", href='" + href + '\'' +
-                ", actuate=" + actuate +
-                ", schemeIdUri='" + schemeIdUri + '\'' +
-                ", value='" + value + '\'' +
-                ", timescale=" + timescale +
-                '}';
+        return Objects.hash(events, href, actuate, schemeIdUri, value, timescale, messageData);
     }
 
     public Builder buildUpon() {
@@ -116,6 +124,7 @@ public class EventStream {
         private String schemeIdUri;
         private String value;
         private Long timescale;
+        private String messageData;
 
         public Builder withEvents(List<Event> events) {
             this.events = events;
@@ -147,8 +156,13 @@ public class EventStream {
             return this;
         }
 
+        public Builder withMessageData(String messageData) {
+            this.messageData = messageData;
+            return this;
+        }
+
         public EventStream build() {
-            return new EventStream(events, href, actuate, schemeIdUri, value, timescale);
+            return new EventStream(events, href, actuate, schemeIdUri, value, timescale, messageData);
         }
     }
 }

@@ -132,7 +132,7 @@ public class SegmentBase {
                 .withAvailabilityTimeOffset(availabilityTimeOffset)
                 .withAvailabilityTimeComplete(availabilityTimeComplete);
     }
-    
+
     static abstract class AbstractBuilder<T> {
         URLType initialization;
         URLType representationIndex;
@@ -182,7 +182,7 @@ public class SegmentBase {
             this.availabilityTimeComplete = availabilityTimeComplete;
             return getThis();
         }
-        
+
         abstract T getThis();
     }
 

@@ -73,6 +73,8 @@ public class MPDParser {
             try {
                 streamWriter.setPrefix("xsi", "http://www.w3.org/2001/XMLSchema-instance");
                 streamWriter.setPrefix("xlink", "http://www.w3.org/1999/xlink");
+                streamWriter.setPrefix("cenc", "urn:mpeg:cenc:2013");
+                streamWriter.setPrefix("mspr", "urn:microsoft:playready");
             } catch (XMLStreamException e) {
                 throw new RuntimeException(e);
             }

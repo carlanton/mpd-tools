@@ -38,14 +38,15 @@ public class MPDParserTest {
     }
 
     @Test
-    public void similarVectors() throws Exception {
+    public void similarVectors() throws IOException {
         String actual;
 
         try {
             MPD mpd = PARSER.parse(Files.newInputStream(path));
             actual = PARSER.writeAsString(mpd);
         } catch (Exception e) {
-            return;
+            throw new RuntimeException("Failure for " + path, e);
+            //return;
         }
 
         Assert.assertThat(path + " is similar", actual,

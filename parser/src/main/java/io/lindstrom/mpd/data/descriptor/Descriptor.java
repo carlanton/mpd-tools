@@ -3,6 +3,9 @@ package io.lindstrom.mpd.data.descriptor;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import io.lindstrom.mpd.data.descriptor.protection.Mp4Protection;
+import io.lindstrom.mpd.data.descriptor.protection.PlayReadyContentProtection;
+import io.lindstrom.mpd.data.descriptor.protection.WidewineProtection;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import java.util.Objects;
@@ -14,8 +17,11 @@ import java.util.Objects;
         visible = true,
         defaultImpl = GenericDescriptor.class)
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = Role.class, name = Role.SCHEME_ID_URI)}
-)
+        @JsonSubTypes.Type(value = Role.class, name = Role.SCHEME_ID_URI),
+        @JsonSubTypes.Type(value = Mp4Protection.class, name = Mp4Protection.SCHEME_ID_URI),
+        @JsonSubTypes.Type(value = PlayReadyContentProtection.class, name = PlayReadyContentProtection.SCHEME_ID_URI),
+        @JsonSubTypes.Type(value = WidewineProtection.class, name = WidewineProtection.SCHEME_ID_URI)
+})
 public abstract class Descriptor {
     @XmlAttribute(name = "schemeIdUri")
     protected final String schemeIdUri;
