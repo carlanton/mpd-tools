@@ -10,10 +10,10 @@ public class EventStream {
     @JacksonXmlProperty(localName = "Event", namespace = MPD.NAMESPACE)
     private final List<Event> events;
 
-    @JacksonXmlProperty(namespace = "http://www.w3.org/1999/xlink")
+    @JacksonXmlProperty(isAttribute = true, namespace = "http://www.w3.org/1999/xlink")
     private final String href;
 
-    @JacksonXmlProperty(namespace = "http://www.w3.org/1999/xlink")
+    @JacksonXmlProperty(isAttribute = true, namespace = "http://www.w3.org/1999/xlink")
     private final ActuateType actuate;
 
     @JacksonXmlProperty(isAttribute = true)
