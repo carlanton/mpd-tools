@@ -1,6 +1,7 @@
 group 'io.lindstrom'
 version '0.6'
 
+apply plugin: 'idea'
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'signing'

@@ -1,7 +1,14 @@
 package io.lindstrom.mpd.data;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.lindstrom.mpd.support.RatioDeserializer;
+import io.lindstrom.mpd.support.RatioSerializer;
+
 import java.util.Objects;
 
+@JsonSerialize(using = RatioSerializer.class)
+@JsonDeserialize(using = RatioDeserializer.class)
 public class Ratio {
     private final Long a;
     private final Long b;
@@ -46,6 +53,10 @@ public class Ratio {
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    public static Ratio of(long a, long b) {
+        return new Ratio(a, b);
     }
 
     public static class Builder {

@@ -56,7 +56,35 @@ public class Mp4Protection extends Descriptor {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(super.hashCode(), defaultKID, value);
+    }
+
+    public Builder buildUpon() {
+        return new Builder()
+                .withDefaultKID(defaultKID)
+                .withValue(value);
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private String defaultKID;
+        private String value;
+
+        public Builder withDefaultKID(String defaultKID) {
+            this.defaultKID = defaultKID;
+            return this;
+        }
+
+        public Builder withValue(String value) {
+            this.value = value;
+            return this;
+        }
+
+        public Mp4Protection build() {
+            return new Mp4Protection(value, defaultKID);
+        }
     }
 }

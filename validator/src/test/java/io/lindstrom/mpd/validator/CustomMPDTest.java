@@ -4,57 +4,49 @@ import io.lindstrom.mpd.data.*;
 import org.junit.Test;
 
 import java.time.Duration;
-import java.util.Arrays;
 
 public class CustomMPDTest {
     @Test
     public void test1() throws Exception {
-        MPD mpd = new MPD.Builder()
+        MPD mpd = MPD.builder()
                 .withProfiles(Profile.MPEG_DASH_ON_DEMAND, Profile.HBBTV15)
                 .withInteroperabilityPointsAndExtensions("mupp2k")
                 .withMediaPresentationDuration(Duration.ofHours(1))
-                .withPeriods(new Period.Builder()
-                        .withAdaptationSet(new AdaptationSet.Builder()
+                .withPeriods(Period.builder()
+                        .withAdaptationSet(AdaptationSet.builder()
                                 .withId(1L)
                                 .withMimeType("video/mp4")
                                 .withContentType("video")
                                 .withWidth(1024L)
                                 .withHeight(1024L)
-                                .withFrameRate(new FrameRate(25, null))
-                                .withPar(new Ratio(1L,1L))
+                                .withFrameRate(FrameRate.of(25))
+                                .withPar(Ratio.of(1, 1))
                                 .withSubsegmentAlignment("true")
-                                .withRepresentations(new Representation.Builder()
+                                .withRepresentations(Representation.builder()
                                         .withId("x")
                                         .withBandwidth(4)
-                                        .withSegmentTemplate(new SegmentTemplate.Builder()
-                                                .withSegmentTimeline(Arrays.asList(
-                                                        new Segment.Builder().withD(4).build(),
-                                                        new Segment.Builder().withT(5L).build()
-                                                ))
+                                        .withSegmentTemplate(SegmentTemplate.builder()
+                                                .withSegmentTimeline(Segment.of(0, 4), Segment.of(4, 4))
                                                 .build())
                                         .build())
                                 .build(),
-                                new AdaptationSet.Builder()
-                                        .withId(2L)
-                                        .withWidth(1024L)
-                                        .withHeight(1024L)
-                                        .withFrameRate(new FrameRate(25, null))
+                                AdaptationSet.builder()
+                                        .withId(2)
+                                        .withWidth(1024)
+                                        .withHeight(1024)
+                                        .withFrameRate(FrameRate.of(25))
                                         .withMimeType("video/mp4")
                                         .withContentType("video")
-                                        .withPar(new Ratio(1L,1L))
+                                        .withPar(Ratio.of(1, 1))
                                         .withSubsegmentAlignment("true")
-                                        .withRepresentations(new Representation.Builder()
+                                        .withRepresentations(Representation.builder()
                                                 .withId("x")
                                                 .withBandwidth(4)
-                                                .withSegmentTemplate(new SegmentTemplate.Builder()
-                                                        .withSegmentTimeline(Arrays.asList(
-                                                                new Segment.Builder().withD(4).build(),
-                                                                new Segment.Builder().withT(5L).build()
-                                                        ))
+                                                .withSegmentTemplate( SegmentTemplate.builder()
+                                                        .withSegmentTimeline(Segment.of(0, 4), Segment.of(4, 4))
                                                         .build())
                                                 .build())
-                                        .build()
-                                )
+                                        .build())
                         .build())
                 .build();
 

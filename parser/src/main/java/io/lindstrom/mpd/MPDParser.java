@@ -15,11 +15,13 @@ import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
 import com.fasterxml.jackson.dataformat.xml.XmlFactory;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import io.lindstrom.mpd.data.MPD;
-import io.lindstrom.mpd.support.ParserModule;
+import io.lindstrom.mpd.support.*;
 import org.codehaus.stax2.XMLStreamWriter2;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.Duration;
+import java.time.OffsetDateTime;
 
 public class MPDParser {
 
@@ -52,15 +54,18 @@ public class MPDParser {
     public static ObjectMapper defaultObjectMapper() {
         JacksonXmlModule module = new JacksonXmlModule();
         module.setDefaultUseWrapper(false);
+        module.addSerializer(OffsetDateTime.class, new OffsetDateTimeSerializer())
+                .addDeserializer(OffsetDateTime.class, new OffsetDateTimeDeserializer())
+                .addSerializer(Duration.class, new DurationSerializer())
+                .addDeserializer(Duration.class, new DurationDeserializer());
 
         return new XmlMapper(new XmlFactory(new WstxInputFactory(), new WstxPrefixedOutputFactory()), module)
                 .enable(SerializationFeature.INDENT_OUTPUT)
                 .setSerializationInclusion(JsonInclude.Include.NON_NULL)
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true)
                 .configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE, true)
                 .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
-                .setVisibility(PropertyAccessor.GETTER, JsonAutoDetect.Visibility.NONE)
-                .registerModule(new ParserModule());
+                .setVisibility(PropertyAccessor.GETTER, JsonAutoDetect.Visibility.NONE);
     }
 
     private static class WstxPrefixedOutputFactory extends WstxOutputFactory {

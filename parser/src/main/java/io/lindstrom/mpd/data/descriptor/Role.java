@@ -76,4 +76,33 @@ public class Role extends Descriptor {
                 ", id='" + id + '\'' +
                 '}';
     }
+
+    public Builder buildUpon() {
+        return new Builder()
+                .withId(id)
+                .withType(type);
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private Type type;
+        private String id;
+
+        public Builder withType(Type type) {
+            this.type = type;
+            return this;
+        }
+
+        public Builder withId(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Role build() {
+            return new Role(type, id);
+        }
+    }
 }

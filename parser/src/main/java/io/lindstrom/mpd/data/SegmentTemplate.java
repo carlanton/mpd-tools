@@ -6,6 +6,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import io.lindstrom.mpd.support.Utils;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -269,6 +270,11 @@ public class SegmentTemplate {
 
         public Builder withSegmentTimeline(List<Segment> segmentTimeline) {
             this.segmentTimeline = segmentTimeline;
+            return this;
+        }
+
+        public Builder withSegmentTimeline(Segment ...segment) {
+            this.segmentTimeline = Arrays.asList(segment);
             return this;
         }
 

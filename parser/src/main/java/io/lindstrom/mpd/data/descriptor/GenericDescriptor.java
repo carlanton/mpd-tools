@@ -50,4 +50,40 @@ public class GenericDescriptor extends Descriptor {
                 ", id='" + id + '\'' +
                 '}';
     }
+
+    public Builder buildUpon() {
+        return new Builder()
+                .withId(id)
+                .withSchemeIdUri(schemeIdUri)
+                .withValue(value);
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private String value;
+        private String schemeIdUri;
+        private String id;
+
+        public Builder withValue(String value) {
+            this.value = value;
+            return this;
+        }
+
+        public Builder withSchemeIdUri(String schemeIdUri) {
+            this.schemeIdUri = schemeIdUri;
+            return this;
+        }
+
+        public Builder withId(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public GenericDescriptor build() {
+            return new GenericDescriptor(schemeIdUri, value, id);
+        }
+    }
 }

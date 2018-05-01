@@ -80,4 +80,47 @@ public class PlayReadyContentProtection extends Descriptor {
                 ", pro='" + pro + '\'' +
                 '}';
     }
+
+    public Builder buildUpon() {
+        return new Builder()
+                .withValue(value)
+                .withDefaultKID(defaultKID)
+                .withPssh(pssh)
+                .withPro(pro);
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private String value;
+        private String defaultKID;
+        private String pssh;
+        private String pro;
+
+        public Builder withValue(String value) {
+            this.value = value;
+            return this;
+        }
+
+        public Builder withDefaultKID(String defaultKID) {
+            this.defaultKID = defaultKID;
+            return this;
+        }
+
+        public Builder withPssh(String pssh) {
+            this.pssh = pssh;
+            return this;
+        }
+
+        public Builder withPro(String pro) {
+            this.pro = pro;
+            return this;
+        }
+
+        public PlayReadyContentProtection build() {
+            return new PlayReadyContentProtection(value, defaultKID, pssh, pro);
+        }
+    }
 }

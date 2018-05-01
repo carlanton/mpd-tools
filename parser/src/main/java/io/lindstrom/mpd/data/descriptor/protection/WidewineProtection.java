@@ -58,4 +58,33 @@ public class WidewineProtection extends Descriptor {
     public int hashCode() {
         return Objects.hash(super.hashCode(), value, pssh);
     }
+
+    public Builder buildUpon() {
+        return new Builder()
+                .withPssh(pssh)
+                .withValue(value);
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private String value;
+        private String pssh;
+
+        public Builder withValue(String value) {
+            this.value = value;
+            return this;
+        }
+
+        public Builder withPssh(String pssh) {
+            this.pssh = pssh;
+            return this;
+        }
+
+        public WidewineProtection build() {
+            return new WidewineProtection(value, pssh);
+        }
+    }
 }

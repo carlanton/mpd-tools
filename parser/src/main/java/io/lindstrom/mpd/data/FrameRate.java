@@ -1,9 +1,15 @@
 package io.lindstrom.mpd.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.lindstrom.mpd.support.FrameRateDeserializer;
+import io.lindstrom.mpd.support.FrameRateSerializer;
 
 import java.util.Objects;
 
+@JsonSerialize(using = FrameRateSerializer.class)
+@JsonDeserialize(using = FrameRateDeserializer.class)
 public class FrameRate {
     private final long numerator;
     private final Long denominator;
@@ -57,6 +63,10 @@ public class FrameRate {
         return new Builder()
                 .withNumerator(numerator)
                 .withDenominator(denominator);
+    }
+
+    public static FrameRate of(long frameRate) {
+        return new FrameRate(frameRate, null);
     }
 
     public static Builder builder() {

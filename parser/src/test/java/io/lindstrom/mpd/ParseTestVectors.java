@@ -17,27 +17,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static org.junit.runners.Parameterized.*;
+
 @RunWith(Parameterized.class)
-public class MPDParserTest {
+public class ParseTestVectors {
     private static final MPDParser PARSER = new MPDParser();
     private static final DifferenceEvaluator DIFFERENCE_EVALUATOR = new MyDifferenceEvaluator();
     private final Path path;
 
-    public MPDParserTest(Path path) {
+    public ParseTestVectors(Path path) {
         this.path = path;
     }
 
     @Test
     public void similarVectors() throws IOException {
-        String actual;
-
-        try {
-            MPD mpd = PARSER.parse(Files.newInputStream(path));
-            actual = PARSER.writeAsString(mpd);
-        } catch (Exception e) {
-            throw new RuntimeException("Failure for " + path, e);
-            //return;
-        }
+        MPD mpd = PARSER.parse(Files.newInputStream(path));
+        String actual = PARSER.writeAsString(mpd);
 
         Assert.assertThat(path + " is similar", actual,
                 CompareMatcher.isSimilarTo(Input.fromFile(path.toFile()))
@@ -46,7 +41,7 @@ public class MPDParserTest {
                         .ignoreWhitespace());
     }
 
-    @Parameterized.Parameters
+    @Parameters
     public static List<Path> params() throws IOException {
         try (Stream<Path> paths = Files.list(Paths.get("src/test/resources/vectors/"))) {
             return paths.collect(Collectors.toList());
