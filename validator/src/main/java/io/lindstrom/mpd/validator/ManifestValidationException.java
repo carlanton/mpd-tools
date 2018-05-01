@@ -1,6 +1,6 @@
-package io.lindstrom.mpd;
+package io.lindstrom.mpd.validator;
 
-import io.lindstrom.mpd.validator.Violation;
+import io.lindstrom.mpd.validator.rules.Violation;
 
 import java.util.List;
 

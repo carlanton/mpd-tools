@@ -1,12 +1,13 @@
-package io.lindstrom.mpd;
+package io.lindstrom.mpd.validator;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import io.lindstrom.mpd.MPDParser;
 import io.lindstrom.mpd.support.DurationDeserializer;
-import io.lindstrom.mpd.validator.MPDValidator;
-import io.lindstrom.mpd.validator.Violation;
+import io.lindstrom.mpd.validator.rules.MPDValidator;
+import io.lindstrom.mpd.validator.rules.Violation;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;

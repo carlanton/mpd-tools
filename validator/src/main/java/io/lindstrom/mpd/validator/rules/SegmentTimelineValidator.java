@@ -1,4 +1,4 @@
-package io.lindstrom.mpd.validator;
+package io.lindstrom.mpd.validator.rules;
 
 import io.lindstrom.mpd.data.MPD;
 import io.lindstrom.mpd.data.Segment;
@@ -32,7 +32,7 @@ public class SegmentTimelineValidator {
         }
         return Violation.empty();
     }
-    
+
     public static List<Violation> validate(MPD mpd, Long timescale, List<Segment> segmentTimeline) {
         return Collections.singletonList(ruleR100(mpd, timescale, segmentTimeline));
     }

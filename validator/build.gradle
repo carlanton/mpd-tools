@@ -3,6 +3,9 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 
+ext.moduleName = 'io.lindstrom.mpd.validator'
+
+
 sourceCompatibility = 10
 
 repositories {

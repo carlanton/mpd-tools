@@ -1,4 +1,4 @@
-package io.lindstrom.mpd.validator;
+package io.lindstrom.mpd.validator.rules;
 
 import io.lindstrom.mpd.data.AdaptationSet;
 import io.lindstrom.mpd.data.descriptor.Descriptor;
@@ -30,7 +30,7 @@ public class ContentProtectionValidator {
                 (contentProtection.getValue() == null || contentProtection.getValue().length() != 4)) {
             return new Violation("R12.1", "The value of ContentProtection shall be the 4-digit lower-case hexadecimal Representation.");
         }
-        
+
         return Violation.empty();
     }
 

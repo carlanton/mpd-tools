@@ -1,4 +1,4 @@
-package io.lindstrom.mpd.validator;
+package io.lindstrom.mpd.validator.rules;
 
 import io.lindstrom.mpd.data.MPD;
 import io.lindstrom.mpd.data.SegmentTemplate;

@@ -1,4 +1,4 @@
-package io.lindstrom.mpd.validator;
+package io.lindstrom.mpd.validator.rules;
 
 import io.lindstrom.mpd.data.descriptor.Descriptor;
 import io.lindstrom.mpd.data.MPD;
@@ -34,7 +34,7 @@ public class AudioChannelConfigurationValidator {
         }
         return Violation.empty();
     }
-    
+
     @ValidationRule("if (contains(ancestor::dash:MPD/@profiles, 'http://dashif.org/guidelines/dashif#mha1') and " +
             "not(@schemeIdUri='urn:mpeg:mpegB:cicp:ChannelConfiguration')) then false() else true()")
     private static Violation ruleR152(MPD mpd, Descriptor audioChannelConfiguration) {
@@ -45,7 +45,7 @@ public class AudioChannelConfigurationValidator {
         }
         return Violation.empty();
     }
-    
+
     public static List<Violation> validate(MPD mpd, Descriptor audioChannelConfiguration) {
         return Arrays.asList(
                 ruleR150(audioChannelConfiguration),

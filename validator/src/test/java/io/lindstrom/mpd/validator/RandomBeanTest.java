@@ -1,4 +1,4 @@
-package io.lindstrom.mpd;
+package io.lindstrom.mpd.validator;
 
 import io.github.benas.randombeans.EnhancedRandomBuilder;
 import io.github.benas.randombeans.FieldDefinitionBuilder;
@@ -28,6 +28,7 @@ public class RandomBeanTest {
                 .constantStringField("lang", "sv")
                 .constantStringField("contains", "1")
                 .constantStringField("dependencyLevel", "1")
+                .constantStringField("messageData", null)
                 .randomize(Long.class, (Supplier<Long>) () -> 5L)
                 .randomize(PresentationType.class,(Supplier<PresentationType>) () ->
                         RANDOM.nextBoolean() ? PresentationType.STATIC : PresentationType.DYNAMIC)
@@ -43,7 +44,7 @@ public class RandomBeanTest {
                 .build();
 
         return () -> Stream.generate(() -> random.nextObject(MPD.class))
-                .limit(10).iterator();
+                .limit(1000).iterator();
     }
 
     private final MPD mpd;

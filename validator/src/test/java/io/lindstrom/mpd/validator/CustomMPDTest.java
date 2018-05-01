@@ -1,4 +1,4 @@
-package io.lindstrom.mpd;
+package io.lindstrom.mpd.validator;
 
 import io.lindstrom.mpd.data.*;
 import org.junit.Test;

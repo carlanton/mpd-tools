@@ -1,4 +1,4 @@
-package io.lindstrom.mpd.validator;
+package io.lindstrom.mpd.validator.rules;
 
 import io.lindstrom.mpd.data.AdaptationSet;
 import io.lindstrom.mpd.data.descriptor.Descriptor;

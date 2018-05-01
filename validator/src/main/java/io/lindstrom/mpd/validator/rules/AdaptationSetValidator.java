@@ -1,4 +1,4 @@
-package io.lindstrom.mpd.validator;
+package io.lindstrom.mpd.validator.rules;
 
 import io.lindstrom.mpd.data.*;
 import io.lindstrom.mpd.data.descriptor.Descriptor;
@@ -342,7 +342,7 @@ public class AdaptationSetValidator {
             ruleRD37(adaptationSet, mpd),
             ruleRD38(adaptationSet),
             ruleR40(adaptationSet)));
-        
+
         if (adaptationSet.getSegmentTemplate() != null) {
             violations.addAll(SegmentTemplateValidator.validate(mpd, adaptationSet.getSegmentTemplate()));
         }
