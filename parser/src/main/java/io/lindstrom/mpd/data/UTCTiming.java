@@ -70,6 +70,10 @@ public class UTCTiming {
                 .withId(id);
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static class Builder {
         private Type schemeIdUri;
         private String value;

@@ -83,6 +83,10 @@ public class SegmentURL {
                 .withIndexRange(indexRange);
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static class Builder {
         private String media;
         private String mediaRange;

@@ -82,6 +82,10 @@ public class Event {
                 .withMessageData(messageData);
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static class Builder {
         private Long presentationTime;
         private Long duration;

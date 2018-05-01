@@ -141,6 +141,10 @@ public class ContentComponent {
                 .withPar(par);
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static class Builder {
         private List<Descriptor> accessibilities;
         private List<Descriptor> roles;

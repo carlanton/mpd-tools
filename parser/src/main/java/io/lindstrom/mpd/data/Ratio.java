@@ -44,6 +44,10 @@ public class Ratio {
                 .withB(b);
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static class Builder {
         private Long a;
         private Long b;

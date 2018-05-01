@@ -59,6 +59,10 @@ public class FrameRate {
                 .withDenominator(denominator);
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static class Builder {
         private long numerator;
         private Long denominator;

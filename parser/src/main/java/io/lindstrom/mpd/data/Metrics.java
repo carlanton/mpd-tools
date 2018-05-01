@@ -73,6 +73,10 @@ public class Metrics {
                 .withMetrics(metrics);
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static class Builder {
         private List<Descriptor> reportings;
         private List<Range> ranges;

@@ -82,6 +82,18 @@ public class Segment {
                 .withR(r);
     }
 
+    public static Segment of(long t, long d, long r) {
+        return new Segment(t, null, d, r);
+    }
+
+    public static Segment of(long t, long d) {
+        return new Segment(t, null, d, null);
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static class Builder {
         private Long t;
         private Long n;

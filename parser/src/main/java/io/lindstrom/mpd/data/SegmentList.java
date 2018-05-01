@@ -220,6 +220,10 @@ public class SegmentList {
             .withAvailabilityTimeComplete(availabilityTimeComplete);
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static class Builder {
         private URLType initialization;
         private URLType representationIndex;

@@ -120,6 +120,10 @@ public class EventStream {
                 .withMessageData(messageData);
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static class Builder {
         private List<Event> events;
         private String href;

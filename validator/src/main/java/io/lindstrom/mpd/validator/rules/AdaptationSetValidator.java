@@ -185,17 +185,17 @@ public class AdaptationSetValidator {
             ") then false() else true()")
     private static Violation ruleR39(AdaptationSet adaptationSet) {
         double minFrameRate;
-        if (adaptationSet.getMinFrameRate() != null) {
-            minFrameRate = adaptationSet.getMinFrameRate().toDouble();
-        } else {
+        if (adaptationSet.getMinFrameRate() == null) {
             minFrameRate = Double.MIN_VALUE;
+        } else {
+            minFrameRate = adaptationSet.getMinFrameRate().toDouble();
         }
 
         double maxFrameRate;
-        if (adaptationSet.getMaxFrameRate() != null) {
-            maxFrameRate = adaptationSet.getMaxFrameRate().toDouble();
-        } else {
+        if (adaptationSet.getMaxFrameRate() == null) {
             maxFrameRate = Double.MAX_VALUE;
+        } else {
+            maxFrameRate = adaptationSet.getMaxFrameRate().toDouble();
         }
 
         for (Representation representation : adaptationSet.getRepresentations()) {

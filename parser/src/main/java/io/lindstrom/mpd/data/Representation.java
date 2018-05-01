@@ -182,7 +182,9 @@ public class Representation extends RepresentationBase {
             .withMediaStreamStructureId(mediaStreamStructureId));
     }
 
-
+    public static Builder builder() {
+        return new Builder();
+    }
 
     public static class Builder extends RepresentationBase.AbstractBuilder<Builder> {
         private List<BaseURL> baseURLs;

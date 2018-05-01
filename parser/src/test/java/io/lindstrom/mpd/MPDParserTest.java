@@ -17,20 +17,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.junit.runners.Parameterized.Parameters;
-
 @RunWith(Parameterized.class)
 public class MPDParserTest {
     private static final MPDParser PARSER = new MPDParser();
     private static final DifferenceEvaluator DIFFERENCE_EVALUATOR = new MyDifferenceEvaluator();
-
-    @Parameters
-    public static List<Path> params() throws IOException {
-        try (Stream<Path> paths = Files.list(Paths.get("src/test/resources/vectors/"))) {
-            return paths.collect(Collectors.toList());
-        }
-    }
-
     private final Path path;
 
     public MPDParserTest(Path path) {
@@ -54,5 +44,12 @@ public class MPDParserTest {
                         .withDifferenceEvaluator(DIFFERENCE_EVALUATOR)
                         .ignoreComments()
                         .ignoreWhitespace());
+    }
+
+    @Parameterized.Parameters
+    public static List<Path> params() throws IOException {
+        try (Stream<Path> paths = Files.list(Paths.get("src/test/resources/vectors/"))) {
+            return paths.collect(Collectors.toList());
+        }
     }
 }

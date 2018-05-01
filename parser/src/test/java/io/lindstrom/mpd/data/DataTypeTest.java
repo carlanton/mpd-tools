@@ -34,7 +34,7 @@ public class DataTypeTest {
         if (object instanceof List) {
 
             // Make sure that the list is immutable
-            assertTrue("List is immutable", object.getClass().equals(UNMODIFIABLE_LIST_CLASS));
+            assertEquals("List is immutable", UNMODIFIABLE_LIST_CLASS, object.getClass());
 
             List<Object> list = new ArrayList<>();
             for (Object member : (List<?>) object) {

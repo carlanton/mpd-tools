@@ -59,6 +59,10 @@ public class Range {
                 .withDuration(duration);
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static class Builder {
         private Duration starttime;
         private Duration duration;

@@ -58,6 +58,10 @@ public class Subset {
                 .withId(id);
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static class Builder {
         private String contains;
         private String id;

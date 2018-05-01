@@ -101,6 +101,10 @@ public class ProgramInformation {
                 .withMoreInformationURL(moreInformationURL);
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static class Builder {
         private String title;
         private String source;

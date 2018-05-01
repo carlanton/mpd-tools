@@ -24,7 +24,8 @@ public class SegmentTimelineValidator {
         long maxSegmentDuration = mpd.getMaxSegmentDuration().toMillis() / 1000;
 
         for (Segment s : segmentTimeline) {
-            double d = timescale != null ? (s.getD() / (double) timescale) : s.getD();
+            double d = timescale == null ? s.getD() : (s.getD() / (double) timescale);
+
             if (d > maxSegmentDuration) {
                 return new Violation("R10.0",
                         "The d attribute of a SegmentTimeline shall not exceed the value give bei the MPD maxSegmentDuration attribute.");

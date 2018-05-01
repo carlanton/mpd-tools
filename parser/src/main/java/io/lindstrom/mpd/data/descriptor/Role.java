@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
+import java.util.Locale;
 import java.util.Objects;
 
 public class Role extends Descriptor {
@@ -34,7 +35,7 @@ public class Role extends Descriptor {
         if (type == null) {
             return null;
         } else {
-            return type.toString().toLowerCase();
+            return type.toString().toLowerCase(Locale.US);
         }
     }
 

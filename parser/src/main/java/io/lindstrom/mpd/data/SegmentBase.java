@@ -186,6 +186,10 @@ public class SegmentBase {
         abstract T getThis();
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static class Builder extends AbstractBuilder<Builder> {
         public SegmentBase build() {
             return new SegmentBase(initialization, representationIndex, timescale, presentationTimeOffset, indexRange, indexRangeExact, availabilityTimeOffset, availabilityTimeComplete);

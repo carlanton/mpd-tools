@@ -339,6 +339,10 @@ public class MPD {
                 .withSchemaLocation(schemaLocation);
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static class Builder {
         private static final String DEFAULT_SCHEMA_LOCATION = "urn:mpeg:dash:schema:mpd:2011 http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-DASH_schema_files/DASH-MPD.xsd";
 

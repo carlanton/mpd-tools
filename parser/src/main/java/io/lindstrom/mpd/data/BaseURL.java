@@ -104,6 +104,10 @@ public class BaseURL {
                 .withAvailabilityTimeComplete(availabilityTimeComplete);
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static class Builder {
         private String value;
         private String serviceLocation;

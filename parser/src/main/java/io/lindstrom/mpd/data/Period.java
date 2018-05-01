@@ -232,6 +232,10 @@ public class Period {
                 .withBitstreamSwitching(bitstreamSwitching);
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static class Builder {
         private List<BaseURL> baseURLs;
         private SegmentBase segmentBase;

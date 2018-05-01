@@ -1,7 +1,6 @@
 package io.lindstrom.mpd.validator;
 
 import io.lindstrom.mpd.validator.rules.*;
-import io.lindstrom.mpd.validator.rules.MPDValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;

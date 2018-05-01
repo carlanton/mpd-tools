@@ -87,6 +87,10 @@ public class SubRepresentation extends RepresentationBase {
                 .withContentComponent(contentComponent));
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static class Builder extends RepresentationBase.AbstractBuilder<Builder> {
         private Long level;
         private String dependencyLevel;

@@ -243,7 +243,10 @@ public class SegmentTemplate {
             .withIndexRangeExact(indexRangeExact)
             .withAvailabilityTimeOffset(availabilityTimeOffset)
             .withAvailabilityTimeComplete(availabilityTimeComplete);
+    }
 
+    public static Builder builder() {
+        return new Builder();
     }
 
     public static class Builder {

@@ -55,6 +55,10 @@ public class Profiles {
                 .withInteroperabilityPointsAndExtensions(interoperabilityPointsAndExtensions);
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static class Builder {
         private List<Profile> profiles;
         private List<String> interoperabilityPointsAndExtensions;

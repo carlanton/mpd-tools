@@ -15,7 +15,7 @@ public class RatioSerializer extends JsonSerializer<Ratio> {
         if (value.getA() != null) {
             stringBuilder.append(value.getA());
         }
-        stringBuilder.append(":");
+        stringBuilder.append(':');
         if (value.getB() != null) {
             stringBuilder.append(value.getB());
         }

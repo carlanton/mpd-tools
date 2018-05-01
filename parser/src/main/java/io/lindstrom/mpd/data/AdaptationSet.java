@@ -414,6 +414,10 @@ public class AdaptationSet extends RepresentationBase {
                 .withBitstreamSwitching(bitstreamSwitching));
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static class Builder extends AbstractBuilder<Builder> {
         private List<Descriptor> accessibilities;
         private List<Descriptor> roles;
@@ -618,7 +622,13 @@ public class AdaptationSet extends RepresentationBase {
         }
 
         public AdaptationSet build() {
-            return new AdaptationSet(framePackings, audioChannelConfigurations, contentProtections, essentialProperties, supplementalProperties, inbandEventStreams, profiles, width, height, sar, frameRate, audioSamplingRate, mimeType, segmentProfiles, codecs, maximumSAPPeriod, startWithSAP, maxPlayoutRate, codingDependency, scanType, accessibilities, roles, ratings, viewpoints, contentComponents, baseURLs, segmentBase, segmentList, segmentTemplate, representations, href, actuate, id, group, lang, contentType, par, minBandwidth, maxBandwidth, minWidth, maxWidth, minHeight, maxHeight, minFrameRate, maxFrameRate, segmentAlignment, subsegmentAlignment, subsegmentStartsWithSAP, bitstreamSwitching);
+            return new AdaptationSet(framePackings, audioChannelConfigurations, contentProtections, essentialProperties,
+                    supplementalProperties, inbandEventStreams, profiles, width, height, sar, frameRate, audioSamplingRate,
+                    mimeType, segmentProfiles, codecs, maximumSAPPeriod, startWithSAP, maxPlayoutRate, codingDependency,
+                    scanType, accessibilities, roles, ratings, viewpoints, contentComponents, baseURLs, segmentBase,
+                    segmentList, segmentTemplate, representations, href, actuate, id, group, lang, contentType, par,
+                    minBandwidth, maxBandwidth, minWidth, maxWidth, minHeight, maxHeight, minFrameRate, maxFrameRate,
+                    segmentAlignment, subsegmentAlignment, subsegmentStartsWithSAP, bitstreamSwitching);
         }
     }
 }
