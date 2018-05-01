@@ -15,6 +15,11 @@ allprojects {
 
 subprojects {
     afterEvaluate {
+        javadoc {
+            options.addStringOption('-module-path', classpath.asPath)
+            options.addStringOption('-html5')
+        }
+
         compileJava {
             inputs.property("moduleName", moduleName)
             doFirst {
