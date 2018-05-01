@@ -1,32 +1,31 @@
 package io.lindstrom.mpd.data;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import io.lindstrom.mpd.support.Utils;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 import java.util.Objects;
 
 public class EventStream {
-    @XmlElement(name = "Event", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "Event", namespace = MPD.NAMESPACE)
     private final List<Event> events;
 
-    @XmlAttribute(name = "href", namespace = "http://www.w3.org/1999/xlink")
+    @JacksonXmlProperty(namespace = "http://www.w3.org/1999/xlink")
     private final String href;
 
-    @XmlAttribute(name = "actuate", namespace = "http://www.w3.org/1999/xlink")
+    @JacksonXmlProperty(namespace = "http://www.w3.org/1999/xlink")
     private final ActuateType actuate;
 
-    @XmlAttribute(name = "schemeIdUri", required = true)
+    @JacksonXmlProperty(isAttribute = true)
     private final String schemeIdUri;
 
-    @XmlAttribute(name = "value")
+    @JacksonXmlProperty(isAttribute = true)
     private final String value;
 
-    @XmlAttribute(name = "timescale")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long timescale;
 
-    @XmlAttribute(name = "messageData")
+    @JacksonXmlProperty(isAttribute = true)
     private final String messageData;
 
     private EventStream(List<Event> events, String href, ActuateType actuate, String schemeIdUri, String value, Long timescale, String messageData) {
@@ -74,6 +73,10 @@ public class EventStream {
         return timescale;
     }
 
+    public String getMessageData() {
+        return messageData;
+    }
+
     @Override
     public String toString() {
         return "EventStream{" +
@@ -103,7 +106,6 @@ public class EventStream {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(events, href, actuate, schemeIdUri, value, timescale, messageData);
     }
 
@@ -114,7 +116,8 @@ public class EventStream {
                 .withActuate(actuate)
                 .withSchemeIdUri(schemeIdUri)
                 .withValue(value)
-                .withTimescale(timescale);
+                .withTimescale(timescale)
+                .withMessageData(messageData);
     }
 
     public static class Builder {

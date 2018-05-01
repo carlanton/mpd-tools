@@ -1,22 +1,22 @@
 package io.lindstrom.mpd.data;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import io.lindstrom.mpd.data.descriptor.Descriptor;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import java.util.List;
 import java.util.Objects;
 
 public class SubRepresentation extends RepresentationBase {
-    @XmlAttribute(name = "level")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long level;
 
-    @XmlAttribute(name = "dependencyLevel")
+    @JacksonXmlProperty(isAttribute = true)
     private final String dependencyLevel;
 
-    @XmlAttribute(name = "bandwidth")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long bandwidth;
 
-    @XmlAttribute(name = "contentComponent")
+    @JacksonXmlProperty(isAttribute = true)
     private final String contentComponent;
 
     private SubRepresentation(List<Descriptor> framePackings, List<Descriptor> audioChannelConfigurations, List<Descriptor> contentProtections, List<Descriptor> essentialProperties, List<Descriptor> supplementalProperties, List<EventStream> inbandEventStreams, String profiles, Long width, Long height, Ratio sar, FrameRate frameRate, String audioSamplingRate, String mimeType, String segmentProfiles, String codecs, Double maximumSAPPeriod, Long startWithSAP, Double maxPlayoutRate, Boolean codingDependency, VideoScanType scanType, Long level, String dependencyLevel, Long bandwidth, String contentComponent) {

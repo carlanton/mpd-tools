@@ -8,20 +8,16 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.AnnotationIntrospector;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
-import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
 import com.fasterxml.jackson.dataformat.xml.XmlFactory;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 import io.lindstrom.mpd.data.MPD;
 import io.lindstrom.mpd.support.ParserModule;
 import org.codehaus.stax2.XMLStreamWriter2;
 
-import javax.xml.stream.XMLStreamException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -54,16 +50,17 @@ public class MPDParser {
     }
 
     public static ObjectMapper defaultObjectMapper() {
-        return new XmlMapper(new XmlFactory(new WstxInputFactory(), new WstxPrefixedOutputFactory()))
+        JacksonXmlModule module = new JacksonXmlModule();
+        module.setDefaultUseWrapper(false);
+
+        return new XmlMapper(new XmlFactory(new WstxInputFactory(), new WstxPrefixedOutputFactory()), module)
                 .enable(SerializationFeature.INDENT_OUTPUT)
                 .setSerializationInclusion(JsonInclude.Include.NON_NULL)
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true)
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                 .configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE, true)
                 .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
-                .registerModule(new ParserModule())
-                .setAnnotationIntrospector(AnnotationIntrospector.pair(
-                        new JaxbAnnotationIntrospector(TypeFactory.defaultInstance()),
-                        new JacksonAnnotationIntrospector()));
+                .setVisibility(PropertyAccessor.GETTER, JsonAutoDetect.Visibility.NONE)
+                .registerModule(new ParserModule());
     }
 
     private static class WstxPrefixedOutputFactory extends WstxOutputFactory {
@@ -75,7 +72,7 @@ public class MPDParser {
                 streamWriter.setPrefix("xlink", "http://www.w3.org/1999/xlink");
                 streamWriter.setPrefix("cenc", "urn:mpeg:cenc:2013");
                 streamWriter.setPrefix("mspr", "urn:microsoft:playready");
-            } catch (XMLStreamException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
             return streamWriter;

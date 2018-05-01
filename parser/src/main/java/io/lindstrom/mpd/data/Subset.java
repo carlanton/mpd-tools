@@ -1,13 +1,14 @@
 package io.lindstrom.mpd.data;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 import java.util.Objects;
 
 public class Subset {
-    @XmlAttribute(name = "contains", required = true)
+    @JacksonXmlProperty(isAttribute = true)
     private final String contains;
 
-    @XmlAttribute(name = "id")
+    @JacksonXmlProperty(isAttribute = true)
     private final String id;
 
     private Subset(String contains, String id) {

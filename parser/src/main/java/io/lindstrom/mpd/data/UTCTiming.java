@@ -1,18 +1,18 @@
 package io.lindstrom.mpd.data;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import java.util.Objects;
 
 public class UTCTiming {
-    @XmlAttribute(name = "schemeIdUri", required = true)
+    @JacksonXmlProperty(isAttribute = true)
     private final Type schemeIdUri;
 
-    @XmlAttribute(name = "value")
+    @JacksonXmlProperty(isAttribute = true, localName = "value")
     private final String value;
 
-    @XmlAttribute(name = "id")
+    @JacksonXmlProperty(isAttribute = true)
     private final String id;
 
     private UTCTiming(Type schemeIdUri, String value, String id) {

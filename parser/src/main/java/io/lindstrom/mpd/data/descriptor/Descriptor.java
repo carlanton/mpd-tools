@@ -3,11 +3,11 @@ package io.lindstrom.mpd.data.descriptor;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import io.lindstrom.mpd.data.descriptor.protection.Mp4Protection;
 import io.lindstrom.mpd.data.descriptor.protection.PlayReadyContentProtection;
 import io.lindstrom.mpd.data.descriptor.protection.WidewineProtection;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import java.util.Objects;
 
 @JsonTypeInfo(
@@ -23,10 +23,10 @@ import java.util.Objects;
         @JsonSubTypes.Type(value = WidewineProtection.class, name = WidewineProtection.SCHEME_ID_URI)
 })
 public abstract class Descriptor {
-    @XmlAttribute(name = "schemeIdUri")
+    @JacksonXmlProperty(isAttribute = true)
     protected final String schemeIdUri;
 
-    @XmlAttribute(name = "id")
+    @JacksonXmlProperty(isAttribute = true)
     protected final String id;
 
     protected Descriptor(String schemeIdUri, String id) {

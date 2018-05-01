@@ -12,8 +12,7 @@ repositories {
 }
 
 dependencies {
-    compile 'javax.xml.bind:jaxb-api:2.3.0'
-    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.9.0'
+    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.9.5'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.xmlunit:xmlunit-matchers:2.4.0'

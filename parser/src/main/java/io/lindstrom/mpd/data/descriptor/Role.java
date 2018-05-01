@@ -3,14 +3,14 @@ package io.lindstrom.mpd.data.descriptor;
 
 import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import java.util.Objects;
 
 public class Role extends Descriptor {
     static final String SCHEME_ID_URI = "urn:mpeg:dash:role:2011";
 
-    @XmlAttribute(name = "value")
+    @JacksonXmlProperty(localName = "value", isAttribute = true)
     private final Type type;
 
     public Role(Type value) {

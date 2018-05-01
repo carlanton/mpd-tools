@@ -1,16 +1,15 @@
 package io.lindstrom.mpd.data;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import io.lindstrom.mpd.data.descriptor.Descriptor;
 import io.lindstrom.mpd.support.Utils;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 import java.util.Objects;
 
 
-@XmlType(propOrder = {
+@JsonPropertyOrder({
         "id",
         "bandwidth",
 
@@ -31,34 +30,34 @@ import java.util.Objects;
         "segmentTemplate"
 })
 public class Representation extends RepresentationBase {
-    @XmlElement(name = "BaseURL", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "BaseURL", namespace = MPD.NAMESPACE)
     private final List<BaseURL> baseURLs;
 
-    @XmlElement(name = "SubRepresentation", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "SubRepresentation", namespace = MPD.NAMESPACE)
     private final List<SubRepresentation> subRepresentations;
 
-    @XmlElement(name = "SegmentBase", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "SegmentBase", namespace = MPD.NAMESPACE)
     private final SegmentBase segmentBase;
 
-    @XmlElement(name = "SegmentList", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "SegmentList", namespace = MPD.NAMESPACE)
     private final SegmentList segmentList;
 
-    @XmlElement(name = "SegmentTemplate", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "SegmentTemplate", namespace = MPD.NAMESPACE)
     private final SegmentTemplate segmentTemplate;
 
-    @XmlAttribute(name = "id", required = true)
+    @JacksonXmlProperty(isAttribute = true)
     private final String id;
 
-    @XmlAttribute(name = "bandwidth", required = true)
+    @JacksonXmlProperty(isAttribute = true)
     private final long bandwidth;
 
-    @XmlAttribute(name = "qualityRanking")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long qualityRanking;
 
-    @XmlAttribute(name = "dependencyId")
+    @JacksonXmlProperty(isAttribute = true)
     private final String dependencyId;
 
-    @XmlAttribute(name = "mediaStreamStructureId")
+    @JacksonXmlProperty(isAttribute = true)
     private final String mediaStreamStructureId;
 
     private Representation(List<Descriptor> framePackings, List<Descriptor> audioChannelConfigurations, List<Descriptor> contentProtections, List<Descriptor> essentialProperties, List<Descriptor> supplementalProperties, List<EventStream> inbandEventStreams, String profiles, Long width, Long height, Ratio sar, FrameRate frameRate, String audioSamplingRate, String mimeType, String segmentProfiles, String codecs, Double maximumSAPPeriod, Long startWithSAP, Double maxPlayoutRate, Boolean codingDependency, VideoScanType scanType, List<BaseURL> baseURLs, List<SubRepresentation> subRepresentations, SegmentBase segmentBase, SegmentList segmentList, SegmentTemplate segmentTemplate, String id, long bandwidth, Long qualityRanking, String dependencyId, String mediaStreamStructureId) {

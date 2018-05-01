@@ -1,9 +1,7 @@
 package io.lindstrom.mpd.data.descriptor.protection;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import io.lindstrom.mpd.data.descriptor.GenericDescriptor;
-
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 
 /*
 <ContentProtection value="MSPR 2.0" schemeIdUri="urn:uuid:9a04f079-9840-4286-ab92-e65be0885f95">
@@ -15,24 +13,24 @@ import javax.xml.bind.annotation.XmlElement;
 public class PlayReadyContentProtection extends GenericDescriptor {
     public static final String SCHEME_ID_URI = "urn:uuid:9a04f079-9840-4286-ab92-e65be0885f95";
 
-    @XmlAttribute(name = "default_KID", namespace = "urn:mpeg:cenc:2013")
+    @JacksonXmlProperty(isAttribute = true, localName = "default_KID", namespace = "urn:mpeg:cenc:2013")
     private final String defaultKID;
 
-    @XmlElement(name = "pssh", namespace = "urn:mpeg:cenc:2013")
+    @JacksonXmlProperty(namespace = "urn:mpeg:cenc:2013")
     private final String pssh;
 
-    @XmlElement(name = "pro", namespace = "urn:microsoft:playready")
+    @JacksonXmlProperty(namespace = "urn:microsoft:playready")
     private final String pro;
 
     public PlayReadyContentProtection(String value, String defaultKID, String pssh, String pro) {
-        super(SCHEME_ID_URI, value);
+        super(SCHEME_ID_URI, value, null);
         this.defaultKID = defaultKID;
         this.pssh = pssh;
         this.pro = pro;
     }
 
     private PlayReadyContentProtection() {
-        super(null, null);
+        super(null, null, null);
         this.defaultKID = null;
         this.pssh = null;
         this.pro = null;

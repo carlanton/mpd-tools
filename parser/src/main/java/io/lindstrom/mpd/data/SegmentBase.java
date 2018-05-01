@@ -1,32 +1,32 @@
 package io.lindstrom.mpd.data;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 import java.util.Objects;
 
 public class SegmentBase {
-    @XmlElement(name = "Initialization", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "Initialization", namespace = MPD.NAMESPACE)
     private final URLType initialization;
 
-    @XmlElement(name = "RepresentationIndex", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "RepresentationIndex", namespace = MPD.NAMESPACE)
     private final URLType representationIndex;
 
-    @XmlAttribute(name = "timescale")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long timescale;
 
-    @XmlAttribute(name = "presentationTimeOffset")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long presentationTimeOffset;
 
-    @XmlAttribute(name = "indexRange")
+    @JacksonXmlProperty(isAttribute = true)
     private final String indexRange;
 
-    @XmlAttribute(name = "indexRangeExact")
+    @JacksonXmlProperty(isAttribute = true)
     private final Boolean indexRangeExact;
 
-    @XmlAttribute(name = "availabilityTimeOffset")
+    @JacksonXmlProperty(isAttribute = true)
     private final Double availabilityTimeOffset;
 
-    @XmlAttribute(name = "availabilityTimeComplete")
+    @JacksonXmlProperty(isAttribute = true)
     private final Boolean availabilityTimeComplete;
 
     protected SegmentBase(URLType initialization, URLType representationIndex, Long timescale, Long presentationTimeOffset, String indexRange, Boolean indexRangeExact, Double availabilityTimeOffset, Boolean availabilityTimeComplete) {

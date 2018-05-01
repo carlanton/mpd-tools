@@ -1,15 +1,14 @@
 package io.lindstrom.mpd.data;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import io.lindstrom.mpd.data.descriptor.Descriptor;
 import io.lindstrom.mpd.support.Utils;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 import java.util.Objects;
 
-@XmlType(propOrder = {
+@JsonPropertyOrder({
     "accessibility",
     "role",
     "rating",
@@ -17,28 +16,28 @@ import java.util.Objects;
     "any"
 })
 public class ContentComponent {
-    @XmlElement(name = "Accessibility", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "Accessibility", namespace = MPD.NAMESPACE)
     private final List<Descriptor> accessibilities;
 
-    @XmlElement(name = "Role", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "Role", namespace = MPD.NAMESPACE)
     private final List<Descriptor> roles;
 
-    @XmlElement(name = "Rating", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "Rating", namespace = MPD.NAMESPACE)
     private final List<Descriptor> ratings;
 
-    @XmlElement(name = "Viewpoint", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "Viewpoint", namespace = MPD.NAMESPACE)
     private final List<Descriptor> viewpoints;
 
-    @XmlAttribute(name = "id")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long id;
 
-    @XmlAttribute(name = "lang")
+    @JacksonXmlProperty(isAttribute = true)
     private final String lang;
 
-    @XmlAttribute(name = "contentType")
+    @JacksonXmlProperty(isAttribute = true)
     private final String contentType;
 
-    @XmlAttribute(name = "par")
+    @JacksonXmlProperty(isAttribute = true)
     private final Ratio par;
 
     private ContentComponent(List<Descriptor> accessibilities, List<Descriptor> roles, List<Descriptor> ratings, List<Descriptor> viewpoints, Long id, String lang, String contentType, Ratio par) {

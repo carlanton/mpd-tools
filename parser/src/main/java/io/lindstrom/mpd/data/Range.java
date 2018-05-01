@@ -1,14 +1,15 @@
 package io.lindstrom.mpd.data;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 import java.time.Duration;
 import java.util.Objects;
 
 public class Range {
-    @XmlAttribute(name = "starttime")
+    @JacksonXmlProperty(isAttribute = true)
     private final Duration starttime;
 
-    @XmlAttribute(name = "duration")
+    @JacksonXmlProperty(isAttribute = true)
     private final Duration duration;
 
     private Range(Duration starttime, Duration duration) {

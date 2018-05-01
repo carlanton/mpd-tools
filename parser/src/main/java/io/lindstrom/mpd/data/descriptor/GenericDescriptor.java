@@ -1,10 +1,11 @@
 package io.lindstrom.mpd.data.descriptor;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 import java.util.Objects;
 
 public class GenericDescriptor extends Descriptor {
-    @XmlAttribute(name = "value")
+    @JacksonXmlProperty(isAttribute = true, localName = "value")
     private final String value;
 
     public GenericDescriptor(String schemeIdUri, String value, String id) {

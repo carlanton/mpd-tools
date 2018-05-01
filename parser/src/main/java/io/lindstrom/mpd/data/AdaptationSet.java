@@ -1,17 +1,16 @@
 package io.lindstrom.mpd.data;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import io.lindstrom.mpd.data.descriptor.Descriptor;
 import io.lindstrom.mpd.data.descriptor.Role;
 import io.lindstrom.mpd.support.Utils;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-@XmlType(propOrder = {
+@JsonPropertyOrder({
         "id",
         "contentType",
         "mimeType",
@@ -35,91 +34,91 @@ import java.util.stream.Collectors;
         "representations"
 })
 public class AdaptationSet extends RepresentationBase {
-    @XmlElement(name = "Accessibility", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "Accessibility", namespace = MPD.NAMESPACE)
     private final List<Descriptor> accessibilities;
 
-    @XmlElement(name = "Role", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "Role", namespace = MPD.NAMESPACE)
     private final List<Descriptor> roles;
 
-    @XmlElement(name = "Rating", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "Rating", namespace = MPD.NAMESPACE)
     private final List<Descriptor> ratings;
 
-    @XmlElement(name = "Viewpoint", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "Viewpoint", namespace = MPD.NAMESPACE)
     private final List<Descriptor> viewpoints;
 
-    @XmlElement(name = "ContentComponent", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "ContentComponent", namespace = MPD.NAMESPACE)
     private final List<ContentComponent> contentComponents;
 
-    @XmlElement(name = "BaseURL", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "BaseURL", namespace = MPD.NAMESPACE)
     private final List<BaseURL> baseURLs;
 
-    @XmlElement(name = "SegmentBase", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "SegmentBase", namespace = MPD.NAMESPACE)
     private final SegmentBase segmentBase;
 
-    @XmlElement(name = "SegmentList", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "SegmentList", namespace = MPD.NAMESPACE)
     private final SegmentList segmentList;
 
-    @XmlElement(name = "SegmentTemplate", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "SegmentTemplate", namespace = MPD.NAMESPACE)
     private final SegmentTemplate segmentTemplate;
 
-    @XmlElement(name = "Representation", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "Representation", namespace = MPD.NAMESPACE)
     private final List<Representation> representations;
 
-    @XmlAttribute(name = "href", namespace = "http://www.w3.org/1999/xlink")
+    @JacksonXmlProperty(isAttribute = true, namespace = "http://www.w3.org/1999/xlink")
     private final String href;
 
-    @XmlAttribute(name = "actuate", namespace = "http://www.w3.org/1999/xlink")
+    @JacksonXmlProperty(isAttribute = true,  namespace = "http://www.w3.org/1999/xlink")
     private final ActuateType actuate;
 
-    @XmlAttribute(name = "id")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long id;
 
-    @XmlAttribute(name = "group")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long group;
 
-    @XmlAttribute(name = "lang")
+    @JacksonXmlProperty(isAttribute = true)
     private final String lang;
 
-    @XmlAttribute(name = "contentType")
+    @JacksonXmlProperty(isAttribute = true)
     private final String contentType;
 
-    @XmlAttribute(name = "par")
+    @JacksonXmlProperty(isAttribute = true)
     private final Ratio par;
 
-    @XmlAttribute(name = "minBandwidth")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long minBandwidth;
 
-    @XmlAttribute(name = "maxBandwidth")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long maxBandwidth;
 
-    @XmlAttribute(name = "minWidth")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long minWidth;
 
-    @XmlAttribute(name = "maxWidth")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long maxWidth;
 
-    @XmlAttribute(name = "minHeight")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long minHeight;
 
-    @XmlAttribute(name = "maxHeight")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long maxHeight;
 
-    @XmlAttribute(name = "minFrameRate")
+    @JacksonXmlProperty(isAttribute = true)
     private final FrameRate minFrameRate;
 
-    @XmlAttribute(name = "maxFrameRate")
+    @JacksonXmlProperty(isAttribute = true)
     private final FrameRate maxFrameRate;
 
-    @XmlAttribute(name = "segmentAlignment")
+    @JacksonXmlProperty(isAttribute = true)
     private final String segmentAlignment;
 
-    @XmlAttribute(name = "subsegmentAlignment")
+    @JacksonXmlProperty(isAttribute = true)
     private final String subsegmentAlignment;
 
-    @XmlAttribute(name = "subsegmentStartsWithSAP")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long subsegmentStartsWithSAP;
 
-    @XmlAttribute(name = "bitstreamSwitching")
+    @JacksonXmlProperty(isAttribute = true)
     private final Boolean bitstreamSwitching;
 
     private AdaptationSet(List<Descriptor> framePackings, List<Descriptor> audioChannelConfigurations, List<Descriptor> contentProtections, List<Descriptor> essentialProperties, List<Descriptor> supplementalProperties, List<EventStream> inbandEventStreams, String profiles, Long width, Long height, Ratio sar, FrameRate frameRate, String audioSamplingRate, String mimeType, String segmentProfiles, String codecs, Double maximumSAPPeriod, Long startWithSAP, Double maxPlayoutRate, Boolean codingDependency, VideoScanType scanType, List<Descriptor> accessibilities, List<Descriptor> roles, List<Descriptor> ratings, List<Descriptor> viewpoints, List<ContentComponent> contentComponents, List<BaseURL> baseURLs, SegmentBase segmentBase, SegmentList segmentList, SegmentTemplate segmentTemplate, List<Representation> representations, String href, ActuateType actuate, Long id, Long group, String lang, String contentType, Ratio par, Long minBandwidth, Long maxBandwidth, Long minWidth, Long maxWidth, Long minHeight, Long maxHeight, FrameRate minFrameRate, FrameRate maxFrameRate, String segmentAlignment, String subsegmentAlignment, Long subsegmentStartsWithSAP, Boolean bitstreamSwitching) {

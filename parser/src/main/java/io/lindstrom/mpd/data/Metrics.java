@@ -1,21 +1,20 @@
 package io.lindstrom.mpd.data;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import io.lindstrom.mpd.data.descriptor.Descriptor;
 import io.lindstrom.mpd.support.Utils;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 import java.util.Objects;
 
 public class Metrics {
-    @XmlElement(name = "Reporting", required = true, namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "Reporting", namespace = MPD.NAMESPACE)
     private final List<Descriptor> reportings;
 
-    @XmlElement(name = "Range", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "Range", namespace = MPD.NAMESPACE)
     private final List<Range> ranges;
 
-    @XmlAttribute(name = "metrics", required = true)
+    @JacksonXmlProperty(isAttribute = true)
     private final String metrics;
 
     private Metrics(List<Descriptor> reportings, List<Range> ranges, String metrics) {

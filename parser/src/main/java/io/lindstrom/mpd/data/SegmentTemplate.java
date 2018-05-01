@@ -1,16 +1,15 @@
 package io.lindstrom.mpd.data;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import io.lindstrom.mpd.support.Utils;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 import java.util.Objects;
 
-@XmlType(propOrder = {
+@JsonPropertyOrder({
         "initialization",
         "media",
         "startNumber",
@@ -23,54 +22,54 @@ import java.util.Objects;
         "BitstreamSwitching"
 })
 public class SegmentTemplate {
-    @XmlElement(name = "S", namespace = MPD.NAMESPACE)
-    @XmlElementWrapper(name = "SegmentTimeline", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "S", namespace = MPD.NAMESPACE)
+    @JacksonXmlElementWrapper(localName = "SegmentTimeline", namespace = MPD.NAMESPACE)
     @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
     private final List<Segment> segmentTimeline;
 
-    @XmlElement(name = "BitstreamSwitching", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "BitstreamSwitching", namespace = MPD.NAMESPACE)
     private final URLType bitstreamswitchingElement;
 
-    @XmlElement(name = "Initialization", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "Initialization", namespace = MPD.NAMESPACE)
     private final URLType initializationElement;
 
-    @XmlElement(name = "RepresentationIndex", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "RepresentationIndex", namespace = MPD.NAMESPACE)
     private final URLType representationIndex;
 
-    @XmlAttribute(name = "media")
+    @JacksonXmlProperty(isAttribute = true)
     private final String media;
 
-    @XmlAttribute(name = "index")
+    @JacksonXmlProperty(isAttribute = true)
     private final String index;
 
-    @XmlAttribute(name = "initialization")
+    @JacksonXmlProperty(isAttribute = true)
     private final String initialization;
 
-    @XmlAttribute(name = "bitstreamSwitching")
+    @JacksonXmlProperty(isAttribute = true)
     private final String bitstreamSwitching;
 
-    @XmlAttribute(name = "duration")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long duration;
 
-    @XmlAttribute(name = "startNumber")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long startNumber;
 
-    @XmlAttribute(name = "timescale")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long timescale;
 
-    @XmlAttribute(name = "presentationTimeOffset")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long presentationTimeOffset;
 
-    @XmlAttribute(name = "indexRange")
+    @JacksonXmlProperty(isAttribute = true)
     private final String indexRange;
 
-    @XmlAttribute(name = "indexRangeExact")
+    @JacksonXmlProperty(isAttribute = true)
     private final Boolean indexRangeExact;
 
-    @XmlAttribute(name = "availabilityTimeOffset")
+    @JacksonXmlProperty(isAttribute = true)
     private final Double availabilityTimeOffset;
 
-    @XmlAttribute(name = "availabilityTimeComplete")
+    @JacksonXmlProperty(isAttribute = true)
     private final Boolean availabilityTimeComplete;
 
     private SegmentTemplate(List<Segment> segmentTimeline, URLType bitstreamswitchingElement, URLType initializationElement, URLType representationIndex, String media, String index, String initialization, String bitstreamSwitching, Long duration, Long startNumber, Long timescale, Long presentationTimeOffset, String indexRange, Boolean indexRangeExact, Double availabilityTimeOffset, Boolean availabilityTimeComplete) {

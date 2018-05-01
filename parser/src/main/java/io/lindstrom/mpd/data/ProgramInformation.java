@@ -1,30 +1,30 @@
 package io.lindstrom.mpd.data;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 import java.util.Objects;
 
-@XmlType(propOrder = {
+@JsonPropertyOrder({
     "title",
     "source",
     "copyright",
     "any"
 })
 public class ProgramInformation {
-    @XmlElement(name = "Title", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "Title", namespace = MPD.NAMESPACE)
     private final String title;
 
-    @XmlElement(name = "Source", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "Source", namespace = MPD.NAMESPACE)
     private final String source;
 
-    @XmlElement(name = "Copyright", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "Copyright", namespace = MPD.NAMESPACE)
     private final String copyright;
 
-    @XmlAttribute(name = "lang")
+    @JacksonXmlProperty(isAttribute = true)
     private final String lang;
 
-    @XmlAttribute(name = "moreInformationURL")
+    @JacksonXmlProperty(isAttribute = true)
     private final String moreInformationURL;
 
     private ProgramInformation(String title, String source, String copyright, String lang, String moreInformationURL) {

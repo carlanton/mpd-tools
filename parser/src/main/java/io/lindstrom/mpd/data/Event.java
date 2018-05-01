@@ -1,19 +1,20 @@
 package io.lindstrom.mpd.data;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 import java.util.Objects;
 
 public class Event {
-    @XmlAttribute(name = "presentationTime")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long presentationTime;
 
-    @XmlAttribute(name = "duration")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long duration;
 
-    @XmlAttribute(name = "id")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long id;
 
-    @XmlAttribute(name = "messageData")
+    @JacksonXmlProperty(isAttribute = true)
     private final String messageData;
 
     private Event(Long presentationTime, Long duration, Long id, String messageData) {

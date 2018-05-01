@@ -1,19 +1,20 @@
 package io.lindstrom.mpd.data;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 import java.util.Objects;
 
 public class Segment {
-    @XmlAttribute(name = "t")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long t;
 
-    @XmlAttribute(name = "n")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long n;
 
-    @XmlAttribute(name = "d", required = true)
+    @JacksonXmlProperty(isAttribute = true)
     private final long d;
 
-    @XmlAttribute(name = "r")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long r;
 
     private Segment(Long t, Long n, long d, Long r) {

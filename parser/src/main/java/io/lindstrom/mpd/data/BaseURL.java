@@ -1,23 +1,24 @@
 package io.lindstrom.mpd.data;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlValue;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
+
 import java.util.Objects;
 
 public class BaseURL {
-    @XmlValue
+    @JacksonXmlText
     private final String value;
 
-    @XmlAttribute(name = "serviceLocation")
+    @JacksonXmlProperty(isAttribute = true)
     private final String serviceLocation;
 
-    @XmlAttribute(name = "byteRange")
+    @JacksonXmlProperty(isAttribute = true)
     private final String byteRange;
 
-    @XmlAttribute(name = "availabilityTimeOffset")
+    @JacksonXmlProperty(isAttribute = true)
     private final Double availabilityTimeOffset;
 
-    @XmlAttribute(name = "availabilityTimeComplete")
+    @JacksonXmlProperty(isAttribute = true)
     private final Boolean availabilityTimeComplete;
 
     @SuppressWarnings("unused")

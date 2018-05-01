@@ -1,60 +1,59 @@
 package io.lindstrom.mpd.data;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import io.lindstrom.mpd.support.Utils;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import java.util.List;
 import java.util.Objects;
 
 public class SegmentList {
-    @XmlElement(name = "Initialization", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "Initialization", namespace = MPD.NAMESPACE)
     private final URLType initialization;
 
-    @XmlElement(name = "RepresentationIndex", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "RepresentationIndex", namespace = MPD.NAMESPACE)
     private final URLType representationIndex;
 
-    @XmlElement(name = "S", namespace = MPD.NAMESPACE)
-    @XmlElementWrapper(name = "SegmentTimeline", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "S", namespace = MPD.NAMESPACE)
+    @JacksonXmlElementWrapper(localName = "SegmentTimeline", namespace = MPD.NAMESPACE)
     @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
     private final List<Segment> segmentTimeline;
 
-    @XmlElement(name = "BitstreamSwitching", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "BitstreamSwitching", namespace = MPD.NAMESPACE)
     private final URLType bitstreamswitchingElement;
 
-    @XmlElement(name = "SegmentURL", namespace = MPD.NAMESPACE)
+    @JacksonXmlProperty(localName = "SegmentURL", namespace = MPD.NAMESPACE)
     private final List<SegmentURL> segmentURLs;
 
-    @XmlAttribute(name = "duration")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long duration;
 
-    @XmlAttribute(name = "startNumber")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long startNumber;
 
-    @XmlAttribute(name = "href", namespace = "http://www.w3.org/1999/xlink")
+    @JacksonXmlProperty(isAttribute = true, namespace = "http://www.w3.org/1999/xlink")
     private final String href;
 
-    @XmlAttribute(name = "actuate", namespace = "http://www.w3.org/1999/xlink")
+    @JacksonXmlProperty(isAttribute = true, namespace = "http://www.w3.org/1999/xlink")
     private final ActuateType actuate;
 
-    @XmlAttribute(name = "timescale")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long timescale;
 
-    @XmlAttribute(name = "presentationTimeOffset")
+    @JacksonXmlProperty(isAttribute = true)
     private final Long presentationTimeOffset;
 
-    @XmlAttribute(name = "indexRange")
+    @JacksonXmlProperty(isAttribute = true)
     private final String indexRange;
 
-    @XmlAttribute(name = "indexRangeExact")
+    @JacksonXmlProperty(isAttribute = true)
     private final Boolean indexRangeExact;
 
-    @XmlAttribute(name = "availabilityTimeOffset")
+    @JacksonXmlProperty(isAttribute = true)
     private final Double availabilityTimeOffset;
 
-    @XmlAttribute(name = "availabilityTimeComplete")
+    @JacksonXmlProperty(isAttribute = true)
     private final Boolean availabilityTimeComplete;
 
     private SegmentList(URLType initialization, URLType representationIndex, List<Segment> segmentTimeline, URLType bitstreamswitchingElement, List<SegmentURL> segmentURLs, Long duration, Long startNumber, String href, ActuateType actuate, Long timescale, Long presentationTimeOffset, String indexRange, Boolean indexRangeExact, Double availabilityTimeOffset, Boolean availabilityTimeComplete) {

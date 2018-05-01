@@ -1,8 +1,7 @@
 package io.lindstrom.mpd.data.descriptor.protection;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import io.lindstrom.mpd.data.descriptor.Descriptor;
-
-import javax.xml.bind.annotation.XmlAttribute;
 
 /*
 			<ContentProtection
@@ -13,10 +12,10 @@ import javax.xml.bind.annotation.XmlAttribute;
 public class Mp4Protection extends Descriptor {
     public static final String SCHEME_ID_URI = "urn:mpeg:dash:mp4protection:2011";
 
-    @XmlAttribute(name = "default_KID", namespace = "urn:mpeg:cenc:2013")
+    @JacksonXmlProperty(isAttribute = true, localName = "default_KID", namespace = "urn:mpeg:cenc:2013")
     private final String defaultKID;
 
-    @XmlAttribute(name = "value")
+    @JacksonXmlProperty(isAttribute = true, localName = "value")
     private final String value;
 
     public Mp4Protection(String value, String defaultKID) {
