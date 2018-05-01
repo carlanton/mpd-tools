@@ -11,5 +11,4 @@ module io.lindstrom.mpd {
     exports io.lindstrom.mpd.data;
     exports io.lindstrom.mpd.data.descriptor;
     exports io.lindstrom.mpd.data.descriptor.protection;
-
 }

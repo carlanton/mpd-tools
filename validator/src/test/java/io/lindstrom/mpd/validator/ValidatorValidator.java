@@ -25,7 +25,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -63,7 +64,7 @@ public class ValidatorValidator {
 
     @Test
     public void test01() throws Exception {
-        assertEquals("Different results for " + input.getFileName(),
+        assertEquals("Validation results for " + input.getFileName() + " should be equal",
                 schematronErrors(), validatorErrors());
     }
 

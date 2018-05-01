@@ -44,7 +44,7 @@ public class RandomBeanTest {
                 .build();
 
         return () -> Stream.generate(() -> random.nextObject(MPD.class))
-                .limit(1000).iterator();
+                .limit(15).iterator();
     }
 
     private final MPD mpd;

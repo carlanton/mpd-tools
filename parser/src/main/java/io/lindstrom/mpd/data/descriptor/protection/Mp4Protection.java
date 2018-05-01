@@ -3,11 +3,7 @@ package io.lindstrom.mpd.data.descriptor.protection;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import io.lindstrom.mpd.data.descriptor.Descriptor;
 
-/*
-			<ContentProtection
-			    schemeIdUri="urn:mpeg:dash:mp4protection:2011"
-			    value="cenc" cenc:default_KID="9eb4050d-e44b-4802-932e-27d75083e266" />
- */
+import java.util.Objects;
 
 public class Mp4Protection extends Descriptor {
     public static final String SCHEME_ID_URI = "urn:mpeg:dash:mp4protection:2011";
@@ -33,9 +29,8 @@ public class Mp4Protection extends Descriptor {
 
     @Override
     public String getValue() {
-        return null;
+        return value;
     }
-
 
     public String getDefaultKID() {
         return defaultKID;
@@ -47,5 +42,21 @@ public class Mp4Protection extends Descriptor {
                 "defaultKID='" + defaultKID + '\'' +
                 ", value='" + value + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Mp4Protection that = (Mp4Protection) o;
+        return Objects.equals(defaultKID, that.defaultKID) &&
+                Objects.equals(value, that.value);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), defaultKID, value);
     }
 }

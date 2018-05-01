@@ -5,6 +5,8 @@ apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
+ext.moduleName = 'io.lindstrom.mpd'
+
 sourceCompatibility = 10
 
 repositories {
