@@ -2,16 +2,19 @@ package io.lindstrom.mpd.support;
 
 import io.lindstrom.mpd.data.Profile;
 import io.lindstrom.mpd.data.Profiles;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ProfilesSerializerTest extends ObjectMapperTestBase<Profiles> {
-    public ProfilesSerializerTest() {
-        super(Profiles.class, new ProfilesSerializer(), new ProfilesDeserializer());
+
+    @BeforeEach
+    public void ProfilesSerializerTest() {
+        initObjectMapperTestBase(Profiles.class, new ProfilesSerializer(), new ProfilesDeserializer());
     }
 
     @Test

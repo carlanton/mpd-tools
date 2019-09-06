@@ -9,19 +9,19 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import java.io.IOException;
 
 public abstract class ObjectMapperTestBase<T> {
-    private final ObjectMapper objectMapper;
-    private final Class<T> clazz;
+    protected ObjectMapper objectMapper;
+    protected Class<T> clazz;
 
-    ObjectMapperTestBase(Class<T> clazz, JsonSerializer<T> serializer, JsonDeserializer<T> deserializer) {
+    protected void initObjectMapperTestBase(Class<T> clazz, JsonSerializer<T> serializer, JsonDeserializer<T> deserializer) {
         this.objectMapper = new ObjectMapper()
-            .registerModule(new SimpleModule() {
-                @Override
-                public void setupModule(SetupContext context) {
-                    addDeserializer(clazz, deserializer);
-                    addSerializer(clazz, serializer);
-                    super.setupModule(context);
-                }
-            });
+                .registerModule(new SimpleModule() {
+                    @Override
+                    public void setupModule(SetupContext context) {
+                        addDeserializer(clazz, deserializer);
+                        addSerializer(clazz, serializer);
+                        super.setupModule(context);
+                    }
+                });
         this.clazz = clazz;
     }
 

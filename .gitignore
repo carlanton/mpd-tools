@@ -26,3 +26,5 @@ parser/build
 parser/out
 validator/build
 validator/out
+/.gradle/
+/.idea/

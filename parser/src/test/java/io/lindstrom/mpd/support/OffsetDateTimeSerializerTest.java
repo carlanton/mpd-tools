@@ -1,15 +1,19 @@
 package io.lindstrom.mpd.support;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.time.OffsetDateTime;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class OffsetDateTimeSerializerTest extends ObjectMapperTestBase<OffsetDateTime> {
-    public OffsetDateTimeSerializerTest() {
-        super(OffsetDateTime.class, new OffsetDateTimeSerializer(), new OffsetDateTimeDeserializer());
+
+    @BeforeEach
+    public void OffsetDateTimeSerializerTest() {
+        initObjectMapperTestBase(OffsetDateTime.class, new OffsetDateTimeSerializer(), new OffsetDateTimeDeserializer());
     }
 
     @Test
@@ -27,8 +31,10 @@ public class OffsetDateTimeSerializerTest extends ObjectMapperTestBase<OffsetDat
         assertEquals(OffsetDateTime.parse("2016-07-08T09:08:10Z"), read("2016-07-08T09:08:10"));
     }
 
-    @Test(expected = JsonMappingException.class)
+    @Test
     public void deserializeFail() throws Exception {
-        read("2016-07-08T09");
+        assertThrows(JsonMappingException.class, () -> {
+            read("2016-07-08T09");
+        });
     }
 }

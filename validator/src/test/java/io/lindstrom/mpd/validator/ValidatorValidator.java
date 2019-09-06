@@ -8,10 +8,8 @@ import io.lindstrom.mpd.MPDParser;
 import io.lindstrom.mpd.support.DurationDeserializer;
 import io.lindstrom.mpd.validator.rules.MPDValidator;
 import io.lindstrom.mpd.validator.rules.Violation;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -31,9 +29,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@RunWith(Parameterized.class)
 public class ValidatorValidator {
     private static final MPDParser MPD_PARSER = new MPDParser(MPDParser.defaultObjectMapper()
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
@@ -42,30 +39,31 @@ public class ValidatorValidator {
 
     private static final List<String> IGNORED_SAMPLES = Arrays.asList("ex57.mpd", "exRD3_1.mpd");
 
-    @Parameters
-    public static List<Path[]> params() throws IOException {
+    static List<List<Path>> params() throws IOException {
         try (Stream<Path> paths = Files.list(Paths.get("src/test/resources/schematron/examples/"))) {
             return paths.filter(p -> !IGNORED_SAMPLES.contains(p.getFileName().toString()))
                     .map(input -> {
-                String resultFileName = "result_" + input.getFileName().toString().replace(".mpd", ".xml");
-                Path output = input.getParent().resolveSibling("output/" + resultFileName);
-                return new Path[]{input, output};
-            }).collect(Collectors.toList());
+                        String resultFileName = "result_" + input.getFileName().toString().replace(".mpd", ".xml");
+                        Path output = input.getParent().resolveSibling("output/" + resultFileName);
+                        return List.of(input, output);
+                    }).collect(Collectors.toList());
         }
     }
 
-    private final Path input;
-    private final Path schematronOutput;
+    private Path input;
+    private Path schematronOutput;
 
-    public ValidatorValidator(Path input, Path schematronOutput) {
-        this.input = input;
-        this.schematronOutput = schematronOutput;
+    void setValidatorValidator(List<Path> paths) {
+        this.input = paths.get(0);
+        this.schematronOutput = paths.get(1);
     }
 
-    @Test
-    public void test01() throws Exception {
-        assertEquals("Validation results for " + input.getFileName() + " should be equal",
-                schematronErrors(), validatorErrors());
+    @ParameterizedTest
+    @MethodSource("params")
+    public void test01(List<Path> paths) throws Exception {
+        setValidatorValidator(paths);
+        assertEquals(
+                schematronErrors(), validatorErrors(), "Validation results for " + input.getFileName() + " should be equal");
     }
 
     private List<String> validatorErrors() throws Exception {
