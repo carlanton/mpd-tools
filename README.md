@@ -3,7 +3,7 @@
 
 This repo contains tools related to MPEG-DASH manifets (MPD).
 
-## Parser
+## [Parser](https://github.com/carlanton/mpd-tools/tree/master/parser)
 *status:* enterprise production grade quality
 
 This is a parser and an object model for MPEG-DASH manifests. Not to be confused
