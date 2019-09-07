@@ -5,10 +5,10 @@ import io.lindstrom.mpd.data.MPD;
 import io.lindstrom.mpd.data.Period;
 import io.lindstrom.mpd.data.descriptor.Descriptor;
 import io.lindstrom.mpd.data.descriptor.Role;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DescriptorTest {
     private final String INPUT = "<MPD xmlns=\"urn:mpeg:dash:schema:mpd:2011\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:mpeg:dash:schema:mpd:2011 http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-DASH_schema_files/DASH-MPD.xsd\" type=\"static\" minBufferTime=\"PT0S\">\n" +
@@ -23,9 +23,9 @@ public class DescriptorTest {
 
     private final MPD OUTPUT = new MPD.Builder()
             .withPeriods(new Period.Builder()
-                .withAdaptationSet(new AdaptationSet.Builder()
-                        .withRoles(ROLE)
-                        .build())
+                    .withAdaptationSet(new AdaptationSet.Builder()
+                            .withRoles(ROLE)
+                            .build())
                     .build())
             .build();
 
@@ -37,7 +37,7 @@ public class DescriptorTest {
                 .getAdaptationSets().get(0)
                 .getRoles().get(0);
 
-        assertTrue("Should be Role", descriptor instanceof Role);
+        Assertions.assertTrue(descriptor instanceof Role, "Should be Role");
         Role role = (Role) descriptor;
         assertEquals(ROLE, role);
     }

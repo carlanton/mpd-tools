@@ -2,13 +2,17 @@ package io.lindstrom.mpd.support;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import io.lindstrom.mpd.data.Ratio;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class RatioSerializerTest extends ObjectMapperTestBase<Ratio> {
-    public RatioSerializerTest() {
-        super(Ratio.class, new RatioSerializer(), new RatioDeserializer());
+
+    @BeforeEach
+    public void RatioSerializerTest() {
+        initObjectMapperTestBase(Ratio.class, new RatioSerializer(), new RatioDeserializer());
     }
 
     @Test
@@ -51,13 +55,17 @@ public class RatioSerializerTest extends ObjectMapperTestBase<Ratio> {
         assertEquals(new Ratio(null, null), read(":"));
     }
 
-    @Test(expected = JsonMappingException.class)
+    @Test
     public void deserializeFail1() throws Exception {
-        read("");
+        assertThrows(JsonMappingException.class, () -> {
+            read("");
+        });
     }
 
-    @Test(expected = JsonMappingException.class)
+    @Test
     public void deserializeFail2() throws Exception {
-        read("x");
+        assertThrows(JsonMappingException.class, () -> {
+            read("x");
+        });
     }
 }

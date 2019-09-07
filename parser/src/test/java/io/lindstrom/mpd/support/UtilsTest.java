@@ -1,23 +1,23 @@
 package io.lindstrom.mpd.support;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class UtilsTest {
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void immutableList() throws Exception {
-        List<String> xs = Utils.unmodifiableList(new ArrayList<>());
-        xs.add("element");
+        assertThrows(UnsupportedOperationException.class, () -> {
+            List<String> xs = Utils.unmodifiableList(new ArrayList<>());
+            xs.add("element");
+        });
     }
 
     @Test

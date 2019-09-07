@@ -1,10 +1,8 @@
 package io.lindstrom.mpd.validator;
 
 import io.lindstrom.mpd.validator.rules.*;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -19,9 +17,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@RunWith(Parameterized.class)
+
 public class RulesExistsTest {
     private static final List<Class<?>> VALIDATORS = Arrays.asList(
             AdaptationSetValidator.class,
@@ -29,7 +27,7 @@ public class RulesExistsTest {
             ContentProtectionValidator.class,
             EventStreamValidator.class,
             FramePackingValidator.class,
-            MPDValidator.class,
+            io.lindstrom.mpd.validator.rules.MPDValidator.class,
             PeriodValidator.class,
             RepresentationValidator.class,
             RoleValidator.class,
@@ -46,8 +44,7 @@ public class RulesExistsTest {
             .map(method -> method.getAnnotation(ValidationRule.class).value())
             .collect(Collectors.toSet());
 
-    @Parameters
-    public static List<String> rules() throws Exception {
+    static List<String> rules() throws Exception {
         Document document = DocumentBuilderFactory.newInstance()
                 .newDocumentBuilder()
                 .parse(new File("src/test/resources/schematron/schematron.xsd"));
@@ -64,14 +61,9 @@ public class RulesExistsTest {
                 .collect(Collectors.toList());
     }
 
-    private final String rule;
-
-    public RulesExistsTest(String rule) {
-        this.rule = rule;
-    }
-
-    @Test
-    public void ruleIsDefined() throws Exception {
-        assertTrue("Rule is not defined: " + rule, DEFINED_RULES.contains(rule));
+    @ParameterizedTest
+    @MethodSource("rules")
+    public void ruleIsDefined(String rule) throws Exception {
+        assertTrue(DEFINED_RULES.contains(rule), "Rule is not defined: " + rule);
     }
 }

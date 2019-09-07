@@ -7,21 +7,17 @@ import io.lindstrom.mpd.data.MPD;
 import io.lindstrom.mpd.data.PresentationType;
 import io.lindstrom.mpd.data.descriptor.Descriptor;
 import io.lindstrom.mpd.data.descriptor.GenericDescriptor;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Random;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-@RunWith(Parameterized.class)
 public class RandomBeanTest {
     private static final Random RANDOM = new Random();
 
-    @Parameters
-    public static Iterable<MPD> randomBeans() {
+    static Iterable<MPD> randomBeans() {
         EnhancedRandom random = new MPDRandomBuilder()
                 .constantStringField("segmentAlignment", "true")
                 .constantStringField("subsegmentAlignment", "true")
@@ -30,10 +26,11 @@ public class RandomBeanTest {
                 .constantStringField("dependencyLevel", "1")
                 .constantStringField("messageData", null)
                 .randomize(Long.class, (Supplier<Long>) () -> 5L)
-                .randomize(PresentationType.class,(Supplier<PresentationType>) () ->
+                .randomize(PresentationType.class, (Supplier<PresentationType>) () ->
                         RANDOM.nextBoolean() ? PresentationType.STATIC : PresentationType.DYNAMIC)
                 .randomize(Descriptor.class, new Supplier<Descriptor>() {
                     private final EnhancedRandom random = new EnhancedRandomBuilder().build();
+
                     @Override
                     public Descriptor get() {
                         return random.nextObject(GenericDescriptor.class);
@@ -47,14 +44,10 @@ public class RandomBeanTest {
                 .limit(15).iterator();
     }
 
-    private final MPD mpd;
 
-    public RandomBeanTest(MPD mpd) {
-        this.mpd = mpd;
-    }
-
-    @Test
-    public void randomMPD() throws Exception {
+    @ParameterizedTest
+    @MethodSource("randomBeans")
+    public void randomMPD(MPD mpd) throws Exception {
         MPDValidator validator = new MPDValidator();
         validator.xsdValidation(mpd);
     }

@@ -1,15 +1,20 @@
 package io.lindstrom.mpd.support;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 public class DurationSerializerTest extends ObjectMapperTestBase<Duration> {
-    public DurationSerializerTest() {
-        super(Duration.class, new DurationSerializer(), new DurationDeserializer());
+
+    @BeforeEach
+    public void DurationSerializerTest() {
+        initObjectMapperTestBase(Duration.class, new DurationSerializer(), new DurationDeserializer());
     }
 
     @Test
@@ -27,8 +32,10 @@ public class DurationSerializerTest extends ObjectMapperTestBase<Duration> {
         assertEquals("PT10S", write(Duration.ofSeconds(10)));
     }
 
-    @Test(expected = JsonMappingException.class)
+    @Test
     public void deserializeFail() throws Exception {
-        read("x");
+        assertThrows(JsonMappingException.class, () -> {
+            read("x");
+        });
     }
 }

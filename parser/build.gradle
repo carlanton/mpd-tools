@@ -8,7 +8,7 @@ apply plugin: 'signing'
 
 ext.moduleName = 'io.lindstrom.mpd'
 
-sourceCompatibility = 10
+sourceCompatibility = 11
 
 repositories {
     mavenCentral()
@@ -17,9 +17,15 @@ repositories {
 dependencies {
     compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.9.5'
 
-    testCompile 'junit:junit:4.12'
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.5.1")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.5.1")
+    testCompile("org.junit.jupiter:junit-jupiter-params:5.5.1")
     testCompile 'org.xmlunit:xmlunit-matchers:2.4.0'
     testCompile 'org.apache.commons:commons-lang3:3.6'
+}
+
+test {
+    useJUnitPlatform()
 }
 
 task javadocJar(type: Jar) {
