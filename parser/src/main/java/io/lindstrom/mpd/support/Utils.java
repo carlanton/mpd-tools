@@ -20,6 +20,7 @@ public class Utils {
     }
 
     @SafeVarargs
+    @SuppressWarnings("varargs")
     public static <T> List<T> varargsToList(T head, T ...tail) {
         if (tail.length == 0) {
             return Collections.singletonList(head);
