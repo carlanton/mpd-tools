@@ -6,7 +6,25 @@ apply plugin: 'java'
 ext.moduleName = 'io.lindstrom.mpd.validator'
 
 
-sourceCompatibility = 11
+compileJava {
+    exclude 'module-info.java'
+}
+
+task compileModuleInfoJava(type: JavaCompile) {
+    classpath = files() // empty
+    source = 'src/main/java/module-info.java'
+    destinationDir = compileJava.destinationDir // same dir to see classes compiled by compileJava
+
+    doFirst {
+        options.compilerArgs = [
+                '--release', '9',
+                '--module-path', compileJava.classpath.asPath,
+        ]
+    }
+}
+
+compileModuleInfoJava.dependsOn compileJava
+classes.dependsOn compileModuleInfoJava
 
 repositories {
     mavenCentral()

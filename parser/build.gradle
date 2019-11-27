@@ -8,7 +8,28 @@ apply plugin: 'signing'
 
 ext.moduleName = 'io.lindstrom.mpd'
 
-sourceCompatibility = 11
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+compileJava {
+    exclude 'module-info.java'
+}
+
+task compileModuleInfoJava(type: JavaCompile) {
+    classpath = files() // empty
+    source = 'src/main/java/module-info.java'
+    destinationDir = compileJava.destinationDir // same dir to see classes compiled by compileJava
+
+    doFirst {
+        options.compilerArgs = [
+                '--release', '9',
+                '--module-path', compileJava.classpath.asPath,
+        ]
+    }
+}
+
+compileModuleInfoJava.dependsOn compileJava
+classes.dependsOn compileModuleInfoJava
 
 repositories {
     mavenCentral()

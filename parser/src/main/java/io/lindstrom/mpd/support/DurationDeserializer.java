@@ -49,7 +49,7 @@ public class DurationDeserializer extends JsonDeserializer<Duration> {
             end = start + 9;
         }
 
-        long fraction = Long.parseLong(text, start, end, 10);
+        long fraction = Long.parseLong(text.subSequence(start, end).toString());
 
         // for number strings smaller than 9 digits, interpret as if there were trailing zeros
         for (int i = end - start; i < 9; i++) {
@@ -88,27 +88,27 @@ public class DurationDeserializer extends JsonDeserializer<Duration> {
         long nanos = 0;
 
         if (yearStart >= 0) {
-            years = Integer.parseInt(text, yearStart, yearEnd, 10);
+            years = Integer.parseInt(text.substring(yearStart, yearEnd));
         }
 
         if (monthStart >= 0) {
-            months = Integer.parseInt(text, monthStart, monthEnd, 10);
+            months = Integer.parseInt(text.substring(monthStart, monthEnd));
         }
 
         if (dayStart >= 0) {
-            days = Integer.parseInt(text, dayStart, dayEnd, 10);
+            days = Integer.parseInt(text.substring(dayStart, dayEnd));
         }
 
         if (hourStart >= 0) {
-            hoursAsSecs = Math.multiplyExact(3600L, Integer.parseInt(text, hourStart, hourEnd, 10));
+            hoursAsSecs = Math.multiplyExact(3600L, Long.parseLong(text.substring(hourStart, hourEnd)));
         }
 
         if (minuteStart >= 0) {
-            minutesAsSecs = Math.multiplyExact(60L, Integer.parseInt(text, minuteStart, minuteEnd, 10));
+            minutesAsSecs = Math.multiplyExact(60L, Long.parseLong(text.substring(minuteStart, minuteEnd)));
         }
 
         if (secondStart >= 0) {
-            seconds = Integer.parseInt(text, secondStart, secondEnd, 10);
+            seconds = Integer.parseInt(text.substring(secondStart, secondEnd), 10);
             boolean negativeSecs = text.charAt(secondStart) == '-';
             nanos = parseFraction(text, fractionStart, fractionEnd, negativeSecs);
         }
