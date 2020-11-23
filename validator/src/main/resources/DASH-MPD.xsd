@@ -77,7 +77,7 @@
   <xs:complexType name="EventStreamType">
     <xs:sequence>
       <xs:element name="Event" type="EventType" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>      
+      <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute ref="xlink:href"/>
     <xs:attribute ref="xlink:actuate" default="onRequest"/>
@@ -86,7 +86,7 @@
     <xs:attribute name="timescale" type="xs:unsignedInt"/>
   </xs:complexType>
 
-  
+
   <!-- Event  -->
   <xs:complexType name="EventType">
     <xs:sequence>
@@ -113,6 +113,7 @@
           <xs:element name="SegmentBase" type="SegmentBaseType" minOccurs="0"/>
           <xs:element name="SegmentList" type="SegmentListType" minOccurs="0"/>
           <xs:element name="SegmentTemplate" type="SegmentTemplateType" minOccurs="0"/>
+          <xs:element name="Label" type="LabelType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="Representation" type="RepresentationType" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="xlink:href"/>
@@ -143,15 +144,15 @@
     <xs:restriction base="xs:string">
       <xs:pattern value="[0-9]*:[0-9]*"/>
     </xs:restriction>
-  </xs:simpleType>   
-  
+  </xs:simpleType>
+
   <!-- Type for Frame Rate -->
   <xs:simpleType name="FrameRateType">
     <xs:restriction base="xs:string">
       <xs:pattern value="[0-9]*[0-9](/[0-9]*[0-9])?"/>
     </xs:restriction>
   </xs:simpleType>
- 
+
 
   <!-- Conditional Unsigned Integer (unsignedInt or boolean) -->
   <xs:simpleType name="ConditionalUintType">
@@ -193,14 +194,14 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  
+
   <!-- String without white spaces -->
   <xs:simpleType name="StringNoWhitespaceType">
     <xs:restriction base="xs:string">
       <xs:pattern value="[^\r\n\t \p{Z}]*"/>
     </xs:restriction>
   </xs:simpleType>
-  
+
 
   <!-- SubRepresentation -->
   <xs:complexType name="SubRepresentationType">
@@ -241,7 +242,7 @@
     <xs:attribute name="scanType" type="VideoScanType"/>
     <xs:anyAttribute namespace="##other" processContents="lax"/>
   </xs:complexType>
-  
+
   <!-- Stream Access Point type enumeration -->
   <xs:simpleType name="SAPType">
     <xs:restriction base="xs:unsignedInt">
@@ -403,7 +404,7 @@
     </xs:sequence>
     <xs:attribute name="schemeIdUri" type="xs:anyURI" use="required"/>
     <xs:attribute name="value" type="xs:string"/>
-    <xs:attribute name="id" type="xs:string"/>    
+    <xs:attribute name="id" type="xs:string"/>
     <xs:anyAttribute namespace="##other" processContents="lax"/>
   </xs:complexType>
 
@@ -422,6 +423,17 @@
   <xs:complexType name="RangeType">
     <xs:attribute name="starttime" type="xs:duration"/>
     <xs:attribute name="duration" type="xs:duration"/>
+  </xs:complexType>
+
+  <!-- Label and Group Label -->
+  <xs:complexType name="LabelType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="id" type="xs:unsignedInt" default="0"/>
+        <xs:attribute name="lang" type="xs:language"/>
+        <xs:anyAttribute namespace="##other" processContents="lax"/>
+      </xs:extension>
+    </xs:simpleContent>
   </xs:complexType>
 
 </xs:schema>

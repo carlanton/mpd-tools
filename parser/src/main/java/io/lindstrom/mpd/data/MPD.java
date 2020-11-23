@@ -8,7 +8,6 @@ import io.lindstrom.mpd.support.Utils;
 
 import java.time.Duration;
 import java.time.OffsetDateTime;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -189,7 +188,7 @@ public class MPD {
 
     public List<Profile> getProfiles() {
         if (profiles == null) {
-            return Collections.emptyList();
+            return List.of();
         } else {
             return profiles.getProfiles();
         }
@@ -197,7 +196,7 @@ public class MPD {
 
     public List<String> getInteroperabilityPointsAndExtensions() {
         if (profiles == null) {
-            return Collections.emptyList();
+            return List.of();
         } else {
             return profiles.getInteroperabilityPointsAndExtensions();
         }

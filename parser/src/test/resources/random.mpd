@@ -42,6 +42,7 @@
       <Event presentationTime="5" duration="5" id="5" messageData="PaeGfVfgusBmJFDPbKlox"/>
     </EventStream>
     <AdaptationSet profiles="lxYLsNWCpEgWpfVH" width="5" height="5" sar="5:5" frameRate="5/5" audioSamplingRate="aEsYDpH" mimeType="eLCRaLdUVcJNahG" segmentProfiles="RJnQIoKqJbIcSZEuUBhxzrmbuN" codecs="OdFO" maximumSAPPeriod="0.920537448807182" startWithSAP="5" maxPlayoutRate="0.3293904172594878" codingDependency="false" scanType="unknown" xlink:href="RfOEnuwD" xlink:actuate="onLoad" id="5" group="5" lang="sv" contentType="CJueiBybTZpvJZwvkV" par="5:5" minBandwidth="5" maxBandwidth="5" minWidth="5" maxWidth="5" minHeight="5" maxHeight="5" minFrameRate="5/5" maxFrameRate="5/5" segmentAlignment="true" subsegmentAlignment="true" subsegmentStartsWithSAP="5" bitstreamSwitching="false">
+      <Label>l0</Label>
       <FramePacking schemeIdUri="YsurnvQmOoplQNgnp" value="EtbivMMEjTHNYSXyJMPzVkuaxBkfMcpe" id="mPltZwkELcXXJKqUQvUz"/>
       <FramePacking schemeIdUri="zZmpORFmvjNYMzgQAkGRqgblIVPDVXj" value="ctCOhfQOSitqKpzJoIB" id="FmnIDJSGfprHUCdB"/>
       <AudioChannelConfiguration schemeIdUri="zZmpORFmvjNYMzgQAkGRqgblIVPDVXj" value="ctCOhfQOSitqKpzJoIB" id="FmnIDJSGfprHUCdB"/>
@@ -237,6 +238,7 @@
       </Representation>
     </AdaptationSet>
     <AdaptationSet profiles="gdfbDWxDeyx" width="5" height="5" sar="5:5" frameRate="5/5" audioSamplingRate="iELmUcUvAPtChAs" mimeType="PoGOzRY" segmentProfiles="vgeFDSWDWoNWWJBakPZRxiCnkxAMOhr" codecs="ROTHjDpFdjjvORc" maximumSAPPeriod="0.33888041727414286" startWithSAP="5" maxPlayoutRate="0.8686082913676931" codingDependency="true" scanType="interlaced" xlink:href="miRpFvZDkqEDGfRPbUtgV" xlink:actuate="onLoad" id="5" group="5" lang="sv" contentType="hhbkJrvuEjbTRhlkUQKP" par="5:5" minBandwidth="5" maxBandwidth="5" minWidth="5" maxWidth="5" minHeight="5" maxHeight="5" minFrameRate="5/5" maxFrameRate="5/5" segmentAlignment="true" subsegmentAlignment="true" subsegmentStartsWithSAP="5" bitstreamSwitching="true">
+      <Label>l1</Label>
       <FramePacking schemeIdUri="NlEGOJuKfeUpiRDjnMJtynw" value="EMzemZWU" id="KXEDVyOJLDBkvGuj"/>
       <FramePacking schemeIdUri="fvkytzrcjfmnu" value="JzjRjsbAsIVtkrQCnSCTmNgxT" id="NblpmkPhBVXIAjZEX"/>
       <AudioChannelConfiguration schemeIdUri="zG" value="OJvoaGmulcNdahEfx" id="Vr"/>
@@ -387,6 +389,7 @@
       <Event presentationTime="5" duration="5" id="5" messageData="PaeGfVfgusBmJFDPbKlox"/>
     </EventStream>
     <AdaptationSet profiles="rsfmlaPpVzsHfdX" width="5" height="5" sar="5:5" frameRate="5/5" audioSamplingRate="x" mimeType="iKaOtWpjDCTwY" segmentProfiles="ZWHsrdrtmZdoFjgVNaUasNDrM" codecs="lkbIStOavgHpTuVAFXDYMLlOR" maximumSAPPeriod="0.28612761002576725" startWithSAP="5" maxPlayoutRate="0.9335028839933709" codingDependency="false" scanType="progressive" xlink:href="SyfWlAKBZqZMqwiLJb" xlink:actuate="onRequest" id="5" group="5" lang="sv" contentType="LXEPCdDzJpmHDLrRKnQ" par="5:5" minBandwidth="5" maxBandwidth="5" minWidth="5" maxWidth="5" minHeight="5" maxHeight="5" minFrameRate="5/5" maxFrameRate="5/5" segmentAlignment="true" subsegmentAlignment="true" subsegmentStartsWithSAP="5" bitstreamSwitching="false">
+      <Label>l3</Label>
       <FramePacking schemeIdUri="NlEGOJuKfeUpiRDjnMJtynw" value="EMzemZWU" id="KXEDVyOJLDBkvGuj"/>
       <AudioChannelConfiguration schemeIdUri="pgTsooWPWSqiteEBEJqjwLgyMoFvot" value="KnLedkMyUpfPkve" id="bNpGwUPRRQd"/>
       <ContentProtection schemeIdUri="zZmpORFmvjNYMzgQAkGRqgblIVPDVXj" value="ctCOhfQOSitqKpzJoIB" id="FmnIDJSGfprHUCdB"/>
