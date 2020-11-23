@@ -31,6 +31,7 @@ import java.util.stream.Collectors;
         "segmentBase",
         "segmentList",
         "segmentTemplate",
+        "labels",
         "representations"
 })
 public class AdaptationSet extends RepresentationBase {
@@ -60,6 +61,9 @@ public class AdaptationSet extends RepresentationBase {
 
     @JacksonXmlProperty(localName = "SegmentTemplate", namespace = MPD.NAMESPACE)
     private final SegmentTemplate segmentTemplate;
+
+    @JacksonXmlProperty(localName = "Label", namespace = MPD.NAMESPACE)
+    private final List<String> labels;
 
     @JacksonXmlProperty(localName = "Representation", namespace = MPD.NAMESPACE)
     private final List<Representation> representations;
@@ -121,7 +125,7 @@ public class AdaptationSet extends RepresentationBase {
     @JacksonXmlProperty(isAttribute = true)
     private final Boolean bitstreamSwitching;
 
-    private AdaptationSet(List<Descriptor> framePackings, List<Descriptor> audioChannelConfigurations, List<Descriptor> contentProtections, List<Descriptor> essentialProperties, List<Descriptor> supplementalProperties, List<EventStream> inbandEventStreams, String profiles, Long width, Long height, Ratio sar, FrameRate frameRate, String audioSamplingRate, String mimeType, String segmentProfiles, String codecs, Double maximumSAPPeriod, Long startWithSAP, Double maxPlayoutRate, Boolean codingDependency, VideoScanType scanType, List<Descriptor> accessibilities, List<Descriptor> roles, List<Descriptor> ratings, List<Descriptor> viewpoints, List<ContentComponent> contentComponents, List<BaseURL> baseURLs, SegmentBase segmentBase, SegmentList segmentList, SegmentTemplate segmentTemplate, List<Representation> representations, String href, ActuateType actuate, Long id, Long group, String lang, String contentType, Ratio par, Long minBandwidth, Long maxBandwidth, Long minWidth, Long maxWidth, Long minHeight, Long maxHeight, FrameRate minFrameRate, FrameRate maxFrameRate, String segmentAlignment, String subsegmentAlignment, Long subsegmentStartsWithSAP, Boolean bitstreamSwitching) {
+    private AdaptationSet(List<Descriptor> framePackings, List<Descriptor> audioChannelConfigurations, List<Descriptor> contentProtections, List<Descriptor> essentialProperties, List<Descriptor> supplementalProperties, List<EventStream> inbandEventStreams, String profiles, Long width, Long height, Ratio sar, FrameRate frameRate, String audioSamplingRate, String mimeType, String segmentProfiles, String codecs, Double maximumSAPPeriod, Long startWithSAP, Double maxPlayoutRate, Boolean codingDependency, VideoScanType scanType, List<Descriptor> accessibilities, List<Descriptor> roles, List<Descriptor> ratings, List<Descriptor> viewpoints, List<ContentComponent> contentComponents, List<BaseURL> baseURLs, SegmentBase segmentBase, SegmentList segmentList, SegmentTemplate segmentTemplate, List<String> labels, List<Representation> representations, String href, ActuateType actuate, Long id, Long group, String lang, String contentType, Ratio par, Long minBandwidth, Long maxBandwidth, Long minWidth, Long maxWidth, Long minHeight, Long maxHeight, FrameRate minFrameRate, FrameRate maxFrameRate, String segmentAlignment, String subsegmentAlignment, Long subsegmentStartsWithSAP, Boolean bitstreamSwitching) {
         super(framePackings, audioChannelConfigurations, contentProtections, essentialProperties, supplementalProperties, inbandEventStreams, profiles, width, height, sar, frameRate, audioSamplingRate, mimeType, segmentProfiles, codecs, maximumSAPPeriod, startWithSAP, maxPlayoutRate, codingDependency, scanType);
         this.accessibilities = accessibilities;
         this.roles = roles;
@@ -132,6 +136,7 @@ public class AdaptationSet extends RepresentationBase {
         this.segmentBase = segmentBase;
         this.segmentList = segmentList;
         this.segmentTemplate = segmentTemplate;
+        this.labels = labels;
         this.representations = representations;
         this.href = href;
         this.actuate = actuate;
@@ -165,6 +170,7 @@ public class AdaptationSet extends RepresentationBase {
         this.segmentBase = null;
         this.segmentList = null;
         this.segmentTemplate = null;
+        this.labels = null;
         this.representations = null;
         this.href = null;
         this.actuate = null;
@@ -221,6 +227,10 @@ public class AdaptationSet extends RepresentationBase {
 
     public SegmentTemplate getSegmentTemplate() {
         return segmentTemplate;
+    }
+
+    public List<String> getLabels() {
+        return Utils.unmodifiableList(labels);
     }
 
     public List<Representation> getRepresentations() {
@@ -318,6 +328,7 @@ public class AdaptationSet extends RepresentationBase {
                 Objects.equals(segmentBase, that.segmentBase) &&
                 Objects.equals(segmentList, that.segmentList) &&
                 Objects.equals(segmentTemplate, that.segmentTemplate) &&
+                Objects.equals(labels, that.labels) &&
                 Objects.equals(representations, that.representations) &&
                 Objects.equals(href, that.href) &&
                 actuate == that.actuate &&
@@ -342,7 +353,7 @@ public class AdaptationSet extends RepresentationBase {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), accessibilities, roles, ratings, viewpoints, contentComponents, baseURLs, segmentBase, segmentList, segmentTemplate, representations, href, actuate, id, group, lang, contentType, par, minBandwidth, maxBandwidth, minWidth, maxWidth, minHeight, maxHeight, minFrameRate, maxFrameRate, segmentAlignment, subsegmentAlignment, subsegmentStartsWithSAP, bitstreamSwitching);
+        return Objects.hash(super.hashCode(), accessibilities, roles, ratings, viewpoints, contentComponents, baseURLs, segmentBase, segmentList, segmentTemplate, labels, representations, href, actuate, id, group, lang, contentType, par, minBandwidth, maxBandwidth, minWidth, maxWidth, minHeight, maxHeight, minFrameRate, maxFrameRate, segmentAlignment, subsegmentAlignment, subsegmentStartsWithSAP, bitstreamSwitching);
     }
 
     @Override
@@ -358,6 +369,7 @@ public class AdaptationSet extends RepresentationBase {
                 ", segmentBase=" + segmentBase +
                 ", segmentList=" + segmentList +
                 ", segmentTemplate=" + segmentTemplate +
+                ", labels=" + labels +
                 ", representations=" + representations +
                 ", href='" + href + '\'' +
                 ", actuate=" + actuate +
@@ -392,6 +404,7 @@ public class AdaptationSet extends RepresentationBase {
                 .withSegmentBase(segmentBase)
                 .withSegmentList(segmentList)
                 .withSegmentTemplate(segmentTemplate)
+                .withLabels(labels)
                 .withRepresentations(representations)
                 .withHref(href)
                 .withActuate(actuate)
@@ -428,6 +441,7 @@ public class AdaptationSet extends RepresentationBase {
         private SegmentBase segmentBase;
         private SegmentList segmentList;
         private SegmentTemplate segmentTemplate;
+        private List<String> labels;
         private List<Representation> representations;
         private String href;
         private ActuateType actuate;
@@ -509,6 +523,15 @@ public class AdaptationSet extends RepresentationBase {
         public Builder withSegmentTemplate(SegmentTemplate segmentTemplate) {
             this.segmentTemplate = segmentTemplate;
             return this;
+        }
+
+        public Builder withLabels(List<String> labels) {
+            this.labels = labels;
+            return this;
+        }
+
+        public Builder withLabels(String label, String... moreLabels) {
+            return withLabels(Utils.varargsToList(label, moreLabels));
         }
 
         public Builder withRepresentations(List<Representation> representations) {
@@ -626,7 +649,7 @@ public class AdaptationSet extends RepresentationBase {
                     supplementalProperties, inbandEventStreams, profiles, width, height, sar, frameRate, audioSamplingRate,
                     mimeType, segmentProfiles, codecs, maximumSAPPeriod, startWithSAP, maxPlayoutRate, codingDependency,
                     scanType, accessibilities, roles, ratings, viewpoints, contentComponents, baseURLs, segmentBase,
-                    segmentList, segmentTemplate, representations, href, actuate, id, group, lang, contentType, par,
+                    segmentList, segmentTemplate, labels, representations, href, actuate, id, group, lang, contentType, par,
                     minBandwidth, maxBandwidth, minWidth, maxWidth, minHeight, maxHeight, minFrameRate, maxFrameRate,
                     segmentAlignment, subsegmentAlignment, subsegmentStartsWithSAP, bitstreamSwitching);
         }
