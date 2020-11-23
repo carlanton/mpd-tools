@@ -51,6 +51,11 @@ public class Role extends Descriptor {
         @JsonProperty("supplementary") SUPPLEMENTARY,
         @JsonProperty("commentary") COMMENTARY,
         @JsonProperty("dub") DUB,
+        @JsonProperty("description") DESCRIPTION,
+        @JsonProperty("enhanced-audio-intelligibility") ENHANCED_AUDIO_INTELLIGIBILITY,
+        @JsonProperty("emergency") EMERGENCY,
+        @JsonProperty("sign") SIGN,
+
         @JsonEnumDefaultValue UNKNOWN
     }
 

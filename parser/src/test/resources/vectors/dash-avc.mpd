@@ -1,0 +1,86 @@
+<MPD xmlns="urn:mpeg:dash:schema:mpd:2011" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mpeg:dash:schema:mpd:2011 DASH-MPD.xsd" profiles="urn:mpeg:dash:profile:isoff-live:2011" type="static" mediaPresentationDuration="PT2M" minBufferTime="PT2S">
+  <Period id="0">
+    <AdaptationSet id="0" contentType="video" segmentAlignment="true" frameRate="12800/512" scanType="progressive" par="16:9" maxWidth="1920" maxHeight="1080">
+      <Representation id="0" bandwidth="5033517" width="1920" height="1080" codecs="avc1.640029" sar="1:1" mimeType="video/mp4">
+        <SegmentTemplate initialization="cmaf-video-avc-4/cmaf-video-avc-4-init.mp4" media="cmaf-video-avc-4/cmaf-video-avc-4-$Number$.mp4" startNumber="1" timescale="12800">
+          <SegmentTimeline>
+            <S t="0" d="49152" r="30"/>
+            <S t="1523712" d="12288"/>
+          </SegmentTimeline>
+        </SegmentTemplate>
+      </Representation>
+      <Representation id="1" bandwidth="3378646" width="1280" height="720" codecs="avc1.4d401f" sar="1:1" mimeType="video/mp4">
+        <SegmentTemplate initialization="cmaf-video-avc-3/cmaf-video-avc-3-init.mp4" media="cmaf-video-avc-3/cmaf-video-avc-3-$Number$.mp4" startNumber="1" timescale="12800">
+          <SegmentTimeline>
+            <S t="0" d="49152" r="30"/>
+            <S t="1523712" d="12288"/>
+          </SegmentTimeline>
+        </SegmentTemplate>
+      </Representation>
+      <Representation id="2" bandwidth="2170809" width="960" height="540" codecs="avc1.4d401f" sar="1:1" mimeType="video/mp4">
+        <SegmentTemplate initialization="cmaf-video-avc-2/cmaf-video-avc-2-init.mp4" media="cmaf-video-avc-2/cmaf-video-avc-2-$Number$.mp4" startNumber="1" timescale="12800">
+          <SegmentTimeline>
+            <S t="0" d="49152" r="30"/>
+            <S t="1523712" d="12288"/>
+          </SegmentTimeline>
+        </SegmentTemplate>
+      </Representation>
+      <Representation id="3" bandwidth="562532" width="416" height="234" codecs="avc1.42c01f" sar="1:1" mimeType="video/mp4">
+        <SegmentTemplate initialization="cmaf-video-avc-0/cmaf-video-avc-0-init.mp4" media="cmaf-video-avc-0/cmaf-video-avc-0-$Number$.mp4" startNumber="1" timescale="12800">
+          <SegmentTimeline>
+            <S t="0" d="49152" r="30"/>
+            <S t="1523712" d="12288"/>
+          </SegmentTimeline>
+        </SegmentTemplate>
+      </Representation>
+      <Representation id="4" bandwidth="1386965" width="640" height="360" codecs="avc1.4d401f" sar="1:1" mimeType="video/mp4">
+        <SegmentTemplate initialization="cmaf-video-avc-1/cmaf-video-avc-1-init.mp4" media="cmaf-video-avc-1/cmaf-video-avc-1-$Number$.mp4" startNumber="1" timescale="12800">
+          <SegmentTimeline>
+            <S t="0" d="49152" r="30"/>
+            <S t="1523712" d="12288"/>
+          </SegmentTimeline>
+        </SegmentTemplate>
+      </Representation>
+    </AdaptationSet>
+    <AdaptationSet id="1" contentType="audio" segmentAlignment="true" lang="sv">
+      <Role schemeIdUri="urn:mpeg:dash:role:2011" value="main"/>
+      <Representation id="5" bandwidth="196153" codecs="mp4a.40.2" audioSamplingRate="48000" mimeType="audio/mp4">
+        <AudioChannelConfiguration schemeIdUri="urn:mpeg:dash:23003:3:audio_channel_configuration:2011" value="2"/>
+        <SegmentTemplate initialization="cmaf-audio-stereo-1/cmaf-audio-stereo-1-init.mp4" media="cmaf-audio-stereo-1/cmaf-audio-stereo-1-$Number$.mp4" startNumber="1" timescale="48000">
+          <SegmentTimeline>
+            <S t="0" d="184320" r="30"/>
+            <S t="5713920" d="46080"/>
+          </SegmentTimeline>
+        </SegmentTemplate>
+      </Representation>
+    </AdaptationSet>
+    <AdaptationSet id="2" contentType="audio" segmentAlignment="true" lang="sv-x-tydligaretal">
+<Accessibility schemeIdUri="urn:tva:metadata:cs:AudioPurposeCS:2007" value="2"/>
+      <Accessibility schemeIdUri="urn:mpeg:dash:role:2011" value="enhanced-audio-intelligibility"/>
+      <Role schemeIdUri="urn:mpeg:dash:role:2011" value="alternate"/>
+      <Label>Tydligare tal</Label>
+      <Representation id="6" bandwidth="195373" codecs="mp4a.40.2" audioSamplingRate="48000" mimeType="audio/mp4">
+        <AudioChannelConfiguration schemeIdUri="urn:mpeg:dash:23003:3:audio_channel_configuration:2011" value="2"/>
+        <SegmentTemplate initialization="cmaf-audio-stereo-de-1/cmaf-audio-stereo-de-1-init.mp4" media="cmaf-audio-stereo-de-1/cmaf-audio-stereo-de-1-$Number$.mp4" startNumber="1" timescale="48000">
+          <SegmentTimeline>
+            <S t="0" d="184320" r="30"/>
+            <S t="5713920" d="48128"/>
+          </SegmentTimeline>
+        </SegmentTemplate>
+      </Representation>
+    </AdaptationSet>
+    <AdaptationSet id="3" contentType="audio" segmentAlignment="true" lang="sv-x-tal">
+      <Role schemeIdUri="urn:mpeg:dash:role:2011" value="dub"/>
+      <Label>Uppläst text</Label>
+      <Representation id="7" bandwidth="204803" codecs="mp4a.40.2" audioSamplingRate="48000" mimeType="audio/mp4">
+        <AudioChannelConfiguration schemeIdUri="urn:mpeg:dash:23003:3:audio_channel_configuration:2011" value="2"/>
+        <SegmentTemplate initialization="cmaf-audio-stereo-tts-1/cmaf-audio-stereo-tts-1-init.mp4" media="cmaf-audio-stereo-tts-1/cmaf-audio-stereo-tts-1-$Number$.mp4" startNumber="1" timescale="48000">
+          <SegmentTimeline>
+            <S t="0" d="184320" r="30"/>
+            <S t="5713920" d="46080"/>
+          </SegmentTimeline>
+        </SegmentTemplate>
+      </Representation>
+    </AdaptationSet>
+  </Period>
+</MPD>
