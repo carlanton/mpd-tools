@@ -45,7 +45,7 @@ public class ValidatorValidator {
                     .map(input -> {
                         String resultFileName = "result_" + input.getFileName().toString().replace(".mpd", ".xml");
                         Path output = input.getParent().resolveSibling("output/" + resultFileName);
-                        return List.of(input, output);
+                        return Arrays.asList(input, output);
                     }).collect(Collectors.toList());
         }
     }
