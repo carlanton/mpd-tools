@@ -22,3 +22,17 @@ This is a pure-Java port of the Schematron based mpdvalidator: https://github.co
 
 It's faster and hopefully easier to understand? ...
 
+## Artifacts
+Maven:
+```xml
+<dependency>
+    <groupId>io.lindstrom</groupId>
+    <artifactId>mpd-parser</artifactId>
+    <version>0.9</version>
+</dependency>
+```
+Gradle:
+```
+compile 'io.lindstrom:mpd-parser:0.9'
+```
+
