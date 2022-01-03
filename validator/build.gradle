@@ -6,7 +6,7 @@ apply plugin: 'java'
 ext.moduleName = 'io.lindstrom.mpd.validator'
 
 
-sourceCompatibility = 11
+sourceCompatibility = 8
 
 repositories {
     mavenCentral()
