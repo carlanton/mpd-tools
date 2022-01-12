@@ -123,9 +123,12 @@ public class AdaptationSet extends RepresentationBase {
     private final Long subsegmentStartsWithSAP;
 
     @JacksonXmlProperty(isAttribute = true)
+    private final Long selectionPriority;
+
+    @JacksonXmlProperty(isAttribute = true)
     private final Boolean bitstreamSwitching;
 
-    private AdaptationSet(List<Descriptor> framePackings, List<Descriptor> audioChannelConfigurations, List<Descriptor> contentProtections, List<Descriptor> essentialProperties, List<Descriptor> supplementalProperties, List<EventStream> inbandEventStreams, String profiles, Long width, Long height, Ratio sar, FrameRate frameRate, String audioSamplingRate, String mimeType, String segmentProfiles, String codecs, Double maximumSAPPeriod, Long startWithSAP, Double maxPlayoutRate, Boolean codingDependency, VideoScanType scanType, List<Descriptor> accessibilities, List<Descriptor> roles, List<Descriptor> ratings, List<Descriptor> viewpoints, List<ContentComponent> contentComponents, List<BaseURL> baseURLs, SegmentBase segmentBase, SegmentList segmentList, SegmentTemplate segmentTemplate, List<String> labels, List<Representation> representations, String href, ActuateType actuate, Long id, Long group, String lang, String contentType, Ratio par, Long minBandwidth, Long maxBandwidth, Long minWidth, Long maxWidth, Long minHeight, Long maxHeight, FrameRate minFrameRate, FrameRate maxFrameRate, String segmentAlignment, String subsegmentAlignment, Long subsegmentStartsWithSAP, Boolean bitstreamSwitching) {
+    private AdaptationSet(List<Descriptor> framePackings, List<Descriptor> audioChannelConfigurations, List<Descriptor> contentProtections, List<Descriptor> essentialProperties, List<Descriptor> supplementalProperties, List<EventStream> inbandEventStreams, String profiles, Long width, Long height, Ratio sar, FrameRate frameRate, String audioSamplingRate, String mimeType, String segmentProfiles, String codecs, Double maximumSAPPeriod, Long startWithSAP, Double maxPlayoutRate, Boolean codingDependency, VideoScanType scanType, List<Descriptor> accessibilities, List<Descriptor> roles, List<Descriptor> ratings, List<Descriptor> viewpoints, List<ContentComponent> contentComponents, List<BaseURL> baseURLs, SegmentBase segmentBase, SegmentList segmentList, SegmentTemplate segmentTemplate, List<String> labels, List<Representation> representations, String href, ActuateType actuate, Long id, Long group, String lang, String contentType, Ratio par, Long minBandwidth, Long maxBandwidth, Long minWidth, Long maxWidth, Long minHeight, Long maxHeight, FrameRate minFrameRate, FrameRate maxFrameRate, String segmentAlignment, String subsegmentAlignment, Long subsegmentStartsWithSAP, Long selectionPriority, Boolean bitstreamSwitching) {
         super(framePackings, audioChannelConfigurations, contentProtections, essentialProperties, supplementalProperties, inbandEventStreams, profiles, width, height, sar, frameRate, audioSamplingRate, mimeType, segmentProfiles, codecs, maximumSAPPeriod, startWithSAP, maxPlayoutRate, codingDependency, scanType);
         this.accessibilities = accessibilities;
         this.roles = roles;
@@ -156,6 +159,7 @@ public class AdaptationSet extends RepresentationBase {
         this.segmentAlignment = segmentAlignment;
         this.subsegmentAlignment = subsegmentAlignment;
         this.subsegmentStartsWithSAP = subsegmentStartsWithSAP;
+        this.selectionPriority = selectionPriority;
         this.bitstreamSwitching = bitstreamSwitching;
     }
 
@@ -309,6 +313,8 @@ public class AdaptationSet extends RepresentationBase {
         return subsegmentStartsWithSAP;
     }
 
+    public Long getSelectionPriority() { return selectionPriority; }
+
     public Boolean getBitstreamSwitching() {
         return bitstreamSwitching;
     }
@@ -348,12 +354,13 @@ public class AdaptationSet extends RepresentationBase {
                 Objects.equals(segmentAlignment, that.segmentAlignment) &&
                 Objects.equals(subsegmentAlignment, that.subsegmentAlignment) &&
                 Objects.equals(subsegmentStartsWithSAP, that.subsegmentStartsWithSAP) &&
+                Objects.equals(selectionPriority, that.selectionPriority) &&
                 Objects.equals(bitstreamSwitching, that.bitstreamSwitching);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), accessibilities, roles, ratings, viewpoints, contentComponents, baseURLs, segmentBase, segmentList, segmentTemplate, labels, representations, href, actuate, id, group, lang, contentType, par, minBandwidth, maxBandwidth, minWidth, maxWidth, minHeight, maxHeight, minFrameRate, maxFrameRate, segmentAlignment, subsegmentAlignment, subsegmentStartsWithSAP, bitstreamSwitching);
+        return Objects.hash(super.hashCode(), accessibilities, roles, ratings, viewpoints, contentComponents, baseURLs, segmentBase, segmentList, segmentTemplate, labels, representations, href, actuate, id, group, lang, contentType, par, minBandwidth, maxBandwidth, minWidth, maxWidth, minHeight, maxHeight, minFrameRate, maxFrameRate, segmentAlignment, subsegmentAlignment, subsegmentStartsWithSAP, selectionPriority, bitstreamSwitching);
     }
 
     @Override
@@ -389,6 +396,7 @@ public class AdaptationSet extends RepresentationBase {
                 ", segmentAlignment='" + segmentAlignment + '\'' +
                 ", subsegmentAlignment='" + subsegmentAlignment + '\'' +
                 ", subsegmentStartsWithSAP=" + subsegmentStartsWithSAP +
+                ", selectionPriority='" + selectionPriority +'\'' +
                 ", bitstreamSwitching=" + bitstreamSwitching +
                 '}';
     }
@@ -461,6 +469,7 @@ public class AdaptationSet extends RepresentationBase {
         private String segmentAlignment;
         private String subsegmentAlignment;
         private Long subsegmentStartsWithSAP;
+        private Long selectionPriority;
         private Boolean bitstreamSwitching;
 
         @Override
@@ -639,6 +648,11 @@ public class AdaptationSet extends RepresentationBase {
             return this;
         }
 
+        public Builder withSelectionPriority(Long selectionPriority) {
+            this.selectionPriority = selectionPriority;
+            return this;
+        }
+
         public Builder withBitstreamSwitching(Boolean bitstreamSwitching) {
             this.bitstreamSwitching = bitstreamSwitching;
             return this;
@@ -651,7 +665,7 @@ public class AdaptationSet extends RepresentationBase {
                     scanType, accessibilities, roles, ratings, viewpoints, contentComponents, baseURLs, segmentBase,
                     segmentList, segmentTemplate, labels, representations, href, actuate, id, group, lang, contentType, par,
                     minBandwidth, maxBandwidth, minWidth, maxWidth, minHeight, maxHeight, minFrameRate, maxFrameRate,
-                    segmentAlignment, subsegmentAlignment, subsegmentStartsWithSAP, bitstreamSwitching);
+                    segmentAlignment, subsegmentAlignment, subsegmentStartsWithSAP, selectionPriority, bitstreamSwitching);
         }
     }
 }
