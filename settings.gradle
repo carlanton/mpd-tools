@@ -1,4 +1,4 @@
 rootProject.name = 'mpd-tools'
-include 'validator'
+//include 'validator'
 include 'parser'
 

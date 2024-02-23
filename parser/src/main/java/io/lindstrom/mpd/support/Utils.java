@@ -19,7 +19,9 @@ public class Utils {
         } else {
             List<T> list = new ArrayList<>();
             list.add(head);
-            list.addAll(List.of(tail));
+            for (T element : tail) {
+                list.add(element);
+            }
             return List.copyOf(list);
         }
     }

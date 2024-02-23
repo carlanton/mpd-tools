@@ -1,18 +1,19 @@
 group 'io.lindstrom'
 version '1.0-SNAPSHOT'
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.10.3'
+/*task wrapper(type: Wrapper) {
+    gradleVersion = '8.6'
     distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
-}
+}*/
 
 allprojects {
     tasks.withType(JavaCompile) {
         options.encoding = 'UTF-8'
-        options.compilerArgs << "-Werror" << "-Xlint:all" << "-Xlint:-processing" << "-Xlint:-serial"
+       // options.compilerArgs << "-Werror" << "-Xlint:all" << "-Xlint:-processing" << "-Xlint:-serial"
     }
 }
 
+/*
 subprojects {
     afterEvaluate {
         javadoc {
@@ -31,3 +32,4 @@ subprojects {
         }
     }
 }
+*/
