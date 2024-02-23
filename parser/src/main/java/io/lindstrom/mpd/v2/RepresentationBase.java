@@ -66,4 +66,7 @@ public interface RepresentationBase {
 
     @JacksonXmlProperty(isAttribute = true)
     VideoScanType scanType();
+
+    @JacksonXmlProperty(isAttribute = true)
+    Long selectionPriority();
 }
