@@ -5,9 +5,6 @@ import io.lindstrom.mpd.data.Profiles;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.Collections;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ProfilesSerializerTest extends ObjectMapperTestBase<Profiles> {
@@ -19,8 +16,10 @@ public class ProfilesSerializerTest extends ObjectMapperTestBase<Profiles> {
 
     @Test
     public void serialize1() throws Exception {
-        Profiles profiles = new Profiles(Arrays.asList(Profile.MPEG_DASH_LIVE, Profile.HBBTV15),
-                Collections.singletonList("http://dashif.org/guidelines/dash264high"));
+        Profiles profiles = Profiles.builder()
+                .addProfiles(Profile.MPEG_DASH_LIVE, Profile.HBBTV15)
+                .addInteroperabilityPointsAndExtensions("http://dashif.org/guidelines/dash264high")
+                .build();
 
         assertEquals("urn:mpeg:dash:profile:isoff-live:2011,urn:hbbtv:dash:profile:isoff-live:2012,http://dashif.org/guidelines/dash264high",
                 write(profiles));
@@ -28,8 +27,10 @@ public class ProfilesSerializerTest extends ObjectMapperTestBase<Profiles> {
 
     @Test
     public void deserialize1() throws Exception {
-        Profiles profiles = new Profiles(Arrays.asList(Profile.MPEG_DASH_LIVE, Profile.HBBTV15),
-                Collections.singletonList("http://dashif.org/guidelines/dash264high"));
+        Profiles profiles = Profiles.builder()
+                .addProfiles(Profile.MPEG_DASH_LIVE, Profile.HBBTV15)
+                .addInteroperabilityPointsAndExtensions("http://dashif.org/guidelines/dash264high")
+                .build();
 
         assertEquals(profiles, read("urn:mpeg:dash:profile:isoff-live:2011,urn:hbbtv:dash:profile:isoff-live:2012,http://dashif.org/guidelines/dash264high"));
     }

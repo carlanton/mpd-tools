@@ -58,18 +58,7 @@ public class DataTypeTest2 {
                         .anyMatch(m -> m.getName().equals("buildUpon")), clazz.getName() + ": A buildUpon() method should exists");
     }
 
-    @ParameterizedTest
-    @MethodSource("params")
-    public void noArgsConstructor(Class<?> clazz) {
-        if (clazz.getAnnotation(JsonDeserialize.class) != null) {
-            return;
-        }
 
-        assertTrue(
-                Arrays.stream(clazz.getDeclaredConstructors())
-                        .filter(c -> Modifier.isPrivate(c.getModifiers()) || Modifier.isProtected(c.getModifiers()))
-                        .anyMatch(c -> c.getParameterCount() == 0), clazz.getName() + "should have a private constructor without arguments");
-    }
 
     @ParameterizedTest
     @MethodSource("params")

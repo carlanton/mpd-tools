@@ -1,86 +1,69 @@
 package io.lindstrom.mpd.data;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.lindstrom.mpd.support.ProfilesDeserializer;
-import io.lindstrom.mpd.support.ProfilesSerializer;
-import io.lindstrom.mpd.support.Utils;
+import org.immutables.value.Value;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-@JsonSerialize(using = ProfilesSerializer.class)
-@JsonDeserialize(using = ProfilesDeserializer.class)
-public class Profiles {
-    private final List<Profile> profiles;
-    private final List<String> interoperabilityPointsAndExtensions;
+@Value.Immutable
+@JsonSerialize(using = Profiles.Serializer.class)
+@JsonDeserialize(using = Profiles.Deserializer.class)
+public interface Profiles {
+    List<Profile> profiles();
+    List<String> interoperabilityPointsAndExtensions();
 
-    public Profiles(List<Profile> profiles, List<String> interoperabilityPointsAndExtensions) {
-        this.profiles = profiles;
-        this.interoperabilityPointsAndExtensions = interoperabilityPointsAndExtensions;
+    default Builder buildUpon() {
+        return builder().from(this);
     }
 
-    Profiles() {
-        this.profiles = null;
-        this.interoperabilityPointsAndExtensions = null;
-    }
-
-    public List<Profile> getProfiles() {
-        return Utils.unmodifiableList(profiles);
-    }
-
-    public List<String> getInteroperabilityPointsAndExtensions() {
-        return Utils.unmodifiableList(interoperabilityPointsAndExtensions);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Profiles profiles1 = (Profiles) o;
-        return Objects.equals(profiles, profiles1.profiles) &&
-                Objects.equals(interoperabilityPointsAndExtensions, profiles1.interoperabilityPointsAndExtensions);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(profiles, interoperabilityPointsAndExtensions);
-    }
-
-    @Override
-    public String toString() {
-        return "Profiles{" +
-                "profiles=" + profiles +
-                ", interoperabilityPointsAndExtensions=" + interoperabilityPointsAndExtensions +
-                '}';
-    }
-
-    public Builder buildUpon() {
-        return new Builder()
-                .withProfiles(profiles)
-                .withInteroperabilityPointsAndExtensions(interoperabilityPointsAndExtensions);
-    }
-
-    public static Builder builder() {
+    static Builder builder() {
         return new Builder();
     }
 
-    public static class Builder {
-        private List<Profile> profiles;
-        private List<String> interoperabilityPointsAndExtensions;
+    class Builder extends ImmutableProfiles.Builder {}
 
-        public Builder withProfiles(List<Profile> profiles) {
-            this.profiles = profiles;
-            return this;
+
+    class Serializer extends JsonSerializer<Profiles> {
+        @Override
+        public void serialize(Profiles value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+            List<String> list = new ArrayList<>();
+            value.profiles().forEach(profile -> list.add(profile.toString()));
+            list.addAll(value.interoperabilityPointsAndExtensions());
+            gen.writeString(String.join(",", list));
         }
+    }
 
-        public Builder withInteroperabilityPointsAndExtensions(List<String> interoperabilityPointsAndExtensions) {
-            this.interoperabilityPointsAndExtensions = interoperabilityPointsAndExtensions;
-            return this;
-        }
+    class Deserializer extends JsonDeserializer<Profiles> {
+        @Override
+        public Profiles deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+            String text = p.getText();
 
-        public Profiles build() {
-            return new Profiles(profiles, interoperabilityPointsAndExtensions);
+            List<Profile> profiles = new ArrayList<>();
+            List<String> others = new ArrayList<>();
+
+            for (String identifier : text.split(",")) {
+                identifier = identifier.trim();
+
+                try {
+                    profiles.add(Profile.fromIdentifier(identifier));
+                } catch (IllegalArgumentException e) {
+                    others.add(identifier);
+                }
+            }
+
+            return builder()
+                    .profiles(profiles)
+                    .interoperabilityPointsAndExtensions(others)
+                    .build();
         }
     }
 }

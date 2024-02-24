@@ -3,10 +3,13 @@ package io.lindstrom.mpd;
 import io.lindstrom.mpd.data.AdaptationSet;
 import io.lindstrom.mpd.data.MPD;
 import io.lindstrom.mpd.data.Period;
+import io.lindstrom.mpd.data.PresentationType;
 import io.lindstrom.mpd.data.descriptor.Descriptor;
 import io.lindstrom.mpd.data.descriptor.Role;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -19,23 +22,31 @@ public class DescriptorTest {
             "  </Period>\n" +
             "</MPD>\n";
 
-    private final Role ROLE = new Role(Role.Type.DUB, "3");
+    private final Role ROLE = Role.builder().type(Role.Type.DUB).id("3").build();
+    //new Role(Role.Type.DUB, "3");
 
-    private final MPD OUTPUT = new MPD.Builder()
-            .withPeriods(new Period.Builder()
-                    .withAdaptationSet(new AdaptationSet.Builder()
-                            .withRoles(ROLE)
-                            .build())
-                    .build())
-            .build();
+    private final MPD OUTPUT;
+
+    {
+        OUTPUT = new MPD.Builder()
+                .schemaLocation(MPD.DEFAULT_SCHEMA_LOCATION)
+                .type(PresentationType.STATIC)
+                .minBufferTime(Duration.ZERO)
+                .addPeriods(Period.builder()
+                        .addAdaptationSets(AdaptationSet.builder()
+                                .addRoles(ROLE)
+                                .build())
+                        .build())
+                .build();
+    }
 
     @Test
     public void deserialize() throws Exception {
         Descriptor descriptor = new MPDParser()
                 .parse(INPUT)
-                .getPeriods().get(0)
-                .getAdaptationSets().get(0)
-                .getRoles().get(0);
+                .periods().get(0)
+                .adaptationSets().get(0)
+                .roles().get(0);
 
         Assertions.assertTrue(descriptor instanceof Role, "Should be Role");
         Role role = (Role) descriptor;

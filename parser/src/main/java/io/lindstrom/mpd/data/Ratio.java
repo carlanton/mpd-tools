@@ -1,54 +1,24 @@
 package io.lindstrom.mpd.data;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.lindstrom.mpd.support.RatioDeserializer;
-import io.lindstrom.mpd.support.RatioSerializer;
 
-import java.util.Objects;
+import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-@JsonSerialize(using = RatioSerializer.class)
-@JsonDeserialize(using = RatioDeserializer.class)
-public class Ratio {
-    private final Long a;
-    private final Long b;
-
-    public Ratio(Long a, Long b) {
-        this.a = a;
-        this.b = b;
-    }
-
-    public Long getA() {
-        return a;
-    }
-
-    public Long getB() {
-        return b;
-    }
-
-    @Override
-    public String toString() {
-        return "Ratio{" + a + ":" + b + "}";
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Ratio ratio = (Ratio) o;
-        return Objects.equals(a, ratio.a) &&
-                Objects.equals(b, ratio.b);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(a, b);
-    }
-
+@JsonSerialize(using = Ratio.Serializer.class)
+@JsonDeserialize(using = Ratio.Deserializer.class)
+public record Ratio(Long a, Long b) {
     public Builder buildUpon() {
-        return new Builder()
-                .withA(a)
-                .withB(b);
+        return builder().a(a).b(b);
     }
 
     public static Builder builder() {
@@ -63,18 +33,52 @@ public class Ratio {
         private Long a;
         private Long b;
 
-        public Builder withA(Long a) {
+        public Builder a(Long a) {
             this.a = a;
             return this;
         }
 
-        public Builder withB(Long b) {
+        public Builder b(Long b) {
             this.b = b;
             return this;
         }
 
         public Ratio build() {
             return new Ratio(a, b);
+        }
+    }
+
+    static class Serializer extends JsonSerializer<Ratio> {
+        @Override
+        public void serialize(Ratio value, JsonGenerator gen, SerializerProvider serializers) throws IOException, JsonProcessingException {
+            StringBuilder stringBuilder = new StringBuilder();
+            if (value.a() != null) {
+                stringBuilder.append(value.a());
+            }
+            stringBuilder.append(':');
+            if (value.b() != null) {
+                stringBuilder.append(value.b());
+            }
+            gen.writeString(stringBuilder.toString());
+        }
+    }
+
+    static class Deserializer extends JsonDeserializer<Ratio> {
+        private static final Pattern RATIO_PATTERN = Pattern.compile("^([0-9]*):([0-9]*)$");
+
+        @Override
+        public Ratio deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+            String text = p.getText();
+            Matcher matcher = RATIO_PATTERN.matcher(text);
+            if (matcher.matches()) {
+                String a = matcher.group(1);
+                String b = matcher.group(2);
+                return new Ratio(a.isEmpty() ? null : Long.parseLong(a),
+                        b.isEmpty() ? null : Long.parseLong(b));
+            } else {
+                ctxt.reportWrongTokenException(this, p.currentToken(), "Invalid ratio");
+                return null;
+            }
         }
     }
 }

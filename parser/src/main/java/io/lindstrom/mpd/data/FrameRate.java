@@ -1,94 +1,78 @@
 package io.lindstrom.mpd.data;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.lindstrom.mpd.support.FrameRateDeserializer;
-import io.lindstrom.mpd.support.FrameRateSerializer;
+import org.immutables.value.Value;
 
-import java.util.Objects;
+import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-@JsonSerialize(using = FrameRateSerializer.class)
-@JsonDeserialize(using = FrameRateDeserializer.class)
-public class FrameRate {
-    private final long numerator;
-    private final Long denominator;
+@JsonSerialize(using = FrameRate.Serializer.class)
+@JsonDeserialize(using = FrameRate.Deserializer.class)
+@Value.Immutable
+public interface FrameRate {
+    long numerator();
 
-    public FrameRate(long numerator, Long denominator) {
-        this.numerator = numerator;
-        this.denominator = denominator;
+    Long denominator();
+
+    static FrameRate of(int numerator, long denominator) {
+        return FrameRate.builder()
+                .numerator(numerator)
+                .denominator(denominator)
+                .build();
     }
 
-    public FrameRate(long frameRate) {
-        this(frameRate, null);
+    static FrameRate of(int numerator) {
+        return FrameRate.builder()
+                .numerator(numerator)
+                .build();
     }
 
-    public long getNumerator() {
-        return numerator;
+    default Builder buildUpon() {
+        return builder().from(this);
     }
 
-    public Long getDenominator() {
-        return denominator;
-    }
-
-    @JsonIgnore
-    public double toDouble() {
-        if (denominator == null) {
-            return numerator;
-        } else {
-            return numerator / (double) denominator;
-        }
-    }
-
-    @Override
-    public String toString() {
-        return "FrameRate{" + numerator + (denominator == null ? "" : ("/" + denominator)) + "}";
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        FrameRate frameRate = (FrameRate) o;
-        return numerator == frameRate.numerator &&
-                Objects.equals(denominator, frameRate.denominator);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(numerator, denominator);
-    }
-
-    public Builder buildUpon() {
-        return new Builder()
-                .withNumerator(numerator)
-                .withDenominator(denominator);
-    }
-
-    public static FrameRate of(long frameRate) {
-        return new FrameRate(frameRate, null);
-    }
-
-    public static Builder builder() {
+    static Builder builder() {
         return new Builder();
     }
 
-    public static class Builder {
-        private long numerator;
-        private Long denominator;
+    class Builder extends ImmutableFrameRate.Builder {}
 
-        public Builder withNumerator(long numerator) {
-            this.numerator = numerator;
-            return this;
+    class Serializer extends JsonSerializer<FrameRate> {
+        @Override
+        public void serialize(FrameRate value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+            gen.writeString(value.numerator() +
+                    (value.denominator() == null ? "" : ("/" + value.denominator())));
         }
+    }
 
-        public Builder withDenominator(Long denominator) {
-            this.denominator = denominator;
-            return this;
-        }
+    class Deserializer extends JsonDeserializer<FrameRate> {
+        private static final Pattern FRAME_RATE_PATTERN = Pattern.compile("^([0-9]+)(/[0-9]+)?$");
 
-        public FrameRate build() {
-            return new FrameRate(numerator, denominator);
+        @Override
+        public FrameRate deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+            String text = p.getText();
+            Matcher matcher = FRAME_RATE_PATTERN.matcher(text);
+            if (matcher.matches()) {
+                String a = matcher.group(1);
+                String b = matcher.group(2);
+                Builder builder = builder();
+                builder.numerator(Long.parseLong(a));
+                if (b != null) {
+                    builder.denominator(Long.parseLong(b.substring(1)));
+                }
+                return builder.build();
+            } else {
+                ctxt.reportWrongTokenException(this, p.currentToken(), "Invalid ratio");
+                return null;
+            }
         }
     }
 }

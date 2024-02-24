@@ -5,6 +5,6 @@
         builderVisibility = Value.Style.BuilderVisibility.PACKAGE,
         overshadowImplementation = true
 )
-package io.lindstrom.mpd.v2;
+package io.lindstrom.mpd.data;
 
 import org.immutables.value.Value;

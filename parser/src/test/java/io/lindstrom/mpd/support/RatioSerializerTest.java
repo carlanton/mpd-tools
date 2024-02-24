@@ -12,7 +12,7 @@ public class RatioSerializerTest extends ObjectMapperTestBase<Ratio> {
 
     @BeforeEach
     public void RatioSerializerTest() {
-        initObjectMapperTestBase(Ratio.class, new RatioSerializer(), new RatioDeserializer());
+        initObjectMapperTestBase(Ratio.class);
     }
 
     @Test

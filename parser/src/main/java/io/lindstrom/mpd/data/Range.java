@@ -1,84 +1,29 @@
 package io.lindstrom.mpd.data;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import org.immutables.value.Value;
 
 import java.time.Duration;
-import java.util.Objects;
 
-public class Range {
+@Value.Immutable
+@JsonSerialize(as = ImmutableRange.class)
+@JsonDeserialize(as = ImmutableRange.class)
+public interface Range {
     @JacksonXmlProperty(isAttribute = true)
-    private final Duration starttime;
+    Duration starttime();
 
     @JacksonXmlProperty(isAttribute = true)
-    private final Duration duration;
+    Duration duration();
 
-    private Range(Duration starttime, Duration duration) {
-        this.starttime = starttime;
-        this.duration = duration;
+    default Builder buildUpon() {
+        return builder().from(this);
     }
 
-    @SuppressWarnings("unused")
-    private Range() {
-        this.starttime = null;
-        this.duration = null;
-    }
-
-    public Duration getStarttime() {
-        return starttime;
-    }
-
-    public Duration getDuration() {
-        return duration;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Range range = (Range) o;
-        return Objects.equals(starttime, range.starttime) &&
-                Objects.equals(duration, range.duration);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(starttime, duration);
-    }
-
-    @Override
-    public String toString() {
-        return "Range{" +
-                "starttime=" + starttime +
-                ", duration=" + duration +
-                '}';
-    }
-
-    public Builder buildUpon() {
-        return new Builder()
-                .withStarttime(starttime)
-                .withDuration(duration);
-    }
-
-    public static Builder builder() {
+    static Builder builder() {
         return new Builder();
     }
 
-    public static class Builder {
-        private Duration starttime;
-        private Duration duration;
-
-        public Builder withStarttime(Duration starttime) {
-            this.starttime = starttime;
-            return this;
-        }
-
-        public Builder withDuration(Duration duration) {
-            this.duration = duration;
-            return this;
-        }
-
-        public Range build() {
-            return new Range(starttime, duration);
-        }
-    }
+    class Builder extends ImmutableRange.Builder {}
 }

@@ -1,9 +1,9 @@
 package io.lindstrom.mpd.transform;
 
-import io.lindstrom.mpd.v2.AdaptationSet;
-import io.lindstrom.mpd.v2.MPD;
-import io.lindstrom.mpd.v2.Period;
-import io.lindstrom.mpd.v2.Representation;
+import io.lindstrom.mpd.data.AdaptationSet;
+import io.lindstrom.mpd.data.MPD;
+import io.lindstrom.mpd.data.Period;
+import io.lindstrom.mpd.data.Representation;
 
 public record RepresentationContext(
         MPD mpd,

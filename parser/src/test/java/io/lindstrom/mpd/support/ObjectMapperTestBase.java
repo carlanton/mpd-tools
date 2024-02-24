@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import io.lindstrom.mpd.data.Ratio;
 
 import java.io.IOException;
 
@@ -22,6 +23,11 @@ public abstract class ObjectMapperTestBase<T> {
                         super.setupModule(context);
                     }
                 });
+        this.clazz = clazz;
+    }
+
+    protected void initObjectMapperTestBase(Class<T> clazz) {
+        this.objectMapper = new ObjectMapper();
         this.clazz = clazz;
     }
 
