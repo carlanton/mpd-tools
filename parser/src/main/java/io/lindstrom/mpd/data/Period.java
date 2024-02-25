@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-
 import io.lindstrom.mpd.data.descriptor.Descriptor;
 import org.immutables.value.Value;
 
@@ -27,7 +26,9 @@ import java.util.List;
         "eventStreams",
         "adaptationSets",
         "subsets",
-        "supplementalProperties"
+        "supplementalProperties",
+        "emptyAdaptationSets",
+        "preselections"
 })
 public interface Period {
     @JacksonXmlProperty(isAttribute = true, namespace = "http://www.w3.org/1999/xlink")
@@ -74,6 +75,12 @@ public interface Period {
 
     @JacksonXmlProperty(localName = "SupplementalProperty", namespace = MPD.NAMESPACE)
     List<Descriptor> supplementalProperties();
+
+    @JacksonXmlProperty(localName = "EmptyAdaptationSet", namespace = MPD.NAMESPACE)
+    List<AdaptationSet> emptyAdaptationSets();
+
+    @JacksonXmlProperty(localName = "Preselection", namespace = MPD.NAMESPACE)
+    List<Preselection> preselections();
 
     default Builder buildUpon() {
         return builder().from(this);

@@ -121,9 +121,6 @@ public interface AdaptationSet extends RepresentationBase {
     @JacksonXmlProperty(localName = "SegmentTemplate", namespace = MPD.NAMESPACE)
     SegmentTemplate segmentTemplate();
 
-    @JacksonXmlProperty(localName = "Label", namespace = MPD.NAMESPACE)
-    List<String> labels();
-
     @JacksonXmlProperty(localName = "Representation", namespace = MPD.NAMESPACE)
     List<Representation> representations();
 

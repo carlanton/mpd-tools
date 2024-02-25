@@ -24,7 +24,8 @@ import java.util.List;
         "metrics",
         "essentialProperties",
         "supplementalProperties",
-        "utcTimings"
+        "utcTimings",
+        "leapSecondInformations"
 })
 public interface MPD {
     String NAMESPACE = "urn:mpeg:dash:schema:mpd:2011";
@@ -95,6 +96,9 @@ public interface MPD {
 
     @JacksonXmlProperty(localName = "UTCTiming", namespace = NAMESPACE)
     List<UTCTiming> utcTimings();
+
+    @JacksonXmlProperty(localName = "LeapSecondInformation", namespace = NAMESPACE)
+    List<LeapSecondInformation> leapSecondInformations();
 
     default Builder buildUpon() {
         return builder().from(this);

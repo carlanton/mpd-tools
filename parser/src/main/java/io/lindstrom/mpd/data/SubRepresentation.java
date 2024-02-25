@@ -8,7 +8,7 @@ import org.immutables.value.Value;
 @Value.Immutable
 @JsonSerialize(as = ImmutableSubRepresentation.class)
 @JsonDeserialize(as = ImmutableSubRepresentation.class)
-public interface SubRepresentation {
+public interface SubRepresentation extends RepresentationBase {
     @JacksonXmlProperty(isAttribute = true)
     Long level();
 

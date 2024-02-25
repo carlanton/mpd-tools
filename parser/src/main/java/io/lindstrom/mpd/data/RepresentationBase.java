@@ -69,4 +69,10 @@ public interface RepresentationBase {
 
     @JacksonXmlProperty(isAttribute = true)
     Long selectionPriority();
+
+    @JacksonXmlProperty(localName = "Label", namespace = MPD.NAMESPACE)
+    List<Label> labels();
+
+    @JacksonXmlProperty(isAttribute = true)
+    String tag();
 }
