@@ -10,6 +10,7 @@ import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Function;
 
 @JsonPropertyOrder({
     "programInformations",
@@ -512,6 +513,10 @@ public class MPD {
         public Builder withSchemaLocation(String schemaLocation) {
             this.schemaLocation = schemaLocation;
             return this;
+        }
+
+        public Builder apply(Function<Builder, Builder> fn) {
+            return fn.apply(this);
         }
 
         public MPD build() {
