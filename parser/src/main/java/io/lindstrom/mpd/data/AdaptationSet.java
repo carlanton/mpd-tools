@@ -195,6 +195,7 @@ public class AdaptationSet extends RepresentationBase {
         this.subsegmentAlignment = null;
         this.subsegmentStartsWithSAP = null;
         this.bitstreamSwitching = null;
+        this.selectionPriority = null;
     }
 
     public List<Descriptor> getAccessibilities() {
