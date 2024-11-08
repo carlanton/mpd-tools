@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MPD xmlns="urn:mpeg:dash:schema:mpd:2011" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mpeg:dash:schema:mpd:2011 DASH-MPD.xsd" xmlns:cenc="urn:mpeg:cenc:2013" xmlns:dashif="https://dashif.org/guidelines/clearKey" profiles="urn:mpeg:dash:profile:isoff-live:2011" minBufferTime="PT2S" type="static" mediaPresentationDuration="PT60.041668S">
+  <Period id="0">
+    <AdaptationSet id="0" contentType="audio" lang="en" startWithSAP="1" segmentAlignment="true">
+      <ContentProtection value="cenc" schemeIdUri="urn:mpeg:dash:mp4protection:2011" cenc:default_KID="643fc40b-c7c8-2f0a-e528-992b76ab0dd8"/>
+      <ContentProtection value="ClearKey1.0" schemeIdUri="urn:uuid:e2719d58-a985-b3c9-781a-b030af78d30e">
+        <dashif:laurl>https://example.com/license</dashif:laurl>
+      </ContentProtection>
+      <Representation id="0" bandwidth="455931" codecs="mp4a.40.2" mimeType="audio/mp4" audioSamplingRate="48000">
+        <AudioChannelConfiguration schemeIdUri="urn:mpeg:dash:23003:3:audio_channel_configuration:2011" value="6"/>
+        <SegmentTemplate timescale="48000" initialization="cenc-a0/a0-init.mp4" media="cenc-a0/a0-$Number$.mp4" startNumber="1">
+          <SegmentTimeline>
+            <S t="0" d="288768"/>
+            <S t="288768" d="287744" r="2"/>
+            <S t="1152000" d="288768"/>
+            <S t="1440768" d="287744" r="2"/>
+            <S t="2304000" d="288768"/>
+            <S t="2592768" d="287744"/>
+          </SegmentTimeline>
+        </SegmentTemplate>
+      </Representation>
+    </AdaptationSet>
+    <AdaptationSet id="1" contentType="video" width="1280" height="720" frameRate="19200/800" segmentAlignment="true" par="16:9">
+      <ContentProtection value="cenc" schemeIdUri="urn:mpeg:dash:mp4protection:2011" cenc:default_KID="643fc40b-c7c8-2f0a-e528-992b76ab0dd8"/>
+      <ContentProtection value="ClearKey1.0" schemeIdUri="urn:uuid:e2719d58-a985-b3c9-781a-b030af78d30e">
+        <dashif:laurl>https://example.com</dashif:laurl>
+      </ContentProtection>
+      <SupplementalProperty schemeIdUri="urn:mpeg:mpegB:cicp:TransferCharacteristics" value="1"/>
+      <Representation id="1" bandwidth="11917283" codecs="avc1.4d401f" mimeType="video/mp4" sar="1:1">
+        <SegmentTemplate timescale="19200" initialization="cenc-v0/v0-init.mp4" media="cenc-v0/v0-$Number$.mp4" startNumber="1">
+          <SegmentTimeline>
+            <S t="0" d="115200" r="9"/>
+            <S t="1152000" d="800"/>
+          </SegmentTimeline>
+        </SegmentTemplate>
+      </Representation>
+    </AdaptationSet>
+  </Period>
+</MPD>

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import io.lindstrom.mpd.data.descriptor.protection.ClearKeyContentProtection;
 import io.lindstrom.mpd.data.descriptor.protection.Mp4Protection;
 import io.lindstrom.mpd.data.descriptor.protection.PlayReadyContentProtection;
 import io.lindstrom.mpd.data.descriptor.protection.WidewineProtection;
@@ -20,7 +21,8 @@ import java.util.Objects;
         @JsonSubTypes.Type(value = Role.class, name = Role.SCHEME_ID_URI),
         @JsonSubTypes.Type(value = Mp4Protection.class, name = Mp4Protection.SCHEME_ID_URI),
         @JsonSubTypes.Type(value = PlayReadyContentProtection.class, name = PlayReadyContentProtection.SCHEME_ID_URI),
-        @JsonSubTypes.Type(value = WidewineProtection.class, name = WidewineProtection.SCHEME_ID_URI)
+        @JsonSubTypes.Type(value = WidewineProtection.class, name = WidewineProtection.SCHEME_ID_URI),
+        @JsonSubTypes.Type(value = ClearKeyContentProtection.class, name = ClearKeyContentProtection.SCHEME_ID_URI)
 })
 public abstract class Descriptor {
     @JacksonXmlProperty(isAttribute = true)

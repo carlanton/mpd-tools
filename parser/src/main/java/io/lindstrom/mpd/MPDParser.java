@@ -77,6 +77,7 @@ public class MPDParser {
                 streamWriter.setPrefix("xlink", "http://www.w3.org/1999/xlink");
                 streamWriter.setPrefix("cenc", "urn:mpeg:cenc:2013");
                 streamWriter.setPrefix("mspr", "urn:microsoft:playready");
+                streamWriter.setPrefix("dashif", "https://dashif.org/guidelines/clearKey");
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
