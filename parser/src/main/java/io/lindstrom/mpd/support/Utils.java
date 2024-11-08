@@ -1,6 +1,7 @@
 package io.lindstrom.mpd.support;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Utils {
@@ -13,6 +14,7 @@ public class Utils {
     }
 
     @SafeVarargs
+    @SuppressWarnings("varargs")
     public static <T> List<T> varargsToList(T head, T ...tail) {
         if (tail.length == 0) {
             return List.of(head);
