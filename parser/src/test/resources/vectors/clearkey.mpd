@@ -6,7 +6,7 @@
     <AdaptationSet id="0" contentType="video" width="1280" height="720" frameRate="19200/800" segmentAlignment="true" par="16:9">
       <ContentProtection value="cbcs" schemeIdUri="urn:mpeg:dash:mp4protection:2011" cenc:default_KID="b326f895-b6a2-4cc5-a4dc-70995728059c"/>
       <ContentProtection value="ClearKey1.0" schemeIdUri="urn:uuid:e2719d58-a985-b3c9-781a-b030af78d30e">
-        <dashif:laurl>https://example.com/license</dashif:laurl>
+        <dashif:Laurl>https://example.com/license</dashif:Laurl>
       </ContentProtection>
 
       <SupplementalProperty schemeIdUri="urn:mpeg:mpegB:cicp:TransferCharacteristics" value="1"/>
@@ -24,7 +24,7 @@
       <ContentProtection value="cbcs" schemeIdUri="urn:mpeg:dash:mp4protection:2011" cenc:default_KID="b326f895-b6a2-4cc5-a4dc-70995728059c"/>
 
       <ContentProtection value="ClearKey1.0" schemeIdUri="urn:uuid:e2719d58-a985-b3c9-781a-b030af78d30e">
-        <dashif:laurl>https://example.com/license</dashif:laurl>
+        <dashif:Laurl>https://example.com/license</dashif:Laurl>
       </ContentProtection>
 
       <Representation id="1" bandwidth="452882" codecs="mp4a.40.2" mimeType="audio/mp4" audioSamplingRate="48000">

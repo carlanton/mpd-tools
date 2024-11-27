@@ -11,7 +11,7 @@ public class ClearKeyContentProtection extends Descriptor {
     @JacksonXmlProperty(isAttribute = true, localName = "value")
     private final String value;
 
-    @JacksonXmlProperty(namespace = "https://dashif.org/guidelines/clearKey")
+    @JacksonXmlProperty(namespace = "https://dashif.org/guidelines/clearKey", localName = "Laurl")
     private final String laurl;
 
     public ClearKeyContentProtection(String value, String laurl) {

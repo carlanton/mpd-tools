@@ -4,7 +4,7 @@
     <AdaptationSet id="0" contentType="audio" lang="en" startWithSAP="1" segmentAlignment="true">
       <ContentProtection value="cenc" schemeIdUri="urn:mpeg:dash:mp4protection:2011" cenc:default_KID="643fc40b-c7c8-2f0a-e528-992b76ab0dd8"/>
       <ContentProtection value="ClearKey1.0" schemeIdUri="urn:uuid:e2719d58-a985-b3c9-781a-b030af78d30e">
-        <dashif:laurl>https://example.com/license</dashif:laurl>
+        <dashif:Laurl>https://example.com/license</dashif:Laurl>
       </ContentProtection>
       <Representation id="0" bandwidth="455931" codecs="mp4a.40.2" mimeType="audio/mp4" audioSamplingRate="48000">
         <AudioChannelConfiguration schemeIdUri="urn:mpeg:dash:23003:3:audio_channel_configuration:2011" value="6"/>
@@ -23,7 +23,7 @@
     <AdaptationSet id="1" contentType="video" width="1280" height="720" frameRate="19200/800" segmentAlignment="true" par="16:9">
       <ContentProtection value="cenc" schemeIdUri="urn:mpeg:dash:mp4protection:2011" cenc:default_KID="643fc40b-c7c8-2f0a-e528-992b76ab0dd8"/>
       <ContentProtection value="ClearKey1.0" schemeIdUri="urn:uuid:e2719d58-a985-b3c9-781a-b030af78d30e">
-        <dashif:laurl>https://example.com</dashif:laurl>
+        <dashif:Laurl>https://example.com</dashif:Laurl>
       </ContentProtection>
       <SupplementalProperty schemeIdUri="urn:mpeg:mpegB:cicp:TransferCharacteristics" value="1"/>
       <Representation id="1" bandwidth="11917283" codecs="avc1.4d401f" mimeType="video/mp4" sar="1:1">
