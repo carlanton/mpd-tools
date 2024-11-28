@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.18.1'
+    api 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.18.1'
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.3'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
