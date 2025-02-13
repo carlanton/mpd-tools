@@ -433,6 +433,7 @@ public class AdaptationSet extends RepresentationBase {
                 .withSegmentAlignment(segmentAlignment)
                 .withSubsegmentAlignment(subsegmentAlignment)
                 .withSubsegmentStartsWithSAP(subsegmentStartsWithSAP)
+                .withSelectionPriority(selectionPriority)
                 .withBitstreamSwitching(bitstreamSwitching));
     }
 
