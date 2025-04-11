@@ -4,7 +4,7 @@ import io.lindstrom.mpd.data.MPD;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.xmlunit.builder.Input;
-import org.xmlunit.diff.DifferenceEvaluator;
+import org.xmlunit.diff.*;
 import org.xmlunit.matchers.CompareMatcher;
 
 import java.io.IOException;
@@ -25,13 +25,14 @@ public class ParseTestVectors {
     @ParameterizedTest
     @MethodSource("params")
     public void similarVectors(Path path) throws IOException {
+        // Parse the input using standard parser configuration
+        MPD mpd = PARSER.parse(Files.newInputStream(path)); 
+        String actualSerializedXml = PARSER.writeAsString(mpd);
 
-        MPD mpd = PARSER.parse(Files.newInputStream(path));
-        String actual = PARSER.writeAsString(mpd);
-
-        assertThat(path + " is similar", actual,
-                CompareMatcher.isSimilarTo(Input.fromFile(path.toFile()))
-                        .withDifferenceEvaluator(DIFFERENCE_EVALUATOR)
+        // Compare directly against the original file input
+        assertThat(path + " is similar", actualSerializedXml,
+                CompareMatcher.isSimilarTo(Input.fromFile(path.toFile())) 
+                        .withDifferenceEvaluator(DIFFERENCE_EVALUATOR) 
                         .ignoreComments()
                         .ignoreWhitespace());
     }

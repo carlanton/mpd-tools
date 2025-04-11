@@ -1,6 +1,9 @@
 package io.lindstrom.mpd.data;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
+import io.lindstrom.mpd.data.scte35.Scte35SpliceInfoSection;
+import static io.lindstrom.mpd.MPDParser.SCTE35_NAMESPACE_URI;
 
 import java.util.Objects;
 
@@ -17,11 +20,20 @@ public class Event {
     @JacksonXmlProperty(isAttribute = true)
     private final String messageData;
 
-    private Event(Long presentationTime, Long duration, Long id, String messageData) {
+    @JacksonXmlText
+    private final String textContent;
+    
+    @JacksonXmlProperty(localName = "SpliceInfoSection", namespace = SCTE35_NAMESPACE_URI)
+    private final Scte35SpliceInfoSection spliceInfoSection;
+
+    private Event(Long presentationTime, Long duration, Long id, String messageData, 
+                 String textContent, Scte35SpliceInfoSection spliceInfoSection) {
         this.presentationTime = presentationTime;
         this.duration = duration;
         this.id = id;
         this.messageData = messageData;
+        this.textContent = textContent;
+        this.spliceInfoSection = spliceInfoSection;
     }
 
     @SuppressWarnings("unused")
@@ -30,6 +42,8 @@ public class Event {
         this.duration = null;
         this.id = null;
         this.messageData = null;
+        this.textContent = null;
+        this.spliceInfoSection = null;
     }
 
     public Long getPresentationTime() {
@@ -48,6 +62,14 @@ public class Event {
         return messageData;
     }
 
+    public String getTextContent() {
+        return textContent;
+    }
+
+    public Scte35SpliceInfoSection getSpliceInfoSection() {
+        return spliceInfoSection;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -56,12 +78,14 @@ public class Event {
         return Objects.equals(presentationTime, event.presentationTime) &&
                 Objects.equals(duration, event.duration) &&
                 Objects.equals(id, event.id) &&
-                Objects.equals(messageData, event.messageData);
+                Objects.equals(messageData, event.messageData) &&
+                Objects.equals(textContent, event.textContent) &&
+                Objects.equals(spliceInfoSection, event.spliceInfoSection);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(presentationTime, duration, id, messageData);
+        return Objects.hash(presentationTime, duration, id, messageData, textContent, spliceInfoSection);
     }
 
     @Override
@@ -71,6 +95,8 @@ public class Event {
                 ", duration=" + duration +
                 ", id=" + id +
                 ", messageData='" + messageData + '\'' +
+                ", textContent='" + textContent + '\'' +
+                ", spliceInfoSection=" + spliceInfoSection +
                 '}';
     }
 
@@ -79,7 +105,9 @@ public class Event {
                 .withPresentationTime(presentationTime)
                 .withDuration(duration)
                 .withId(id)
-                .withMessageData(messageData);
+                .withMessageData(messageData)
+                .withTextContent(textContent)
+                .withSpliceInfoSection(spliceInfoSection);
     }
 
     public static Builder builder() {
@@ -91,6 +119,8 @@ public class Event {
         private Long duration;
         private Long id;
         private String messageData;
+        private String textContent;
+        private Scte35SpliceInfoSection spliceInfoSection;
 
         public Builder withPresentationTime(Long presentationTime) {
             this.presentationTime = presentationTime;
@@ -112,8 +142,19 @@ public class Event {
             return this;
         }
 
+        public Builder withTextContent(String textContent) {
+            this.textContent = textContent;
+            return this;
+        }
+
+        public Builder withSpliceInfoSection(Scte35SpliceInfoSection spliceInfoSection) {
+            this.spliceInfoSection = spliceInfoSection;
+            return this;
+        }
+
         public Event build() {
-            return new Event(presentationTime, duration, id, messageData);
+            return new Event(presentationTime, duration, id, messageData, textContent, spliceInfoSection);
         }
     }
 }
+
