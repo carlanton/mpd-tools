@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'io.lindstrom'
-version = '0.18'
+version = '0.19'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
@@ -30,7 +30,7 @@ test {
 }
 
 mavenPublishing {
-  coordinates("io.lindstrom", "mpd-parser", "0.18")
+  coordinates("io.lindstrom", "mpd-parser", "0.19")
 
   pom {
       name = 'mpd-parser'
