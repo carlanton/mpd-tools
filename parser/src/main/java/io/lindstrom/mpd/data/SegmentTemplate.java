@@ -14,6 +14,7 @@ import java.util.Objects;
         "initialization",
         "media",
         "startNumber",
+        "endNumber",
         "timescale",
         "duration",
 
@@ -56,6 +57,9 @@ public class SegmentTemplate {
     private final Long startNumber;
 
     @JacksonXmlProperty(isAttribute = true)
+    private final Long endNumber;
+
+    @JacksonXmlProperty(isAttribute = true)
     private final Long timescale;
 
     @JacksonXmlProperty(isAttribute = true)
@@ -73,7 +77,7 @@ public class SegmentTemplate {
     @JacksonXmlProperty(isAttribute = true)
     private final Boolean availabilityTimeComplete;
 
-    private SegmentTemplate(List<Segment> segmentTimeline, URLType bitstreamswitchingElement, URLType initializationElement, URLType representationIndex, String media, String index, String initialization, String bitstreamSwitching, Long duration, Long startNumber, Long timescale, Long presentationTimeOffset, String indexRange, Boolean indexRangeExact, Double availabilityTimeOffset, Boolean availabilityTimeComplete) {
+    private SegmentTemplate(List<Segment> segmentTimeline, URLType bitstreamswitchingElement, URLType initializationElement, URLType representationIndex, String media, String index, String initialization, String bitstreamSwitching, Long duration, Long startNumber, Long endNumber, Long timescale, Long presentationTimeOffset, String indexRange, Boolean indexRangeExact, Double availabilityTimeOffset, Boolean availabilityTimeComplete) {
         this.segmentTimeline = segmentTimeline;
         this.bitstreamswitchingElement = bitstreamswitchingElement;
         this.initializationElement = initializationElement;
@@ -84,6 +88,7 @@ public class SegmentTemplate {
         this.bitstreamSwitching = bitstreamSwitching;
         this.duration = duration;
         this.startNumber = startNumber;
+        this.endNumber = endNumber;
         this.timescale = timescale;
         this.presentationTimeOffset = presentationTimeOffset;
         this.indexRange = indexRange;
@@ -104,6 +109,7 @@ public class SegmentTemplate {
         this.bitstreamSwitching = null;
         this.duration = null;
         this.startNumber = null;
+        this.endNumber = null;
         this.timescale = null;
         this.presentationTimeOffset = null;
         this.indexRange = null;
@@ -152,6 +158,10 @@ public class SegmentTemplate {
         return startNumber;
     }
 
+    public Long getEndNumber() {
+        return endNumber;
+    }
+
     public Long getTimescale() {
         return timescale;
     }
@@ -191,6 +201,7 @@ public class SegmentTemplate {
                 Objects.equals(bitstreamSwitching, that.bitstreamSwitching) &&
                 Objects.equals(duration, that.duration) &&
                 Objects.equals(startNumber, that.startNumber) &&
+                Objects.equals(endNumber, that.endNumber) &&
                 Objects.equals(timescale, that.timescale) &&
                 Objects.equals(presentationTimeOffset, that.presentationTimeOffset) &&
                 Objects.equals(indexRange, that.indexRange) &&
@@ -201,7 +212,7 @@ public class SegmentTemplate {
 
     @Override
     public int hashCode() {
-        return Objects.hash(segmentTimeline, bitstreamswitchingElement, initializationElement, representationIndex, media, index, initialization, bitstreamSwitching, duration, startNumber, timescale, presentationTimeOffset, indexRange, indexRangeExact, availabilityTimeOffset, availabilityTimeComplete);
+        return Objects.hash(segmentTimeline, bitstreamswitchingElement, initializationElement, representationIndex, media, index, initialization, bitstreamSwitching, duration, startNumber, endNumber, timescale, presentationTimeOffset, indexRange, indexRangeExact, availabilityTimeOffset, availabilityTimeComplete);
     }
 
     @Override
@@ -217,6 +228,7 @@ public class SegmentTemplate {
                 ", bitstreamSwitching='" + bitstreamSwitching + '\'' +
                 ", duration=" + duration +
                 ", startNumber=" + startNumber +
+                ", endNumber=" + endNumber +
                 ", timescale=" + timescale +
                 ", presentationTimeOffset=" + presentationTimeOffset +
                 ", indexRange='" + indexRange + '\'' +
@@ -238,6 +250,7 @@ public class SegmentTemplate {
             .withBitstreamSwitching(bitstreamSwitching)
             .withDuration(duration)
             .withStartNumber(startNumber)
+            .withEndNumber(endNumber)
             .withTimescale(timescale)
             .withPresentationTimeOffset(presentationTimeOffset)
             .withIndexRange(indexRange)
@@ -261,6 +274,7 @@ public class SegmentTemplate {
         private String bitstreamSwitching;
         private Long duration;
         private Long startNumber;
+        private Long endNumber;
         private Long timescale;
         private Long presentationTimeOffset;
         private String indexRange;
@@ -323,6 +337,11 @@ public class SegmentTemplate {
             return this;
         }
 
+        public Builder withEndNumber(Long endNumber) {
+            this.endNumber = endNumber;
+            return this;
+        }
+
         public Builder withTimescale(Long timescale) {
             this.timescale = timescale;
             return this;
@@ -354,7 +373,7 @@ public class SegmentTemplate {
         }
 
         public SegmentTemplate build() {
-            return new SegmentTemplate(segmentTimeline, bitstreamswitchingElement, initializationElement, representationIndex, media, index, initialization, bitstreamSwitching, duration, startNumber, timescale, presentationTimeOffset, indexRange, indexRangeExact, availabilityTimeOffset, availabilityTimeComplete);
+            return new SegmentTemplate(segmentTimeline, bitstreamswitchingElement, initializationElement, representationIndex, media, index, initialization, bitstreamSwitching, duration, startNumber, endNumber, timescale, presentationTimeOffset, indexRange, indexRangeExact, availabilityTimeOffset, availabilityTimeComplete);
         }
     }
 }
