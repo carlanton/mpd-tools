@@ -1,5 +1,5 @@
-group 'io.lindstrom'
-version '1.0-SNAPSHOT'
+group = 'io.lindstrom'
+version = '1.0-SNAPSHOT'
 
 allprojects {
     tasks.withType(JavaCompile) {

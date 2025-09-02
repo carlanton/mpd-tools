@@ -1,17 +1,14 @@
 plugins {
     id 'idea'
     id 'java-library'
-    id 'maven-publish'
-    id 'signing'
+    id 'com.vanniktech.maven.publish' version '0.34.0'
 }
 
-group 'io.lindstrom'
-version '0.18'
+group = 'io.lindstrom'
+version = '0.18'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
-    withJavadocJar()
-    withSourcesJar()
 }
 
 repositories {
@@ -32,62 +29,34 @@ test {
     useJUnitPlatform()
 }
 
-ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
+mavenPublishing {
+  coordinates("io.lindstrom", "mpd-parser", "0.18")
 
-publishing {
-    repositories {
-        maven {
-            def releaseRepo = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
-            def snapshotRepo = "https://oss.sonatype.org/content/repositories/snapshots/"
+  pom {
+      name = 'mpd-parser'
+      description = 'DASH MPD parser'
+      url = 'https://github.com/carlanton/mpd-tools'
 
-            name = "OSSRH"
-            url = isReleaseVersion ? releaseRepo : snapshotRepo
+      licenses {
+          license {
+              name = 'MIT License'
+              url = 'https://github.com/carlanton/mpd-tools/blob/master/LICENSE'
+          }
+      }
 
-            credentials {
-                username = findProperty("ossrhUsername") ?: System.getenv("OSSRH_USERNAME")
-                password = findProperty("ossrhPassword") ?: System.getenv("OSSRH_PASSWORD")
-            }
-        }
-    }
+      scm {
+          url = 'https://github.com/carlanton/mpd-tools.git'
+          connection = 'scm:git:https://github.com/carlanton/mpd-tools.git'
+          developerConnection = 'scm:git:git@github.com:carlanton/mpd-tools.git'
+      }
 
-    publications {
-        mavenJava(MavenPublication) {
-            artifactId = 'mpd-parser'
-
-            from components.java
-
-            pom {
-                groupId = 'io.lindstrom'
-                name = 'mpd-parser'
-                description = 'DASH MPD parser'
-                url = 'https://github.com/carlanton/mpd-tools'
-                packaging = 'jar'
-
-                licenses {
-                    license {
-                        name = 'MIT License'
-                        url = 'https://github.com/carlanton/mpd-tools/blob/master/LICENSE'
-                    }
-                }
-
-                scm {
-                    url = 'https://github.com/carlanton/mpd-tools.git'
-                    connection = 'scm:git:https://github.com/carlanton/mpd-tools.git'
-                    developerConnection = 'scm:git:git@github.com:carlanton/mpd-tools.git'
-                }
-
-                developers {
-                    developer {
-                        id = 'antonlindstrom'
-                        name = 'Anton Lindström'
-                        email = 'carlantonlindstrom@gmail.com'
-                    }
-                }
-            }
-        }
-    }
+      developers {
+          developer {
+              id = 'antonlindstrom'
+              name = 'Anton Lindström'
+              email = 'carlantonlindstrom@gmail.com'
+          }
+      }
+  }
 }
 
-signing {
-    sign publishing.publications.mavenJava
-}
