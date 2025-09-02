@@ -5,7 +5,7 @@ import io.lindstrom.mpd.data.descriptor.Descriptor;
 
 import java.util.Objects;
 
-public class WidewineProtection extends Descriptor {
+public class WidevineProtection extends Descriptor {
     public static final String SCHEME_ID_URI = "urn:uuid:edef8ba9-79d6-4ace-a3c8-27dcd51d21ed";
 
     @JacksonXmlProperty(isAttribute = true, localName = "value")
@@ -14,14 +14,14 @@ public class WidewineProtection extends Descriptor {
     @JacksonXmlProperty(namespace = "urn:mpeg:cenc:2013")
     private final String pssh;
 
-    public WidewineProtection(String value, String pssh) {
+    public WidevineProtection(String value, String pssh) {
         super(SCHEME_ID_URI, null);
         this.value = value;
         this.pssh = pssh;
     }
 
     @SuppressWarnings("unused")
-    private WidewineProtection() {
+    private WidevineProtection() {
         super(null, null);
         this.pssh = null;
         this.value = null;
@@ -38,7 +38,7 @@ public class WidewineProtection extends Descriptor {
 
     @Override
     public String toString() {
-        return "WidewineProtection{" +
+        return "WidevineProtection{" +
                 "value='" + value + '\'' +
                 ", pssh='" + pssh + '\'' +
                 '}';
@@ -49,7 +49,7 @@ public class WidewineProtection extends Descriptor {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        WidewineProtection that = (WidewineProtection) o;
+        WidevineProtection that = (WidevineProtection) o;
         return Objects.equals(value, that.value) &&
                 Objects.equals(pssh, that.pssh);
     }
@@ -83,8 +83,8 @@ public class WidewineProtection extends Descriptor {
             return this;
         }
 
-        public WidewineProtection build() {
-            return new WidewineProtection(value, pssh);
+        public WidevineProtection build() {
+            return new WidevineProtection(value, pssh);
         }
     }
 }

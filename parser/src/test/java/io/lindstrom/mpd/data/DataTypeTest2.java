@@ -5,7 +5,7 @@ import io.lindstrom.mpd.data.descriptor.GenericDescriptor;
 import io.lindstrom.mpd.data.descriptor.Role;
 import io.lindstrom.mpd.data.descriptor.protection.Mp4Protection;
 import io.lindstrom.mpd.data.descriptor.protection.PlayReadyContentProtection;
-import io.lindstrom.mpd.data.descriptor.protection.WidewineProtection;
+import io.lindstrom.mpd.data.descriptor.protection.WidevineProtection;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -115,7 +115,7 @@ public class DataTypeTest2 {
                 Role.class,
                 Mp4Protection.class,
                 PlayReadyContentProtection.class,
-                WidewineProtection.class);
+                WidevineProtection.class);
     }
 
     private static Class<?> builderClass(Class<?> clazz) {
