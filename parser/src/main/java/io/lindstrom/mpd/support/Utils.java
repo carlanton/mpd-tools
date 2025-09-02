@@ -1,8 +1,8 @@
 package io.lindstrom.mpd.support;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class Utils {
     public static <T> List<T> unmodifiableList(List<T> list) {
@@ -10,6 +10,14 @@ public class Utils {
             return List.of();
         } else {
             return List.copyOf(list);
+        }
+    }
+
+    public static <K, V> Map<K, V> unmodifiableMap(Map<K, V> map) {
+        if (map == null) {
+            return Map.of();
+        } else {
+            return Map.copyOf(map);
         }
     }
 
