@@ -28,7 +28,11 @@ public class MPDParser {
     private final ObjectMapper objectMapper;
 
     public MPDParser() {
-        this(defaultObjectMapper());
+        this(ParsingMode.STRICT);
+    }
+
+    public MPDParser(ParsingMode parsingMode) {
+        this.objectMapper = defaultObjectMapper(parsingMode);
     }
 
     public MPDParser(ObjectMapper objectMapper) {
@@ -52,6 +56,10 @@ public class MPDParser {
     }
 
     public static ObjectMapper defaultObjectMapper() {
+        return defaultObjectMapper(ParsingMode.STRICT);
+    }
+
+    public static ObjectMapper defaultObjectMapper(ParsingMode parsingMode) {
         JacksonXmlModule module = new JacksonXmlModule();
         module.setDefaultUseWrapper(false);
         module.addSerializer(OffsetDateTime.class, new OffsetDateTimeSerializer())
@@ -62,7 +70,7 @@ public class MPDParser {
         return new XmlMapper(new XmlFactory(new WstxInputFactory(), new WstxPrefixedOutputFactory()), module)
                 .enable(SerializationFeature.INDENT_OUTPUT)
                 .setSerializationInclusion(JsonInclude.Include.NON_NULL)
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true)
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, parsingMode == ParsingMode.STRICT)
                 .configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE, true)
                 .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
                 .setVisibility(PropertyAccessor.GETTER, JsonAutoDetect.Visibility.NONE);
