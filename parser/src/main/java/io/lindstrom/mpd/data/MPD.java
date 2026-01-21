@@ -19,7 +19,8 @@ import java.util.Objects;
     "metrics",
     "essentialProperties",
     "supplementalProperties",
-    "utcTimings"
+    "utcTimings",
+    "contentSteering"
 })
 @JacksonXmlRootElement(localName = "MPD", namespace = io.lindstrom.mpd.data.MPD.NAMESPACE)
 public class MPD {
@@ -48,6 +49,9 @@ public class MPD {
 
     @JacksonXmlProperty(localName = "UTCTiming", namespace = NAMESPACE)
     private final List<UTCTiming> utcTimings;
+
+    @JacksonXmlProperty(localName = "ContentSteering", namespace = NAMESPACE)
+    private final ContentSteering contentSteering;
 
     @JacksonXmlProperty(isAttribute = true, namespace = "http://www.w3.org/2001/XMLSchema-instance")
     private final String schemaLocation;
@@ -95,7 +99,7 @@ public class MPD {
 
     private MPD(String schemaLocation, List<ProgramInformation> programInformations, List<BaseURL> baseURLs, List<String> locations,
                 List<Period> periods, List<Metrics> metrics, List<Descriptor> essentialProperties,
-                List<Descriptor> supplementalProperties, List<UTCTiming> utcTimings, String id,
+                List<Descriptor> supplementalProperties, List<UTCTiming> utcTimings, ContentSteering contentSteering, String id,
                 Profiles profiles, PresentationType type, OffsetDateTime availabilityStartTime,
                 OffsetDateTime availabilityEndTime, OffsetDateTime publishTime, Duration mediaPresentationDuration,
                 Duration minimumUpdatePeriod, Duration minBufferTime, Duration timeShiftBufferDepth,
@@ -109,6 +113,7 @@ public class MPD {
         this.essentialProperties = essentialProperties;
         this.supplementalProperties = supplementalProperties;
         this.utcTimings = utcTimings;
+        this.contentSteering = contentSteering;
         this.id = id;
         this.profiles = profiles;
         this.type = type;
@@ -134,6 +139,7 @@ public class MPD {
         this.essentialProperties = null;
         this.supplementalProperties = null;
         this.utcTimings = null;
+        this.contentSteering = null;
         this.id = null;
         this.profiles = null;
         this.type = null;
@@ -180,6 +186,10 @@ public class MPD {
 
     public List<UTCTiming> getUtcTimings() {
         return Utils.unmodifiableList(utcTimings);
+    }
+
+    public ContentSteering getContentSteering() {
+        return contentSteering;
     }
 
     public String getId() {
@@ -263,6 +273,7 @@ public class MPD {
                 Objects.equals(essentialProperties, mpd.essentialProperties) &&
                 Objects.equals(supplementalProperties, mpd.supplementalProperties) &&
                 Objects.equals(utcTimings, mpd.utcTimings) &&
+                Objects.equals(contentSteering, mpd.contentSteering) &&
                 Objects.equals(id, mpd.id) &&
                 Objects.equals(profiles, mpd.profiles) &&
                 type == mpd.type &&
@@ -281,7 +292,7 @@ public class MPD {
 
     @Override
     public int hashCode() {
-        return Objects.hash(programInformations, baseURLs, locations, periods, metrics, essentialProperties, supplementalProperties, utcTimings, id, profiles, type, availabilityStartTime, availabilityEndTime, publishTime, mediaPresentationDuration, minimumUpdatePeriod, minBufferTime, timeShiftBufferDepth, suggestedPresentationDelay, maxSegmentDuration, maxSubsegmentDuration, schemaLocation);
+        return Objects.hash(programInformations, baseURLs, locations, periods, metrics, essentialProperties, supplementalProperties, utcTimings, contentSteering, id, profiles, type, availabilityStartTime, availabilityEndTime, publishTime, mediaPresentationDuration, minimumUpdatePeriod, minBufferTime, timeShiftBufferDepth, suggestedPresentationDelay, maxSegmentDuration, maxSubsegmentDuration, schemaLocation);
     }
 
     @Override
@@ -295,6 +306,7 @@ public class MPD {
                 ", essentialProperties=" + essentialProperties +
                 ", supplementalProperties=" + supplementalProperties +
                 ", utcTimings=" + utcTimings +
+                ", contentSteering=" + contentSteering +
                 ", id='" + id + '\'' +
                 ", profiles='" + profiles + '\'' +
                 ", type=" + type +
@@ -353,6 +365,7 @@ public class MPD {
         private List<Descriptor> essentialProperties;
         private List<Descriptor> supplementalProperties;
         private List<UTCTiming> utcTimings;
+        private ContentSteering contentSteering;
         private String id;
         private Profiles profiles;
         private PresentationType type;
@@ -421,6 +434,11 @@ public class MPD {
 
         public Builder withUtcTimings(UTCTiming utcTiming, UTCTiming ...moreUtcTiming) {
             this.utcTimings = Utils.varargsToList(utcTiming, moreUtcTiming);
+            return this;
+        }
+
+        public Builder withContentSteering(ContentSteering contentSteering) {
+            this.contentSteering = contentSteering;
             return this;
         }
 
@@ -515,7 +533,7 @@ public class MPD {
         }
 
         public MPD build() {
-            return new MPD(schemaLocation, programInformations, baseURLs, locations, periods, metrics, essentialProperties, supplementalProperties, utcTimings, id, profiles, type, availabilityStartTime, availabilityEndTime, publishTime, mediaPresentationDuration, minimumUpdatePeriod, minBufferTime, timeShiftBufferDepth, suggestedPresentationDelay, maxSegmentDuration, maxSubsegmentDuration);
+            return new MPD(schemaLocation, programInformations, baseURLs, locations, periods, metrics, essentialProperties, supplementalProperties, utcTimings, contentSteering, id, profiles, type, availabilityStartTime, availabilityEndTime, publishTime, mediaPresentationDuration, minimumUpdatePeriod, minBufferTime, timeShiftBufferDepth, suggestedPresentationDelay, maxSegmentDuration, maxSubsegmentDuration);
         }
     }
 }

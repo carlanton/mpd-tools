@@ -1,0 +1,23 @@
+<MPD xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:mpeg:dash:schema:mpd:2011"
+     xsi:schemaLocation="urn:mpeg:dash:schema:mpd:2011 DASH-MPD.xsd" type="dynamic"
+     minimumUpdatePeriod="PT30S" timeShiftBufferDepth="PT30M" availabilityStartTime="2022-02-25T12:30:00" minBufferTime="PT4S" profiles="urn:mpeg:dash:profile:isoff-live:2011">
+    <BaseURL serviceLocation="alpha">https://cdn1.com/</BaseURL>
+    <BaseURL serviceLocation="beta">https://cdn2.com/</BaseURL>
+    <!--EssentialProperty schemeIdUri="urn:mpeg:dash:urlparam:2014"
+                       xmlns:up="urn:mpeg:dash:schema:urlparam:2014">
+        <up:UrlQueryInfo includeInRequests="mpd segment steering" queryTemplate="$querypart$"
+                         useMPDUrlQuery="true"/>
+    </EssentialProperty-->
+    <Period id="1">
+        <AdaptationSet mimeType="video/mp4" contentType="video" subsegmentAlignment="true"
+                       subsegmentStartsWithSAP="1" par="16:9">
+            <SegmentTemplate duration="120" timescale="30"
+                             media="$RepresentationID$/$RepresentationID$_$Number$.m4v?geo=US" startNumber="1"
+                             initialization="$RepresentationID$/$RepresentationID$_0.m4v?geo=US"/>
+            <Representation id="1024x576_2500k" codecs="avc1.64001f" bandwidth="3134488" width="1024"
+                            height="576" frameRate="30" sar="1:1" scanType="progressive"/>
+        </AdaptationSet>
+    </Period>
+    <ContentSteering defaultServiceLocation="beta"
+                     queryBeforeStart="true">https://steeringservice.com/app/instance1234?sessionID=64829</ContentSteering>
+</MPD>

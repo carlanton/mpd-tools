@@ -111,6 +111,7 @@ public class DataTypeTest2 {
                 Subset.class,
                 URLType.class,
                 UTCTiming.class,
+                ContentSteering.class,
                 GenericDescriptor.class,
                 Role.class,
                 Mp4Protection.class,
