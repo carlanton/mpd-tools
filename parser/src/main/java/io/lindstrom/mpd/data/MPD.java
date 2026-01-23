@@ -334,6 +334,7 @@ public class MPD {
                 .withEssentialProperties(essentialProperties)
                 .withSupplementalProperties(supplementalProperties)
                 .withUtcTimings(utcTimings)
+                .withContentSteering(contentSteering)
                 .withId(id)
                 .withProfiles(profiles)
                 .withType(type)
