@@ -3,8 +3,8 @@
      minimumUpdatePeriod="PT30S" timeShiftBufferDepth="PT30M" availabilityStartTime="2022-02-25T12:30:00" minBufferTime="PT4S" profiles="urn:mpeg:dash:profile:isoff-live:2011">
     <BaseURL serviceLocation="alpha">https://segments-cdn-A.com/</BaseURL>
     <BaseURL serviceLocation="beta">https://segments-cdn-B.com/</BaseURL>
-    <Location>https://manifest-cdn1.com/</Location>
-    <Location>https://manifest-cdn2.com/</Location>
+    <Location serviceLocation="x">https://manifest-cdn1.com/</Location>
+    <Location serviceLocation="y">https://manifest-cdn2.com/</Location>
     <Period id="Primary-Content-1">
     </Period>
     <Period id="Ad-break-1">

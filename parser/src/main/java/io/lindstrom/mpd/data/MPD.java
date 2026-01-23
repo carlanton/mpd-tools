@@ -33,7 +33,7 @@ public class MPD {
     private final List<BaseURL> baseURLs;
 
     @JacksonXmlProperty(localName = "Location", namespace = NAMESPACE)
-    private final List<String> locations;
+    private final List<Location> locations;
 
     @JacksonXmlProperty(localName = "Period", namespace = NAMESPACE)
     private final List<Period> periods;
@@ -97,7 +97,7 @@ public class MPD {
 
 
 
-    private MPD(String schemaLocation, List<ProgramInformation> programInformations, List<BaseURL> baseURLs, List<String> locations,
+    private MPD(String schemaLocation, List<ProgramInformation> programInformations, List<BaseURL> baseURLs, List<Location> locations,
                 List<Period> periods, List<Metrics> metrics, List<Descriptor> essentialProperties,
                 List<Descriptor> supplementalProperties, List<UTCTiming> utcTimings, ContentSteering contentSteering, String id,
                 Profiles profiles, PresentationType type, OffsetDateTime availabilityStartTime,
@@ -164,7 +164,7 @@ public class MPD {
         return Utils.unmodifiableList(baseURLs);
     }
 
-    public List<String> getLocations() {
+    public List<Location> getLocations() {
         return Utils.unmodifiableList(locations);
     }
 
@@ -360,7 +360,7 @@ public class MPD {
 
         private List<ProgramInformation> programInformations;
         private List<BaseURL> baseURLs;
-        private List<String> locations;
+        private List<Location> locations;
         private List<Period> periods;
         private List<Metrics> metrics;
         private List<Descriptor> essentialProperties;
@@ -398,7 +398,7 @@ public class MPD {
             return this;
         }
 
-        public Builder withLocations(List<String> locations) {
+        public Builder withLocations(List<Location> locations) {
             this.locations = locations;
             return this;
         }
