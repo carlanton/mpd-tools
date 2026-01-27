@@ -28,11 +28,11 @@ Maven:
 <dependency>
     <groupId>io.lindstrom</groupId>
     <artifactId>mpd-parser</artifactId>
-    <version>0.22</version>
+    <version>0.23</version>
 </dependency>
 ```
 Gradle:
 ```
-implementation 'io.lindstrom:mpd-parser:0.22'
+implementation 'io.lindstrom:mpd-parser:0.23'
 ```
 
