@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<MPD xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:dolby="http://www.dolby.com/ns/online/DASH"
+     xmlns="urn:mpeg:dash:schema:mpd:2011"
+     xsi:schemaLocation="urn:mpeg:dash:schema:mpd:2011" type="static"
+     mediaPresentationDuration="PT0H2M39.080S" minBufferTime="PT4S"
+     profiles="urn:mpeg:dash:profile:isoff-live:2011">
+    <Period start="PT0S">
+        <!-- Audio 2.0-->
+        <AdaptationSet mimeType="audio/mp4" codecs="ac-4.02.01.00" audioSamplingRate="48000"
+                       lang="en" segmentAlignment="true" startWithSAP="1">
+            <AudioChannelConfiguration schemeIdUri="urn:mpeg:mpegB:cicp:ChannelConfiguration"
+                                       value="2"/>
+            <SegmentTemplate timescale="48000"
+                             media="../Audio/Silent_2ch_64kbps_25fps_ac4_$Number$.mp4"
+                             initialization="../Audio/Silent_2ch_64kbps_25fps_ac4.mp4">
+                <SegmentTimeline>
+                    <S t="0" d="96000" r="79"/>
+                </SegmentTimeline>
+            </SegmentTemplate>
+            <Representation id="1" bandwidth="82964"/>
+        </AdaptationSet>
+        <!-- Audio 5.1-->
+        <AdaptationSet mimeType="audio/mp4" codecs="ac-4.02.01.01" audioSamplingRate="48000"
+                       lang="en" segmentAlignment="true" startWithSAP="1">
+            <AudioChannelConfiguration schemeIdUri="urn:mpeg:mpegB:cicp:ChannelConfiguration"
+                                       value="6"/>
+            <SegmentTemplate timescale="48000"
+                             media="../Audio/Silent_6ch_128kbps_25fps_ac4_$Number$.mp4"
+                             initialization="../Audio/Silent_6ch_128kbps_25fps_ac4.mp4">
+                <SegmentTimeline>
+                    <S t="0" d="96000" r="79"/>
+                </SegmentTimeline>
+            </SegmentTemplate>
+            <Representation id="2" bandwidth="150312"/>
+        </AdaptationSet>
+        <!-- Audio 5.1.2-->
+        <AdaptationSet mimeType="audio/mp4" codecs="ac-4.02.01.02" audioSamplingRate="48000"
+                       lang="en" segmentAlignment="true" startWithSAP="1">
+            <AudioChannelConfiguration
+                    schemeIdUri="tag:dolby.com,2015:dash:audio_channel_configuration:2015"
+                    value="0000C7"/>
+            <SegmentTemplate timescale="48000"
+                             media="../Audio/Silent_8ch_160kbps_25fps_ac4_$Number$.mp4"
+                             initialization="../Audio/Silent_8ch_160kbps_25fps_ac4.mp4">
+                <SegmentTimeline>
+                    <S t="0" d="96000" r="79"/>
+                </SegmentTimeline>
+            </SegmentTemplate>
+            <Representation id="3" bandwidth="160000"/>
+        </AdaptationSet>
+    </Period>
+</MPD>

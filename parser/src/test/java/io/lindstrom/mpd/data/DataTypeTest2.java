@@ -116,7 +116,8 @@ public class DataTypeTest2 {
                 Role.class,
                 Mp4Protection.class,
                 PlayReadyContentProtection.class,
-                WidevineProtection.class);
+                WidevineProtection.class,
+                Preselection.class);
     }
 
     private static Class<?> builderClass(Class<?> clazz) {

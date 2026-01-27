@@ -18,12 +18,6 @@ public class Location {
         this.serviceLocation = null;
     }
 
-    @SuppressWarnings("unused")
-    private Location(String value) {
-        this.value = value;
-        this.serviceLocation = null;
-    }
-
     private Location(String value, String serviceLocation) {
         this.value = value;
         this.serviceLocation = serviceLocation;

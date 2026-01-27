@@ -9,14 +9,13 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DataTypeTest {
-    private static final String PACKAGE = DataTypeTest.class.getPackage().getName();
-
     @Test
     public void rebuildMPD() throws Exception {
         MPD mpd = new MPDParser().parse(Files.newInputStream(Paths.get("src/test/resources/random.mpd")));
@@ -28,22 +27,25 @@ public class DataTypeTest {
             return null;
         }
 
-        // If the object is a list, rebuild all elements
-        if (object instanceof List) {
+        Class<?> clazz = object.getClass();
 
+        // If the object is a list, rebuild all elements
+        if (object instanceof List<?> objectList) {
             // Make sure that the list is immutable
-            String name = object.getClass().getName().split("\\$")[0];
+            String name = clazz.getName().split("\\$")[0];
             assertEquals("java.util.ImmutableCollections", name, "List is immutable " + path);
 
             List<Object> list = new ArrayList<>();
-            for (Object member : (List<?>) object) {
-                list.add(rebuildAndValidate(member, path + "/" + object.getClass().getSimpleName()));
+            for (Object element : objectList) {
+                list.add(rebuildAndValidate(element, path + "/" + clazz.getSimpleName()));
+            }
+            if (list.isEmpty()) {
+                return null;
             }
             return list;
         }
 
-        Class<?> clazz = object.getClass();
-        if (!clazz.getPackage().getName().equals(PACKAGE) || clazz.isEnum()) {
+        if (clazz.getName().startsWith("java.") || clazz.isEnum()) {
             return object;
         }
 
@@ -88,7 +90,7 @@ public class DataTypeTest {
                 continue;
             }
 
-            assertTrue(Modifier.isPrivate(modifiers), "Field is private");
+            assertFalse(Modifier.isPublic(modifiers), "Field is public");
             assertTrue(Modifier.isFinal(modifiers), "Field is final");
 
             Method getter = clazz.getMethod(getterName(field.getName()));

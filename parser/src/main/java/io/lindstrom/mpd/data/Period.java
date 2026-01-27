@@ -20,7 +20,8 @@ import java.util.Objects;
         "eventStreams",
         "adaptationSets",
         "subsets",
-        "supplementalProperties"
+        "supplementalProperties",
+        "prelections"
 })
 public class Period {
     @JacksonXmlProperty(localName = "BaseURL", namespace = MPD.NAMESPACE)
@@ -50,6 +51,9 @@ public class Period {
     @JacksonXmlProperty(localName = "SupplementalProperty", namespace = MPD.NAMESPACE)
     private final List<Descriptor> supplementalProperties;
 
+    @JacksonXmlProperty(localName = "Preselection", namespace = MPD.NAMESPACE)
+    private final List<Preselection> preselections;
+
     @JacksonXmlProperty(isAttribute = true, namespace = "http://www.w3.org/1999/xlink")
     private final String href;
 
@@ -68,7 +72,11 @@ public class Period {
     @JacksonXmlProperty(isAttribute = true)
     private final Boolean bitstreamSwitching;
 
-    private Period(List<BaseURL> baseURLs, SegmentBase segmentBase, SegmentList segmentList, SegmentTemplate segmentTemplate, Descriptor assetIdentifier, List<EventStream> eventStreams, List<AdaptationSet> adaptationSets, List<Subset> subsets, List<Descriptor> supplementalProperties, String href, ActuateType actuate, String id, Duration start, Duration duration, Boolean bitstreamSwitching) {
+    private Period(List<BaseURL> baseURLs, SegmentBase segmentBase, SegmentList segmentList,
+                   SegmentTemplate segmentTemplate, Descriptor assetIdentifier, List<EventStream> eventStreams,
+                   List<AdaptationSet> adaptationSets, List<Subset> subsets, List<Descriptor> supplementalProperties,
+                   List<Preselection> preselections, String href, ActuateType actuate, String id, Duration start,
+                   Duration duration, Boolean bitstreamSwitching) {
         this.baseURLs = baseURLs;
         this.segmentBase = segmentBase;
         this.segmentList = segmentList;
@@ -78,6 +86,7 @@ public class Period {
         this.adaptationSets = adaptationSets;
         this.subsets = subsets;
         this.supplementalProperties = supplementalProperties;
+        this.preselections = preselections;
         this.href = href;
         this.actuate = actuate;
         this.id = id;
@@ -97,6 +106,7 @@ public class Period {
         this.adaptationSets = null;
         this.subsets = null;
         this.supplementalProperties = null;
+        this.preselections = null;
         this.href = null;
         this.actuate = null;
         this.id = null;
@@ -141,6 +151,10 @@ public class Period {
         return Utils.unmodifiableList(supplementalProperties);
     }
 
+    public List<Preselection> getPreselections() {
+        return Utils.unmodifiableList(preselections);
+    }
+
     public String getHref() {
         return href;
     }
@@ -179,6 +193,7 @@ public class Period {
                 Objects.equals(adaptationSets, period.adaptationSets) &&
                 Objects.equals(subsets, period.subsets) &&
                 Objects.equals(supplementalProperties, period.supplementalProperties) &&
+                Objects.equals(preselections, period.preselections) &&
                 Objects.equals(href, period.href) &&
                 actuate == period.actuate &&
                 Objects.equals(id, period.id) &&
@@ -189,7 +204,7 @@ public class Period {
 
     @Override
     public int hashCode() {
-        return Objects.hash(baseURLs, segmentBase, segmentList, segmentTemplate, assetIdentifier, eventStreams, adaptationSets, subsets, supplementalProperties, href, actuate, id, start, duration, bitstreamSwitching);
+        return Objects.hash(baseURLs, segmentBase, segmentList, segmentTemplate, assetIdentifier, eventStreams, adaptationSets, subsets, supplementalProperties, preselections, href, actuate, id, start, duration, bitstreamSwitching);
     }
 
     @Override
@@ -204,6 +219,7 @@ public class Period {
                 ", adaptationSets=" + adaptationSets +
                 ", subsets=" + subsets +
                 ", supplementalProperties=" + supplementalProperties +
+                ", preselections=" + preselections +
                 ", href='" + href + '\'' +
                 ", actuate=" + actuate +
                 ", id='" + id + '\'' +
@@ -224,6 +240,7 @@ public class Period {
                 .withAdaptationSets(adaptationSets)
                 .withSubsets(subsets)
                 .withSupplementalProperties(supplementalProperties)
+                .withPreselections(preselections)
                 .withHref(href)
                 .withActuate(actuate)
                 .withId(id)
@@ -246,6 +263,7 @@ public class Period {
         private List<AdaptationSet> adaptationSets;
         private List<Subset> subsets;
         private List<Descriptor> supplementalProperties;
+        private List<Preselection> preselections;
         private String href;
         private ActuateType actuate;
         private String id;
@@ -303,6 +321,11 @@ public class Period {
             return this;
         }
 
+        public Builder withPreselections(List<Preselection> preselections) {
+            this.preselections = preselections;
+            return this;
+        }
+
         public Builder withHref(String href) {
             this.href = href;
             return this;
@@ -334,7 +357,9 @@ public class Period {
         }
 
         public Period build() {
-            return new Period(baseURLs, segmentBase, segmentList, segmentTemplate, assetIdentifier, eventStreams, adaptationSets, subsets, supplementalProperties, href, actuate, id, start, duration, bitstreamSwitching);
+            return new Period(baseURLs, segmentBase, segmentList, segmentTemplate, assetIdentifier, eventStreams,
+                    adaptationSets, subsets, supplementalProperties, preselections, href, actuate, id, start,
+                    duration, bitstreamSwitching);
         }
     }
 }
